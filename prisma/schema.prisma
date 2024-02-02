@@ -1,0 +1,83 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+  // previewFeatures = []
+}
+
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
+model User {
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  email     String    @unique
+  password  String
+  name      String?
+  role      Role
+  Order     Order[]
+  Payment   Payment[]
+}
+
+model Products {
+  id               String         @id @default(cuid())
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  title            String
+  description      String
+  variant          ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId Int
+}
+
+model ProductVariant {
+  id       Int        @id @default(autoincrement())
+  weight   Float
+  imageUrl String
+  price    Float
+  Products Products[]
+}
+
+model Order {
+  orderId              Int       @id @default(autoincrement())
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+  orderDate            DateTime
+  orderItem            OrderItem @relation(fields: [orderItemOrderItemId], references: [OrderItemId])
+  orderAmount          Float
+  user                 User      @relation(fields: [userId], references: [id])
+  userId               String
+  Payment              Payment[]
+  orderItemOrderItemId Int
+}
+
+model OrderItem {
+  OrderItemId Int     @id @default(autoincrement())
+  MRP         Float
+  Quantity    Int
+  Order       Order[]
+}
+
+model Payment {
+  paymentId     Int      @id @default(autoincrement())
+  order         Order    @relation(fields: [orderOrderId], references: [orderId])
+  orderOrderId  Int
+  user          User     @relation(fields: [userId], references: [id])
+  dateOfPayment DateTime
+  userId        String
+}
+
+model Addres {
+  addressId    Int    @id @default(autoincrement())
+  name         String
+  mobileNumber String
+}
+
+enum Role {
+  ADMIN
+  CUSTOMER
+}
