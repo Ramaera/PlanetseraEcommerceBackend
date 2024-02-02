@@ -10,9 +10,74 @@ Table User {
   password String [not null]
   name String
   role Role [not null]
+  Order Order [not null]
+  Payment Payment [not null]
+}
+
+Table Products {
+  id String [pk]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  title String [not null]
+  description String [not null]
+  variant ProductVariant [not null]
+  productVariantId Int [not null]
+}
+
+Table ProductVariant {
+  id Int [pk, increment]
+  weight Float [not null]
+  imageUrl String [not null]
+  price Float [not null]
+  Products Products [not null]
+}
+
+Table Order {
+  orderId Int [pk, increment]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  orderDate DateTime [not null]
+  orderItem OrderItem [not null]
+  orderAmount Float [not null]
+  user User [not null]
+  userId String [not null]
+  Payment Payment [not null]
+  orderItemOrderItemId Int [not null]
+}
+
+Table OrderItem {
+  OrderItemId Int [pk, increment]
+  MRP Float [not null]
+  Quantity Int [not null]
+  Order Order [not null]
+}
+
+Table Payment {
+  paymentId Int [pk, increment]
+  order Order [not null]
+  orderOrderId Int [not null]
+  user User [not null]
+  dateOfPayment DateTime [not null]
+  userId String [not null]
+}
+
+Table Addres {
+  addressId Int [pk, increment]
+  name String [not null]
+  mobileNumber String [not null]
 }
 
 Enum Role {
   ADMIN
-  USER
+  CUSTOMER
 }
+
+Ref: Products.productVariantId > ProductVariant.id
+
+Ref: Order.orderItemOrderItemId > OrderItem.OrderItemId
+
+Ref: Order.userId > User.id
+
+Ref: Payment.orderOrderId > Order.orderId
+
+Ref: Payment.userId > User.id
