@@ -21,7 +21,7 @@ export class User extends BaseModel {
   @IsEmail()
   email: string;
 
-  @Field()
+  @Field({ nullable: true })
   name: string;
 
   @Field()
