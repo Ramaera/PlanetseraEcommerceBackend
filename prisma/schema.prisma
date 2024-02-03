@@ -37,7 +37,7 @@ model Products {
 model ProductVariant {
   id       Int        @id @default(autoincrement())
   weight   Float
-  imageUrl String
+  imageUrl String[]
   price    Float
   Products Products[]
 }

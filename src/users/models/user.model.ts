@@ -21,17 +21,11 @@ export class User extends BaseModel {
   @IsEmail()
   email: string;
 
-  @Field(() => String, { nullable: true })
-  firstname?: string;
+  @Field()
+  name: string;
 
-  @Field(() => String, { nullable: true })
-  lastname?: string;
-
-  @Field(() => Role)
+  @Field()
   role: Role;
-
-  @Field(() => [Post], { nullable: true })
-  posts?: [Post] | null;
 
   @HideField()
   password: string;

@@ -62,7 +62,7 @@ type Query {
 """User role"""
 enum Role {
   ADMIN
-  USER
+  CUSTOMER
 }
 
 input SignupInput {
