@@ -22,37 +22,62 @@ model User {
   role      Role
   Order     Order[]
   Payment   Payment[]
+  buyer     Buyer?
+}
+
+model Buyer {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId    String    @unique
+  orders    Order[]
+  addresses Address[]
+  Cart      Cart?
 }
 
 model Products {
-  id               String         @id @default(cuid())
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  title            String
-  description      String
-  variant          ProductVariant @relation(fields: [productVariantId], references: [id])
-  productVariantId Int
+  id              String           @id @default(cuid())
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  title           String
+  description     String
+  ProductsVariant ProductVariant[]
 }
 
 model ProductVariant {
-  id       Int        @id @default(autoincrement())
-  weight   Float
-  imageUrl String[]
-  price    Float
-  Products Products[]
+  id        Int       @id @default(autoincrement())
+  weight    Float
+  imageUrl  String[]
+  price     Float
+  stock     Int?
+  products  Products? @relation(fields: [productId], references: [id])
+  Cart      Cart[]
+  productId String
+}
+
+model Cart {
+  createdAt        DateTime       @default(now())
+  updatedAt        DateTime       @updatedAt
+  id               String         @id @default(cuid())
+  buyer            Buyer          @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  buyerId          String         @unique
+  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  productVariantId Int
 }
 
 model Order {
-  orderId              Int       @id @default(autoincrement())
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
+  orderId              Int         @id @default(autoincrement())
+  createdAt            DateTime    @default(now())
+  updatedAt            DateTime    @updatedAt
   orderDate            DateTime
-  orderItem            OrderItem @relation(fields: [orderItemOrderItemId], references: [OrderItemId])
+  orderItem            OrderItem   @relation(fields: [orderItemOrderItemId], references: [OrderItemId])
   orderAmount          Float
-  user                 User      @relation(fields: [userId], references: [id])
+  user                 User        @relation(fields: [userId], references: [id])
   userId               String
   Payment              Payment[]
   orderItemOrderItemId Int
+  status               OrderStatus @default(PROCESSING)
+  Buyer                Buyer?      @relation(fields: [buyerId], references: [id])
+  buyerId              String?
 }
 
 model OrderItem {
@@ -71,13 +96,26 @@ model Payment {
   userId        String
 }
 
-model Addres {
-  addressId    Int    @id @default(autoincrement())
+model Address {
+  addresId     Int     @id @default(autoincrement())
   name         String
   mobileNumber String
+  Buyer        Buyer?  @relation(fields: [buyerId], references: [id])
+  buyerId      String?
 }
 
 enum Role {
   ADMIN
   CUSTOMER
+}
+
+enum OrderStatus {
+  OUTOFSTOCK
+  USERCANCELLED
+  SELLERCANCELLED
+  PROCESSING
+  PACKED
+  SHIPPED
+  OUTFORDELIVERY
+  DELIVERED
 }
