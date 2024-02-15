@@ -13,16 +13,16 @@ generator dbml {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
   password  String
   name      String?
   role      Role
-  Order     Order[]
-  Payment   Payment[]
-  buyer     Buyer?
+
+  Payment Payment[]
+  buyer   Buyer?
 }
 
 model Buyer {
@@ -31,7 +31,7 @@ model Buyer {
   userId    String    @unique
   orders    Order[]
   addresses Address[]
-  Cart      Cart?
+  Cart      Cart[]
 }
 
 model Products {
@@ -40,56 +40,52 @@ model Products {
   updatedAt       DateTime         @updatedAt
   title           String
   description     String
+  metaData        Json?            @db.Json
   ProductsVariant ProductVariant[]
 }
 
 model ProductVariant {
   id        Int       @id @default(autoincrement())
-  weight    Float
+  weight    String
   imageUrl  String[]
-  price     Float
+  price     Int?
   stock     Int?
   products  Products? @relation(fields: [productId], references: [id])
   Cart      Cart[]
   productId String
 }
 
+model Order {
+  id          Int         @id @default(autoincrement())
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orderDate   DateTime?
+  orderAmount Float
+  Payment     Payment[]
+  status      OrderStatus @default(PROCESSING)
+  Buyer       Buyer?      @relation(fields: [buyerId], references: [id])
+  buyerId     String?
+  OrderItem   Cart?       @relation(fields: [cartItemid], references: [id])
+  cartItemid  String?
+}
+
 model Cart {
   createdAt        DateTime       @default(now())
   updatedAt        DateTime       @updatedAt
   id               String         @id @default(cuid())
+  subTotal         Int?
+  itemCount        Int
+  checkedOut       Boolean        @default(false)
   buyer            Buyer          @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  buyerId          String         @unique
-  productVariant   ProductVariant @relation(fields: [productVariantId], references: [id])
+  buyerId          String
+  item             ProductVariant @relation(fields: [productVariantId], references: [id])
   productVariantId Int
-}
-
-model Order {
-  orderId              Int         @id @default(autoincrement())
-  createdAt            DateTime    @default(now())
-  updatedAt            DateTime    @updatedAt
-  orderDate            DateTime
-  orderItem            OrderItem   @relation(fields: [orderItemOrderItemId], references: [OrderItemId])
-  orderAmount          Float
-  user                 User        @relation(fields: [userId], references: [id])
-  userId               String
-  Payment              Payment[]
-  orderItemOrderItemId Int
-  status               OrderStatus @default(PROCESSING)
-  Buyer                Buyer?      @relation(fields: [buyerId], references: [id])
-  buyerId              String?
-}
-
-model OrderItem {
-  OrderItemId Int     @id @default(autoincrement())
-  MRP         Float
-  Quantity    Int
-  Order       Order[]
+  Order            Order[]
 }
 
 model Payment {
   paymentId     Int      @id @default(autoincrement())
-  order         Order    @relation(fields: [orderOrderId], references: [orderId])
+  order         Order    @relation(fields: [orderOrderId], references: [id])
   orderOrderId  Int
   user          User     @relation(fields: [userId], references: [id])
   dateOfPayment DateTime

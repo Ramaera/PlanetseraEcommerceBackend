@@ -10,7 +10,6 @@ Table User {
   password String [not null]
   name String
   role Role [not null]
-  Order Order [not null]
   Payment Payment [not null]
   buyer Buyer
 }
@@ -21,7 +20,7 @@ Table Buyer {
   userId String [unique, not null]
   orders Order [not null]
   addresses Address [not null]
-  Cart Cart
+  Cart Cart [not null]
 }
 
 Table Products {
@@ -30,51 +29,46 @@ Table Products {
   updatedAt DateTime [not null]
   title String [not null]
   description String [not null]
+  metaData Json
   ProductsVariant ProductVariant [not null]
-  productVariantId Int
 }
 
 Table ProductVariant {
   id Int [pk, increment]
-  weight Float [not null]
+  weight String [not null]
   imageUrl String[] [not null]
-  price Float [not null]
+  price Int
   stock Int
   products Products
   Cart Cart [not null]
   productId String [not null]
 }
 
+Table Order {
+  id Int [pk, increment]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  orderDate DateTime
+  orderAmount Float [not null]
+  Payment Payment [not null]
+  status OrderStatus [not null, default: 'PROCESSING']
+  Buyer Buyer
+  buyerId String
+  OrderItem Cart
+  cartItemid String
+}
+
 Table Cart {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   id String [pk]
+  subTotal Int
+  itemCount Int [not null]
+  checkedOut Boolean [not null, default: false]
   buyer Buyer [not null]
-  buyerId String [unique, not null]
-  productVariant ProductVariant [not null]
+  buyerId String [not null]
+  item ProductVariant [not null]
   productVariantId Int [not null]
-}
-
-Table Order {
-  orderId Int [pk, increment]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  orderDate DateTime [not null]
-  orderItem OrderItem [not null]
-  orderAmount Float [not null]
-  user User [not null]
-  userId String [not null]
-  Payment Payment [not null]
-  orderItemOrderItemId Int [not null]
-  status OrderStatus [not null, default: 'PROCESSING']
-  Buyer Buyer
-  buyerId String
-}
-
-Table OrderItem {
-  OrderItemId Int [pk, increment]
-  MRP Float [not null]
-  Quantity Int [not null]
   Order Order [not null]
 }
 
@@ -115,17 +109,15 @@ Ref: Buyer.userId - User.id [delete: Cascade]
 
 Ref: ProductVariant.productId > Products.id
 
-Ref: Cart.buyerId - Buyer.id [delete: Cascade]
+Ref: Order.buyerId > Buyer.id
+
+Ref: Order.cartItemid > Cart.id
+
+Ref: Cart.buyerId > Buyer.id [delete: Cascade]
 
 Ref: Cart.productVariantId > ProductVariant.id
 
-Ref: Order.orderItemOrderItemId > OrderItem.OrderItemId
-
-Ref: Order.userId > User.id
-
-Ref: Order.buyerId > Buyer.id
-
-Ref: Payment.orderOrderId > Order.orderId
+Ref: Payment.orderOrderId > Order.id
 
 Ref: Payment.userId > User.id
 

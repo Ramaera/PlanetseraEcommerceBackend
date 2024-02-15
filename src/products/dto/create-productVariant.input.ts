@@ -5,8 +5,8 @@ export class CreateProductVariantInput {
   @Field(() => String)
   ProductId: string;
     
-  @Field(() => Float)
-  weight: number;
+  @Field(() => String)
+  weight: string;
 
   @Field(() => [String])
   imageUrl: string[];

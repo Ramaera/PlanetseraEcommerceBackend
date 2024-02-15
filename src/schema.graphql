@@ -11,9 +11,38 @@ type Auth {
   user: User!
 }
 
+type BuyerData {
+  createdAt: DateTime!
+  id: String!
+  updatedAt: DateTime!
+  userId: String!
+}
+
+type Cart {
+  buyerId: String!
+  checkedOut: Boolean!
+  itemCount: Int!
+  productVariantId: Int!
+  subTotal: Int!
+}
+
 input ChangePasswordInput {
   newPassword: String!
   oldPassword: String!
+}
+
+input CreateCartInput {
+  buyerId: String!
+  checkedOut: Boolean!
+  itemCount: Int!
+  productVariantId: Int!
+}
+
+input CreateOrderInput {
+  buyerId: String!
+  cartItemid: String!
+  orderAmount: Float!
+  orderDate: DateTime
 }
 
 input CreateProductInput {
@@ -26,13 +55,18 @@ input CreateProductVariantInput {
   imageUrl: [String!]!
   price: Float!
   stock: Int!
-  weight: Float!
+  weight: String!
 }
 
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
 
 """
 A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
@@ -46,12 +80,21 @@ input LoginInput {
 
 type Mutation {
   changePassword(data: ChangePasswordInput!): User!
+  createCart(CreateCartInput: CreateCartInput!): Cart!
+  createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
   updateUser(data: UpdateUserInput!): User!
+}
+
+type Order {
+  buyerId: String!
+  cartItemid: String!
+  orderAmount: Float!
+  orderDate: DateTime!
 }
 
 type Post {
@@ -69,21 +112,28 @@ type Post {
 }
 
 type Product {
+  ProductsVariant: [ProductVariant!]!
   description: String!
+  id: String!
+  metaData: [JSONObject!]
   title: String!
 }
 
 type ProductVariant {
+  id: Int!
   imageUrl: [String!]!
   price: Float!
-  stock: Int!
+  stock: Int
   weight: Float!
 }
 
 type Query {
+  allProducts: [Product!]!
+  getBuyer: BuyerData!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
+  viewCart(buyerId: String!): [Cart!]!
 }
 
 """User role"""
@@ -116,9 +166,11 @@ input UpdateUserInput {
 }
 
 type User {
+  buyer: BuyerData!
+
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-  email: String!
+  email: String
   id: ID!
   name: String
   role: Role!

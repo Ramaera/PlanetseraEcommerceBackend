@@ -47,6 +47,6 @@ export class AuthResolver {
 
   @ResolveField('user', () => User)
   async user(@Parent() auth: Auth) {
-    return await this.auth.getUserFromToken(auth.accessToken);
+    return await this.auth.getUserFromToken(auth.accessToken)
   }
 }
