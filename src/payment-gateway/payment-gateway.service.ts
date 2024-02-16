@@ -8,7 +8,7 @@ import { ConfigService } from '@nestjs/config';
 @Injectable()
 export class PaymentGatewayService {
   constructor(private readonly configService: ConfigService) {}
-  async newPayment() {
+  async newPayment(createPayment: CreatePaymentGatewayDto) {
     try {
       const merchantTransactionId = 'M' + Date.now();
       // const { buyer_id, price, email, name } = createPaymentGatewayDto;

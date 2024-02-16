@@ -16,13 +16,15 @@ export class PaymentGatewayController {
   constructor(private readonly paymentGatewayService: PaymentGatewayService) {}
 
   @Post('/pay')
-  create() {
-    return this.paymentGatewayService.newPayment();
+  create(@Body() createPayment: CreatePaymentGatewayDto) {
+    return this.paymentGatewayService.newPayment(createPayment);
   }
 
-  @Get()
-  findAll() {
-    return this.paymentGatewayService.findAll();
+  @Get('v1/status/:merchantTransactionId')
+  getPaymentStatus(
+    @Param('merchantTransactionId') merchantTransactionId: string,
+  ) {
+    return this.paymentGatewayService.checkStatus(merchantTransactionId);
   }
 
   @Get(':id')
