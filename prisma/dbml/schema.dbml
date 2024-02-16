@@ -27,7 +27,7 @@ Table Products {
 Table ProductVariant {
   id Int [pk, increment]
   weight Float [not null]
-  imageUrl String [not null]
+  imageUrl String[] [not null]
   price Float [not null]
   Products Products [not null]
 }
