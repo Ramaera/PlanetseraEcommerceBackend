@@ -46,13 +46,8 @@ export class ProductsResolver {
   }
 
 
-@Mutation(()=>Cart)
-createCart(@Args("CreateCartInput")createCartInput:CreateCartInput){
-  return this.productsService.createCart(createCartInput)
-}
-
-
-
-  
-
+  @Mutation(()=>Cart)
+  createCart(@Args("CreateCartInput")createCartInput:CreateCartInput){
+    return this.productsService.createCart(createCartInput)
+  }
 }

@@ -112,7 +112,10 @@ type Post {
 }
 
 type Product {
+  Amazon: Boolean
+  Flipkart: Boolean
   ProductsVariant: [ProductVariant!]!
+  category: [String!]
   description: String!
   id: String!
   metaData: [JSONObject!]

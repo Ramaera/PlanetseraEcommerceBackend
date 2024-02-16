@@ -8,10 +8,11 @@ import fs from "fs"
 const productData=[{
     "title":"Sabji Masala",
     "description":"With the quality blend of herbs and spices in PlanetsEra's Sabji Masala, your vegetables will taste and have more depth. Because it is composed entirely of natural ingredients, it is free of additives and preservatives. The Sabzi Masala from PlanestEra will give your vegetables a delicious flavour. A delicate mixture of spices enhances the taste of vegetable meals. In PlanetsEra Mix Masala Powder, we provide you with the best Sabji Masala for your dishes. Adding it to veggie recipes gives them a delicious aroma and colour.",
+   "productImageUrl":"allProductsImg/SabjiMasala.webp",
     "variant":[{
         "weight":"50",
         "price":30,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/SabjiMasala.webp","allProductsImg/SabjiMasala-Back-50.webp","allProductsImg/SabjiMasala-BackContent-50.webp"]
 
     },
     {

@@ -40,8 +40,12 @@ model Products {
   updatedAt       DateTime         @updatedAt
   title           String
   description     String
+  productImageUrl String?
   metaData        Json?            @db.Json
+  category        String[]
   ProductsVariant ProductVariant[]
+  Flipkart        Boolean          @default(false)
+  Amazon          Boolean          @default(false)
 }
 
 model ProductVariant {

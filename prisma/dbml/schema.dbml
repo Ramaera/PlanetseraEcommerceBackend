@@ -30,7 +30,10 @@ Table Products {
   title String [not null]
   description String [not null]
   metaData Json
+  category String[] [not null]
   ProductsVariant ProductVariant [not null]
+  Flipkart Boolean [not null, default: false]
+  Amazon Boolean [not null, default: false]
 }
 
 Table ProductVariant {
