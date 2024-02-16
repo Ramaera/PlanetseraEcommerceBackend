@@ -10,15 +10,15 @@ export class PaymentGatewayService {
   constructor(private readonly configService: ConfigService) {}
   async newPayment(createPayment: CreatePaymentGatewayDto) {
     try {
-      const merchantTransactionId = 'M' + Date.now();
+      const merchantTransactionId = 'PL' + Date.now();
       // const { buyer_id, price, email, name } = createPaymentGatewayDto;
 
       const data = {
-        merchantId: 'PGTESTPAYUAT',
+        merchantId: 'M22VCKEIOPT4Z',
         merchantTransactionId: merchantTransactionId,
         merchantUserId: 'MUID' + '1234',
         name: 'RAJU',
-        amount: 123 * 100,
+        amount: 1 * 100,
         redirectUrl: `http://localhost:6770/api/v1/status/${merchantTransactionId}`,
         email: 'mohan@gmail.com',
         redirectMode: 'POST',
@@ -34,10 +34,9 @@ export class PaymentGatewayService {
       const string = payloadMain + '/pg/v1/pay' + process.env.SALT_KEY;
       const sha256 = crypto.createHash('sha256').update(string).digest('hex');
       const checksum = sha256 + '###' + keyIndex;
-      const prod_URL =
-        'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay';
+      const prod_URL = 'https://api.phonepe.com/apis/hermes/pg/v1/pay';
+      // 'https://api-preprod.phonepe.com/apis/pg-sandbox/pg/v1/pay';
       // const prod_URL = 'https://api.phonepe.com/apis/hermes/pg/v1/pay';
-      console.log('-->', process.env.MERCHANT_ID);
       const options = {
         method: 'POST',
         url: prod_URL,
@@ -50,7 +49,6 @@ export class PaymentGatewayService {
           request: payloadMain,
         },
       };
-      console.log('here44', options);
       const response = await axios.request(options);
       console.log('reps', response.data.data.instrumentResponse);
       return response.data.data.instrumentResponse.redirectInfo.url;
@@ -61,7 +59,7 @@ export class PaymentGatewayService {
 
   async checkStatus(merchantTransactionId: string) {
     try {
-      const merchantId = this.configService.get<string>('MERCHANT_ID');
+      const merchantId = 'M22VCKEIOPT4Z';
       const keyIndex = 1;
       const string =
         `/pg/v1/status/${merchantId}/${merchantTransactionId}` +
