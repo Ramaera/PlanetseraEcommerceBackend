@@ -12,14 +12,13 @@ type Auth {
 }
 
 type BuyerData {
-  createdAt: DateTime!
   id: String!
-  updatedAt: DateTime!
   userId: String!
 }
 
 type Cart {
   buyerId: String!
+  cartItem: [[JSONObject!]!]
   checkedOut: Boolean!
   itemCount: [Int!]!
   productVariantIds: [Int!]!
@@ -33,6 +32,7 @@ input ChangePasswordInput {
 
 input CreateCartInput {
   buyerId: String!
+  cartItem: [JSONObject!]!
   checkedOut: Boolean!
   itemCount: Int!
   productVariantId: Int!
@@ -47,6 +47,7 @@ input CreateOrderInput {
 
 input CreateProductInput {
   description: String!
+  productUrl: String!
   title: String!
 }
 
@@ -84,6 +85,7 @@ type Mutation {
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
+  deleteCart(cartId: String!): Cart!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
@@ -120,6 +122,7 @@ type Product {
   id: String!
   metaData: [JSONObject!]
   productImageUrl: String
+  productUrl: String
   title: String!
 }
 

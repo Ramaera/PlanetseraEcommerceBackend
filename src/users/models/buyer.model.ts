@@ -18,11 +18,6 @@ export class BuyerData{
 
 
 
-    @Field({})
-    createdAt: Date;
-
-    @Field({ })
-    updatedAt: Date;
 
 }
 

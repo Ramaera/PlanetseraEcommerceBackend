@@ -7,5 +7,9 @@ export class CreateProductInput {
   
   @Field()
   description : string;
+
+  @Field()
+  productUrl: string
+
  
 }

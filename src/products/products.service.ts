@@ -16,7 +16,8 @@ export class ProductsService {
         const newProduct = await this.prisma.products.create({
           data:{
             title:createProductInput.title,
-            description:createProductInput.description
+            description:createProductInput.description,
+            productUrl:createProductInput.productUrl
             
           }
         });
@@ -91,6 +92,7 @@ async createCart(createCartInput: CreateCartInput) {
         data: {
           itemCount: updatedItemCount,
           productVariantIds : existingCart.productVariantIds,
+          cartItem:[createCartInput.cartItem],
           subTotal:updatedSubTotal
         }
       });
@@ -104,6 +106,7 @@ async createCart(createCartInput: CreateCartInput) {
         data: {
           itemCount: [createCartInput.itemCount],
           productVariantIds: [createCartInput.productVariantId],
+          cartItem:[createCartInput.cartItem],
           buyerId: createCartInput.buyerId,
           subTotal: totalPrice
         }
@@ -116,6 +119,34 @@ async createCart(createCartInput: CreateCartInput) {
     throw new Error('Could not create cart');
   }
 }
+async addItemtocart  (createCartInput: CreateCartInput) {
+  const cartData = await this.prisma.cart.create({
+    data: {
+      itemCount: [createCartInput.itemCount],
+      productVariantIds: [createCartInput.productVariantId],
+      cartItem:createCartInput.cartItem,
+      buyerId: createCartInput.buyerId,
+      subTotal: 12
+    }
+  });
+  console.log("cartData",cartData)
+
+}
+async deleteCart(cartId: string) {
+  try {
+    const deletedCart = await this.prisma.cart.delete({
+      where: {
+        id: cartId
+      }
+    });
+
+    return deletedCart;
+  } catch (error) {
+    console.error('Error deleting cart:', error);
+    throw new Error('Could not delete cart');
+  }
+}
+
 
 
 async createOrder(createOrderVariantInput: CreateOrderInput) {

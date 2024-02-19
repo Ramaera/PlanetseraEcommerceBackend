@@ -50,4 +50,9 @@ export class ProductsResolver {
   createCart(@Args("CreateCartInput")createCartInput:CreateCartInput){
     return this.productsService.createCart(createCartInput)
   }
+
+  @Mutation(() => Cart)
+  deleteCart(@Args('cartId') cartId: string): Promise<Cart> {
+    return this.productsService.deleteCart(cartId);
+  }
 }

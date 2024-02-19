@@ -45,6 +45,7 @@ model Products {
   ProductsVariant ProductVariant[]
   Flipkart        Boolean          @default(false)
   Amazon          Boolean          @default(false)
+  productUrl      String
 }
 
 model ProductVariant {
@@ -82,9 +83,9 @@ model Cart {
   buyer             Buyer            @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
   buyerId           String
   items             ProductVariant[]
-  // @relation(fields: [productVariantId], references: [id])
   productVariantIds Int[]
   Order             Order[]
+  cartItem          Json[]
 }
 
 model Payment {

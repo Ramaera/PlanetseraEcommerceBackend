@@ -259,7 +259,7 @@ const productData=[{
     "description":"Indian food gets its colour and taste from turmeric powder, so it's great for a spicy feast. The effect is amazing and has been shaped beautifully beyond its natural form. Nearly 4,000 years ago, India's Vedic society used haldi powder as a spice that also had religious meaning.Turmeric's uses are also well known to all. To give your sabji the proper colour, use PlenetsEra haldi powder, created with the highest-quality turmeric powder.",
     "productImageUrl":"allProductsImg/TurmericPowder.webp",
     "category":["KitchenSpices"],
-"Flipkart":true,
+    "Flipkart":true,
     "Amazon":false,
     "productUrl":"turmeric-powder",
 
@@ -881,7 +881,9 @@ const productCreate =(product)=>{
             productImageUrl:product.productImageUrl,
             category:product.category,
             Amazon:product.Amazon,
-            Flipkart:product.Flipkart
+            Flipkart:product.Flipkart,
+            productUrl:product.productUrl
+          
 
         }
     })

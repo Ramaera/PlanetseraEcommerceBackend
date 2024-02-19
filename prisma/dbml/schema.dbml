@@ -35,6 +35,7 @@ Table Products {
   ProductsVariant ProductVariant [not null]
   Flipkart Boolean [not null, default: false]
   Amazon Boolean [not null, default: false]
+  productUrl String [not null]
 }
 
 Table ProductVariant {
@@ -74,6 +75,7 @@ Table Cart {
   items ProductVariant [not null]
   productVariantIds Int[] [not null]
   Order Order [not null]
+  cartItem Json[] [not null]
 }
 
 Table Payment {

@@ -32,4 +32,8 @@ metaData?: any[];
 @Field({nullable:true})
 productImageUrl:string
 
+@Field({nullable:true})
+productUrl:string
+
+
 }

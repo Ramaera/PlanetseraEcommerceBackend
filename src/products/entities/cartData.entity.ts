@@ -10,8 +10,11 @@ export class Cart {
   
     @Field()
     subTotal:number
+
     
-  
+    @Field(() => [[GraphQLJSONObject]], { nullable: true })
+    cartItem?: any[];
+
     @Field()
     buyerId   : string
   
