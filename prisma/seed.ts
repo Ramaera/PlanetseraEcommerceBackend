@@ -9,8 +9,8 @@ const productData=[{
     "title":"Sabji Masala",
     "description":"With the quality blend of herbs and spices in PlanetsEra's Sabji Masala, your vegetables will taste and have more depth. Because it is composed entirely of natural ingredients, it is free of additives and preservatives. The Sabzi Masala from PlanestEra will give your vegetables a delicious flavour. A delicate mixture of spices enhances the taste of vegetable meals. In PlanetsEra Mix Masala Powder, we provide you with the best Sabji Masala for your dishes. Adding it to veggie recipes gives them a delicious aroma and colour.",
    "productImageUrl":"allProductsImg/SabjiMasala.webp",
-   "Flipkart":"true",
-   "Amazon":"false",
+   "Flipkart":true,
+   "Amazon":false,
    "productUrl":"sabji-masala",
    "category":["BestSelling","KitchenSpices"],
     "variant":[{
@@ -75,8 +75,8 @@ const productData=[{
     "description":"Chat Masala makes the right texture and also improves the taste of any drinks or fruits that are eaten with it. It has more than 18 different kinds of spices that are all different sizes. We know a lot about spices, so we were able to make this one-of-a-kind chat masala powder that will wake up your taste buds and make you want more. When it comes to masala spices, chat masala is one of the best ones that everyone uses and likes.",
     "productImageUrl":"allProductsImg/ChatMasala.webp",
     "category":["MouthWatering","WeekandTadka"],
-    "Flipkart":"true",
-    "Amazon":"true",
+    "Flipkart":true,
+    "Amazon":true,
     "productUrl":"chat-masala",
 
     "variant":[{
@@ -139,8 +139,8 @@ const productData=[{
     "description":"Amchur Powder, which is produced from dried, unripe green mangoes, gives food a tangy, sour flavour. It smells deliciously like honey and tastes tangy. It is utilised in a wide range of north Indian curries, chutneys, and pickles. Spices like amchur powder add tanginess and a mild sour taste to food. Amchur masala powder also helps make meat more tender. It's one of the most important ingredients in Punjabi food. PlanetsEra's amchur powder uses the best mangoes and the newest dehydrating technique to preserve the king of fruits' flavour, smell, and zest.",
     "productImageUrl":"allProductsImg/DryMangoPowder.webp",
     "category":["MouthWatering"],
-    "Flipkart":"true",
-    "Amazon":"false",
+    "Flipkart":true,
+    "Amazon":false,
     "productUrl":"amchur-powder",
 
     "variant":[{
@@ -199,8 +199,8 @@ const productData=[{
     "description":"This age-old, worldwide flavour enhancer is made with a carefully selected mixture of 12 different spices. We prepare the masala with the best garam masala ingredients: Coriander, Cumin, black pepper, Cinnamon Stick, Clove, Cardamom Amomum, Star Anise, Bay Leaf, Dry Ginger, Nutmeg, Mace, Green Cardamom. Because it is based on chilli, it lends foods an unusual, crimson-coloured gravy.Over the entire country of India, garam masala is used extensively. The masala spices ignite the taste buds. There's something about certain meals that makes you want to resist them. There's nothing like PlanetsEra Garam Masala, with its incredible aftertaste, to bring Indian cuisine to life.",
     "productImageUrl":"allProductsImg/GaramMasala.webp",
     "category":["WeekandTadka"],
-    "Flipkart":"true",
-    "Amazon":"true",
+    "Flipkart":true,
+    "Amazon":true,
     "productUrl":"garam-masala",
 
     "variant":[{
@@ -259,8 +259,8 @@ const productData=[{
     "description":"Indian food gets its colour and taste from turmeric powder, so it's great for a spicy feast. The effect is amazing and has been shaped beautifully beyond its natural form. Nearly 4,000 years ago, India's Vedic society used haldi powder as a spice that also had religious meaning.Turmeric's uses are also well known to all. To give your sabji the proper colour, use PlenetsEra haldi powder, created with the highest-quality turmeric powder.",
     "productImageUrl":"allProductsImg/TurmericPowder.webp",
     "category":["KitchenSpices"],
-"Flipkart":"true",
-    "Amazon":"false",
+"Flipkart":true,
+    "Amazon":false,
     "productUrl":"turmeric-powder",
 
     "variant":[{
@@ -319,8 +319,8 @@ const productData=[{
     "description":"Coriander powder smells like a freshly cut lawn of a green forest. Indian foods are often made with this kind to give them an authentic curry taste. Coriander powder, also called dhania powder, is said to have hints of lemon and sage and a hint of sweetness in the background. It is a nice spice to put in food. The flavour of PlanetsEra coriander powder has been brought to a level of perfection, and as a result, it can produce the intended effect every time it is used. Dhaniya powder is known to be a fundamental component of Indian cuisine.",
     "productImageUrl":"allProductsImg/CorianderPowder.webp",
     "category":["BestSelling"],
-    "Flipkart":"true",
-    "Amazon":"true",
+    "Flipkart":true,
+    "Amazon":true,
     "productUrl":"coriander-powder",
 
     "variant":[{
@@ -381,8 +381,8 @@ const productData=[{
     "description":"Combined with other food spices or ingredients, cumin powder adds a unique flavour to any dish. Provides a taste to all your unusual foods. Ground cumin is made by grinding dried mature fruits of the cumin plant to make jeera powder. PlanetsEra cumin powder does not contain any artificial colouring or potentially dangerous ingredients.    ",
     "productImageUrl":"allProductsImg/CuminPowder.webp",
     "category":["KitchenSpices"],
-    "Flipkart":"true",
-    "Amazon":"false",
+    "Flipkart":true,
+    "Amazon":false,
     "productUrl":"cumin-powder",
 
     "variant":[{
@@ -442,8 +442,8 @@ const productData=[{
     "description":"Most often used as a dry spice, black pepper, also known as kali mirch powder, refers to the spice's dark colouring and hot flavour. It appears to be small and rounded black chillies. Black pepper powder is used to make the recipe hotter, just like chilli. Restaurants and hotels also leave it on the table by itself with salt. It's one of the most popular Indian spices. With its exceptional heat, PlanetsEra Black Pepper Powder adds a kick to soups and other meals. As a remedy, it eases inflammation and colds.    ",
     "productImageUrl":"allProductsImg/BlackPepperPowder.webp",
     "category":["BestSelling"],
-    "Flipkart":"true",
-    "Amazon":"true",
+    "Flipkart":true,
+    "Amazon":true,
     "productUrl":"black-pepper-powder",
 
     "variant":[{
@@ -505,8 +505,8 @@ const productData=[{
     "description":"Meat masala is a mix of pepper, coriander, and chilli, giving meat and other non-vegetarian foods a dark brown colour and a spicy flavour. It is especially good when used in meat-containing dishes. This mixture is flavoured with a lot of food spices. It's because Indians love to season their meat well. When combined with the meat, they bring out the underlying flavour of the dish.    ",
     "productImageUrl":"allProductsImg/MeatMasala.webp",
     "category":["NonvegTadka","WeekandTadka"],
-    "Flipkart":"true",
-    "Amazon":"false",
+    "Flipkart":true,
+    "Amazon":false,
     "productUrl":"meat-masala",
 
     "variant":[{
@@ -565,8 +565,8 @@ const productData=[{
     "description":"Red chilli powder has a strong flavour and just the right amount of heat. A genuine Lal Mirch powder has a sharp taste that gives any blended food a distinctive flavour. Using carefully hand-selected, naturally sun-dried, scientifically processed chillies, chilli powder preserves the flavour and colour of whole chillies while maintaining their natural heat.Your food will have a brilliant red colour thanks to PlanetsEra Chilli Powder. Due to its widespread use in all Indian cuisines, red chilli powder is one of the most popular Indian masalas.",
     "productImageUrl":"allProductsImg/RedChilliPowder.webp",
     "category":["BestSelling","MouthWatering"],
-    "Flipkart":"true",
-    "Amazon":"true",
+    "Flipkart":true,
+    "Amazon":true,
     "productUrl":"red-chilli-powder",
 
     "variant":[{
@@ -630,8 +630,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/ChickenMasala.webp",
     "category":["WeekandTadka","MouthWatering","ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"chicken-masala",
 
     "variant":[{
@@ -664,8 +664,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/KitchenKing.webp",
     "category":["KitchenSpices","ComingSoon"],
- "Flipkart":"false",
-    "Amazon":"false",
+ "Flipkart":false,
+    "Amazon":false,
     "productUrl":"kitchen-king-masala",
 
     "variant":[{
@@ -698,8 +698,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/PaneerMasala.webp",
     "category":["ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"paneer-masala",
 
     "variant":[{
@@ -732,8 +732,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/ChholeMasala.webp",
     "category":["ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"chhole-masala",
 
     "variant":[{
@@ -766,8 +766,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/BiryaniMasala.webp",
     "category":["ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"biryani-masala",
 
     "variant":[{
@@ -800,8 +800,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"allProductsImg/ChanaMasala.webp",
     "category":["ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"chana-masala",
 
     "variant":[{
@@ -834,8 +834,8 @@ const productData=[{
     "description":"",
     "productImageUrl":"",
     "category":["ComingSoon"],
-    "Flipkart":"false",
-    "Amazon":"false",
+    "Flipkart":false,
+    "Amazon":false,
     "productUrl":"combo-pack",
 
     "variant":[{
@@ -878,6 +878,10 @@ const productCreate =(product)=>{
             title:product.title,
             description:product.description,
             metaData:product.metaData,
+            productImageUrl:product.productImageUrl,
+            category:product.category,
+            Amazon:product.Amazon,
+            Flipkart:product.Flipkart
 
         }
     })
