@@ -21,8 +21,8 @@ type BuyerData {
 type Cart {
   buyerId: String!
   checkedOut: Boolean!
-  itemCount: Int!
-  productVariantId: Int!
+  itemCount: [Int!]!
+  productVariantIds: [Int!]!
   subTotal: Int!
 }
 
@@ -119,6 +119,7 @@ type Product {
   description: String!
   id: String!
   metaData: [JSONObject!]
+  productImageUrl: String
   title: String!
 }
 

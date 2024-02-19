@@ -29,5 +29,7 @@ Flipkart:boolean
 @Field(() => [GraphQLJSONObject], { nullable: true })
 metaData?: any[];
 
+@Field({nullable:true})
+productImageUrl:string
 
 }

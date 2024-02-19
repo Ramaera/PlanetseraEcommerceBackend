@@ -13,16 +13,15 @@ generator dbml {
 }
 
 model User {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  email     String   @unique
+  id        String    @id @default(cuid())
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  email     String    @unique
   password  String
   name      String?
   role      Role
-
-  Payment Payment[]
-  buyer   Buyer?
+  Payment   Payment[]
+  buyer     Buyer?
 }
 
 model Buyer {
@@ -74,17 +73,18 @@ model Order {
 }
 
 model Cart {
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  id               String         @id @default(cuid())
-  subTotal         Int?
-  itemCount        Int
-  checkedOut       Boolean        @default(false)
-  buyer            Buyer          @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
-  buyerId          String
-  item             ProductVariant @relation(fields: [productVariantId], references: [id])
-  productVariantId Int
-  Order            Order[]
+  createdAt         DateTime         @default(now())
+  updatedAt         DateTime         @updatedAt
+  id                String           @id @default(cuid())
+  subTotal          Int?
+  itemCount         Int[]
+  checkedOut        Boolean          @default(false)
+  buyer             Buyer            @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  buyerId           String
+  items             ProductVariant[]
+  // @relation(fields: [productVariantId], references: [id])
+  productVariantIds Int[]
+  Order             Order[]
 }
 
 model Payment {

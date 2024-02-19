@@ -53,12 +53,13 @@ async createProductVariant(createProductVariantInput: CreateProductVariantInput)
       throw new Error('Could not create product variant');
   }
 }
+
 async createCart(createCartInput: CreateCartInput) {
   try {
     const existingCart = await this.prisma.cart.findFirst({
       where: {
-        productVariantId: createCartInput.productVariantId,
-        buyerId: createCartInput.buyerId
+        buyerId: createCartInput.buyerId,
+        checkedOut: false
       }
     });
     const getProductVarinatDetails = await this.prisma.productVariant.findUnique({
@@ -70,8 +71,18 @@ async createCart(createCartInput: CreateCartInput) {
 
     if (existingCart) {
       console.log("existingCart",existingCart)
-      const updatedItemCount = existingCart.itemCount + createCartInput.itemCount;
-      const updatedSubTotal =existingCart.subTotal+ (createCartInput.itemCount* getProductVarinatDetails.price)
+      let  indexOfProduct = existingCart.productVariantIds.findIndex(id => id === createCartInput.productVariantId);
+      let updatedItemCount = existingCart.itemCount;
+
+      console.log("existingProduct index",indexOfProduct)
+      if(indexOfProduct>=0){
+        updatedItemCount[indexOfProduct]= updatedItemCount[indexOfProduct] + createCartInput.itemCount;
+      }else{
+        existingCart.productVariantIds.push(createCartInput.productVariantId);
+        existingCart.itemCount.push(createCartInput.itemCount);
+      }
+
+      const updatedSubTotal = existingCart.subTotal+ (createCartInput.itemCount* getProductVarinatDetails.price)
 
       const updatedCart = await this.prisma.cart.update({
         where: {
@@ -79,6 +90,7 @@ async createCart(createCartInput: CreateCartInput) {
         },
         data: {
           itemCount: updatedItemCount,
+          productVariantIds : existingCart.productVariantIds,
           subTotal:updatedSubTotal
         }
       });
@@ -90,8 +102,8 @@ async createCart(createCartInput: CreateCartInput) {
       const totalPrice = getProductVarinatDetails.price * createCartInput.itemCount;
       const cartData = await this.prisma.cart.create({
         data: {
-          itemCount: createCartInput.itemCount,
-          productVariantId: createCartInput.productVariantId,
+          itemCount: [createCartInput.itemCount],
+          productVariantIds: [createCartInput.productVariantId],
           buyerId: createCartInput.buyerId,
           subTotal: totalPrice
         }
@@ -104,6 +116,8 @@ async createCart(createCartInput: CreateCartInput) {
     throw new Error('Could not create cart');
   }
 }
+
+
 async createOrder(createOrderVariantInput: CreateOrderInput) {
   try {
       

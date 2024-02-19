@@ -29,6 +29,7 @@ Table Products {
   updatedAt DateTime [not null]
   title String [not null]
   description String [not null]
+  productImageUrl String
   metaData Json
   category String[] [not null]
   ProductsVariant ProductVariant [not null]
@@ -66,12 +67,12 @@ Table Cart {
   updatedAt DateTime [not null]
   id String [pk]
   subTotal Int
-  itemCount Int [not null]
+  itemCount Int[] [not null]
   checkedOut Boolean [not null, default: false]
   buyer Buyer [not null]
   buyerId String [not null]
-  item ProductVariant [not null]
-  productVariantId Int [not null]
+  items ProductVariant [not null]
+  productVariantIds Int[] [not null]
   Order Order [not null]
 }
 
@@ -90,6 +91,11 @@ Table Address {
   mobileNumber String [not null]
   Buyer Buyer
   buyerId String
+}
+
+Table CartToProductVariant {
+  cartId String [ref: > Cart.id]
+  itemsId Int [ref: > ProductVariant.id]
 }
 
 Enum Role {
@@ -117,8 +123,6 @@ Ref: Order.buyerId > Buyer.id
 Ref: Order.cartItemid > Cart.id
 
 Ref: Cart.buyerId > Buyer.id [delete: Cascade]
-
-Ref: Cart.productVariantId > ProductVariant.id
 
 Ref: Payment.orderOrderId > Order.id
 

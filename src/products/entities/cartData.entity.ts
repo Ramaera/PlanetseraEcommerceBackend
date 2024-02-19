@@ -5,8 +5,8 @@ import { ProductVariant } from './productVariant.entity';
 @ObjectType()
 export class Cart {
 
-    @Field(()=>(Int))
-    itemCount : number;
+    @Field(()=>[Int])
+    itemCount : number[];
   
     @Field()
     subTotal:number
@@ -15,8 +15,8 @@ export class Cart {
     @Field()
     buyerId   : string
   
-    @Field(()=>(Int))
-    productVariantId : number
+    @Field(()=>[Int])
+    productVariantIds : number[]
   
     @Field()
     checkedOut: Boolean

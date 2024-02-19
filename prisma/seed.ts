@@ -18,13 +18,13 @@ const productData=[{
     {
         "weight":"100",
         "price":55,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/SabjiMasala.webp","allProductsImg/SabjiMasala-Back-100.webp","allProductsImg/SabjiMasala-BackContent-100.webp"]
 
     },
     {
         "weight":"500",
         "price":275,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/SabjiMasala-500.webp","allProductsImg/SabjiMasala-Back-500.webp","allProductsImg/SabjiMasala-BackContent-500.webp"]
 
     }
 
@@ -72,19 +72,19 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":38,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/ChatMasala.webp","allProductsImg/ChatMasala-Back-50.webp","allProductsImg/ChatMasala-BacKContent-50.webp"]
 
     },
     {
         "weight":"100",
         "price":70,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/ChatMasala.webp","allProductsImg/ChatMasala-Back-100.webp","allProductsImg/ChatMasala-BacKContent-100.webp"]
 
     },
     {
         "weight":"500",
         "price":330,
-        "imgurl":["ab","def","ghi"]
+        "imgurl":["allProductsImg/ChatMasala-500.webp","allProductsImg/ChatMasala-Back-500.webp","allProductsImg/ChatMasala-BacKContent-500.webp"]
 
     }
 
@@ -130,7 +130,7 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":35,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/DryMangoPowder.webp","allProductsImg/DryMangoPowder-Back-50.webp","allProductsImg/DryMangoPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
@@ -184,17 +184,17 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":50,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/GaramMasala.webp","allProductsImg/GaramMasala-Back-50.webp","allProductsImg/GaramMasala-BackContent-50.webp"]
         },
         {
             "weight":"100",
             "price":95,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/GaramMasala.webp","allProductsImg/GaramMasala-Back-100.webp","allProductsImg/GaramMasala-BackContent-100.webp"]
         },
         {
                 "weight":"500",
                 "price":370,
-                "imgurl":["ab","cd","de"]
+                "imgurl":["allProductsImg/GaramMasala-500.webp","allProductsImg/GaramMasala-Back-500.webp","allProductsImg/GaramMasala-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -238,17 +238,17 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":20,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/TurmericPowder.webp","allProductsImg/TurmericPowder-Back-50.webp","allProductsImg/TurmericPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
             "price":33,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/TurmericPowder.webp","allProductsImg/TurmericPowder-Back-100.webp","allProductsImg/TurmericPowder-BackContent-100.webp"]
         },
         {
                 "weight":"500",
                 "price":165,
-                "imgurl":["ab","cd","de"]
+                "imgurl":["allProductsImg/TurmericPowder-500.webp","allProductsImg/TurmericPowder-Back-500.webp","allProductsImg/TurmericPowder-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -292,17 +292,17 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":22,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/CorianderPowder.webp","allProductsImg/CorianderPowder-Back-50.webp","allProductsImg/CorianderPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
             "price":40,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/CorianderPowder.webp","allProductsImg/CorianderPowder-Back-100.webp","allProductsImg/CorianderPowder-BackContent-50.webp"]
         },
         {
                 "weight":"500",
                 "price":195,
-                "imgurl":["ab","cd","de"]
+                "imgurl":["allProductsImg/CorianderPowder-500.webp","allProductsImg/CorianderPowder-Back-500.webp","allProductsImg/CoriandrerPowder-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -348,7 +348,7 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":40,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/CuminPowder.webp","allProductsImg/CuminPowder-Back-50.webp","allProductsImg/CuminPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
@@ -358,7 +358,7 @@ const productData=[{
         {
             "weight":"500",
             "price":330,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/CuminPowder-500.webp","allProductsImg/CuminPowder-Back-500.webp","allProductsImg/CuminPowder-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -403,7 +403,7 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":75,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/BlackPepperPowder.webp","allProductsImg/BlackPepperPowder-Back-50.webp","allProductsImg/BlackPepperPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
@@ -413,7 +413,7 @@ const productData=[{
         {
             "weight":"500",
             "price":495,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/BlackPepperPowder-500.webp","allProductsImg/BlackPepperPowder-Back-500.webp","allProductsImg/BlackPepperPowder-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -460,17 +460,17 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":45,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/MeatMasala.webp","allProductsImg/MeatMasala-Back-50.webp","allProductsImg/MeatMasala-BackContent-50.webp"]
         },
         {
             "weight":"100",
             "price":80,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/MeatMasala.webp","allProductsImg/MeatMasala-Back-100.webp","allProductsImg/MeatMasala-BackContent-100.webp"]
         },
         {
                 "weight":"500",
                 "price":400,
-                "imgurl":["ab","cd","de"]
+                "imgurl":["allProductsImg/MeatMasala-500.webp","allProductsImg/MeatMasala-Back-500.webp","allProductsImg/MeatMasala-BackContent-500.webp"]
         }
     ],
     "metaData":[
@@ -514,17 +514,17 @@ const productData=[{
     "variant":[{
         "weight":"50",
         "price":30,
-        "imgurl":["ab","cd","de"]
+        "imgurl":["allProductsImg/RedChilliPowder.webp","allProductsImg/RedChilliPowder-Back-50.webp","allProductsImg/RedChilliPowder-BackContent-50.webp"]
         },
         {
             "weight":"100",
             "price":58,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/RedChilliPowder.webp","allProductsImg/RedChilliPowder-Back-100.webp","allProductsImg/RedChilliPowder-BackContent-100.webp"]
         },
         {
             "weight":"500",
             "price":290,
-            "imgurl":["ab","cd","de"]
+            "imgurl":["allProductsImg/RedChilliPowder-500.webp","allProductsImg/RedChilliPowder-Back-500.webp","allProductsImg/RedChilliPowder-BackContent-500.webp"]
         }
     ],
     "metaData":[
