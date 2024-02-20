@@ -13,6 +13,8 @@ const productData=[{
    "Amazon":false,
    "productUrl":"sabji-masala",
    "category":["BestSelling","KitchenSpices"],
+   "type":"blended",
+   
     "variant":[{
         "weight":"50",
         "price":30,
@@ -38,6 +40,13 @@ const productData=[{
        "usage":"You only need your favourite vegetables and PlanetsEra Sabji Masala for a quick vegetable curry. It's true; no extra spice is necessary to make food irresistible. The Planetsera Sabji Masala is a must-have for anyone who needs more cooking time but still wants to make delicious vegetable meals.",
        "ingredients":"Coriander, Cumin, Red Chili, Turmeric, Black Pepper, Cardamom Amomum, Dry Ginger, Bay Leaf, Salt, Clove, Nutmeg, Asafoetida, Dry Mango, Curry Leaves, Black Mustard, Green Cardamom, Black Salt       ",
        "healthBenefits":"Sabzi masala powder has many health benefits. Add this aromatic spice blend to vegetable recipes for flavour and nutrition. Sabzi masala helps digestion, metabolism, and delivers vitamins and minerals with its blend of healthy spices. Naturally healthy ingredients make it a tasty and nutritious addition to your cooking. Sabji masala is tasty and healthy.       ",
+       "productBg":"allProductsImg/SabjiMasalaBg.webp",
+       "colored": "#7F9F5E",
+       "colored2": "#ADD4B0",
+       "inactiveBtn": "rgb(127 159 94 / 38%)",
+       "inactiveBtn2": "rgb(173 212 176 /38%)",
+       "bgColor": "rgb(177 211 176)",
+       
        faqs: [
         {
           question: "1. What is Sabzi Masala Powder?",
@@ -78,6 +87,9 @@ const productData=[{
     "Flipkart":true,
     "Amazon":true,
     "productUrl":"chat-masala",
+    "type":"blended",
+    
+
 
     "variant":[{
         "weight":"50",
@@ -104,6 +116,12 @@ const productData=[{
        "usage":"You can sprinkle it on Salties, Samosas, Sandwiches, Tikkies, Pizzas, Pakoras, Soft drinks, Dahi Wadas, Papris, Burgers, Wafers, Paneer-Tikkas, etc.       ",
        "ingredients":"Black Salt, Salt, Coriander, Dry Mango, Cumin, Rock Salt, Fennel Seed, Pomegranate Seed, Tamarind, Mint, Carom Seed, Black Pepper, Dry Ginger, Red Chili, Nutmeg, Clove, Asafoetida, Citric Acid       ",
        "healthBenefits":"Chat masala powder isn't just a flavorful spice blend; it also offers health benefits. Packed with a mix of spices like cumin, coriander, and asafoetida, it aids digestion and can alleviate indigestion and bloating. The best chaat masala can also provide a dash of antioxidants, helping to boost your overall well-being. Enjoy its tangy goodness while reaping these health perks.       ",
+       "productBg":"allProductsImg/ChatMasalaBg.webp",
+       "colored": "rgb(206 206 93)",
+       "colored2": "#CDE1A2",
+       "inactiveBtn": "rgb(209 209 69 / 38%)",
+       "inactiveBtn2": "rgb(205 225 162 / 38%)",
+       "bgColor": "rgb(238 238 216)",
        faqs: [
         {
           question: "1. What is Chat Masala Powder?",
@@ -142,6 +160,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":false,
     "productUrl":"amchur-powder",
+    "type":"grounded",
 
     "variant":[{
         "weight":"50",
@@ -164,6 +183,12 @@ const productData=[{
        "usage":"A variety of dishes, salads, beverages and desserts can benefit from PlanetsEra amchur powder Powder's tangy flavour and aroma.       ",
        "ingredients":"Dry Mango       ",
        "healthBenefits":"Amchur powder, also known as dry mango powder or amchur masala, offers more than just a tangy flavor to your dishes. Packed with vitamins, antioxidants, and digestive properties, amchur powder aids in digestion, boosts immunity, and enhances skin health. Its high vitamin C content supports overall well-being and adds a zesty twist to your culinary creations. Embrace the goodness of amchur powder for a flavorful and health-conscious culinary experience.       ",
+       "productBg":"allProductsImg/AmchurPowderBg.webp",
+       "colored": "rgb(212 158 74)",
+       "colored2": "#DCBF92",
+       "inactiveBtn": "rgb(212 158 74 / 38%)",
+       "inactiveBtn2": "rgb(253 235 208)",
+       "bgColor": "rgb(236 220 197)",
        faqs: [
         {
           question: "1. How is Amchur Powder made?",
@@ -202,6 +227,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":true,
     "productUrl":"garam-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -224,6 +250,12 @@ const productData=[{
        "usage":"It is primarily used for preparing vegetarian dishes that require gravy. In Gujarat and Marwar, it is typically used in lentils (dal) and in snacks such as samosas, usal, patra, and farsan.       ",
        "ingredients":"Coriander, Cumin, Black-Pepper, Cinnamon Stick, Clove, Cardamom Amomum, Star Anise, Bay Leaf, Dry Ginger, Nutmeg, Mace, Green Cardamom       ",
        "healthBenefits":"Whole garam masala has health benefits in addition to its flavour. It aids digestion, boosts the calorie burn, and aides in weight management due to its aromatic spices. Antioxidant-rich, it promotes general health and may reduce inflammation. Incorporate Planetsera's high-quality garam masala compound into your culinary endeavours for a tasty way to improve your health.",
+       "productBg":"allProductsImg/GaramMasalaBg.webp",
+       "colored": "#996d51",
+       "colored2": "#E5C6BB",
+       "inactiveBtn": "rgb(209 194 172 / 38%)",
+       "inactiveBtn2": "rgb(229 198 187 / 38%)",
+       "bgColor": "rgb(188 163 155)",
        faqs: [
         {
           question: "1. What is Garam Masala?",
@@ -262,6 +294,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":false,
     "productUrl":"turmeric-powder",
+    "type":"grounded",
 
     "variant":[{
         "weight":"50",
@@ -284,6 +317,13 @@ const productData=[{
        "usage":"Hindus use turmeric to season fish before they cook it in India. In Indian cooking, turmeric is used both to add colour and taste. Turmeric has been used for a long time to heal cuts, treat eye infections, and treat the common cold.       ",
        "ingredients":"Turmeric",
        "healthBenefits":"Organic turmeric powder, which is also called haldi powder, is a powerful superfood that has many health benefits. It has anti-inflammatory and antioxidant qualities because it is full of curcumin. When you consume haldi powder regularly, it helps your body digest food, boosts your immune system, and keeps your face healthy. Take advantage of the natural benefits of organic turmeric powder to improve your health overall.       ",
+       "productBg":"allProductsImg/TurmericPowderBg.webp",
+       "colored": "rgb(214 184 65)",
+       "colored2": "#E2C199",
+       "inactiveBtn": "rgb(214 184 65 / 38%)",
+       "inactiveBtn2": "rgb(226 193 153 / 38%)",
+       "bgColor": "rgb(228 223 203)",
+       
        faqs: [
         {
           question: "1. What is turmeric powder (haldi powder)?",
@@ -322,7 +362,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":true,
     "productUrl":"coriander-powder",
-
+    "type":"grounded",
     "variant":[{
         "weight":"50",
         "price":22,
@@ -344,6 +384,12 @@ const productData=[{
        "usage":"Coriander is mainly used in Indian cuisine for its taste. When fried in oil, roasted coriander powder produces a characteristic curry flavour. The seeds of coriander have diuretic properties. Digestive toning and gas relief are its benefits.",
        "ingredients":"Coriander Seed       ",
        "healthBenefits":"The health benefits of coriander powder, also known as dhaniya Powder, are numerous. It helps digestion, lowers damage, and controls blood sugar levels. It supports heart health and the immune system due to its abundance of antioxidants. In addition to aiding in detoxification, coriander powder can mitigate IBS symptoms. Include this flavorful spice in your diet for a delicious method to improve your health.       ",
+       "productBg":"allProductsImg/CorianderPowderBg.webp",
+       "colored": "rgb(132 184 108)",
+       "colored2": "#ABC59F",
+       "inactiveBtn": "rgb(171 197 159 / 38%)",
+       "inactiveBtn2": "rgb(171 197 159 / 38%)",
+       "bgColor": "rgb(210 224 203)",
        faqs: [
         {
           question: "1. What is Coriander Powder (Dhaniya Powder)?",
@@ -384,6 +430,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":false,
     "productUrl":"cumin-powder",
+    "type":"grounded",
 
     "variant":[{
         "weight":"50",
@@ -406,6 +453,12 @@ const productData=[{
        "usage":"The tawa (girdle) is used to roast the seeds very briefly (for only a minute) then grind them into powder to release their full flavour. Digestion is one of the benefits of cumin.       ",
        "ingredients":"Cumin Seed       ",
        "healthBenefits":"Cumin powder, also known as jeera powder, has numerous positive health effects. Cumin powder, which is abundant in antioxidants and essential nutrients, aids digestion, promotes weight loss, and may help control blood sugar. Additionally, it is anti-inflammatory and promotes respiratory health. Include this adaptable spice in your diet to benefit from its flavorful and health-enhancing qualities.       ",
+       "productBg":"allProductsImg/CuminPowderBg.webp",
+       "colored": "#8E5B24",
+       "colored2": "#8E5B24",
+       "inactiveBtn": "rgb(142 91 36 / 38%)",
+       "inactiveBtn2": "rgb(142 91 36 / 38%)",
+       "bgColor": "rgb(206 182 154)",
        faqs: [
         {
           question: "1. What is Cumin Powder, and how is it made?",
@@ -445,6 +498,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":true,
     "productUrl":"black-pepper-powder",
+    "type":"grounded",
 
     "variant":[{
         "weight":"50",
@@ -467,6 +521,12 @@ const productData=[{
        "usage":"Pepper is extensively used in the winter food of North India. It's used as a spice in non-vegetarian dishes in the South. It's an essential spice in the Indian four-spice classic Garam Masala. When peppercorns and basil leaves are boiled together, chest congestion and asthma are relieved.       ",
        "ingredients":"Black Pepper       ",
        "healthBenefits":"Black pepper powder, also known as kali mirch powder or kali mirch, is more than just a seasoning. This humble spice boasts numerous health benefits. Rich in antioxidants and anti-inflammatory properties, black pepper powder aids digestion, promotes weight loss, and enhances nutrient absorption. Its natural warmth helps relieve congestion and supports respiratory health. Incorporate black pepper powder into your diet for a flavorful way to boost your overall well-being.       ",
+       "productBg":"allProductsImg/BlackPepperBg.webp",
+       "colored": "#594E4E",
+       "colored2": "#594E4E",
+       "inactiveBtn": "rgb(197 197 197)",
+       "inactiveBtn2": "rgb(197 197 197)",
+       "bgColor": "rgb(161 161 161)",
        faqs: [
         {
           question: "1. What is black pepper powder, and how is it made?",
@@ -508,6 +568,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":false,
     "productUrl":"meat-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -530,6 +591,12 @@ const productData=[{
        "usage":"You can use PlanetsEra meat masala whenever a dark gravy is required for meat dish preparation.       ",
        "ingredients":"Coriander, Cumin, Cinnamon, Mace, Clove, Green Cardamom, Nutmeg, Rai, Fennel, Seed, Kashmiri Red Chili, Turmeric, Garlic, Ginger, Black salt, Asafoetida, Bay Leaf, Black Pepper, Red Chili, Mustard, Fenugreek Leaves, Cardamom Amomum       ",
        "healthBenefits":"Identify the best meat masala to enhance your dishes. Not only do our best-selling meat seasonings, commonly known as (meat ka masala bring a burst of flavour, but they also provide health benefits. This blend of aromatic spices not only enhances the taste of your food, but it can also facilitate digestion and provide essential nutrients. Enhance your meat dishes with our finest meat masala and savour every delicious morsel.       ",
+       "productBg":"allProductsImg/MeatMasalaBg.webp",
+       "colored": "#D48259",
+       "colored2": "#D48259",
+       "inactiveBtn": "rgb(212 130 89 / 38%)",
+       "inactiveBtn2": "rgb(212 130 89 / 38%)",
+       "bgColor": "rgb(231 194 177)",
        faqs: [
         {
           question: "1. What is Meat Masala Powder",
@@ -568,6 +635,7 @@ const productData=[{
     "Flipkart":true,
     "Amazon":true,
     "productUrl":"red-chilli-powder",
+    "type":"grounded",
 
     "variant":[{
         "weight":"50",
@@ -590,6 +658,12 @@ const productData=[{
        "usage":"Red chillies are commonly used in Indian dishes. A firm curry is achieved by crushing red chillies and coconuts. Providing vitamin C and aiding digestion, chillies are an excellent source of heat.",
        "ingredients":"Red Chilli",
        "healthBenefits":"Red chilli powder, which is also called chilli powder or lal mirch powder, has more to give than just a spicy taste. It helps you lose weight because it has capsaicin, speeds up your metabolism, and lowers inflammation. This spice has a lot of vitamins and antioxidants, which are good for the heart and make the defence system stronger. Its spicy kick can even ease pain and make you feel better. Red chilli powder is good for your health and a tasty addition to your diet.",
+       "productBg":"allProductsImg/RedChilliBg.webp",
+       "colored": "rgb(194 127 127)",
+       "colored2": "#C59F9F",
+       "inactiveBtn": "#F1E4E4",
+       "inactiveBtn2": "#F1E4E4",
+       "bgColor": "rgb(227 211 211)",
        faqs: [
         {
           question:
@@ -633,6 +707,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"chicken-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -667,6 +742,7 @@ const productData=[{
  "Flipkart":false,
     "Amazon":false,
     "productUrl":"kitchen-king-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -701,6 +777,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"paneer-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -735,6 +812,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"chhole-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -769,6 +847,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"biryani-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -803,6 +882,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"chana-masala",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -837,6 +917,7 @@ const productData=[{
     "Flipkart":false,
     "Amazon":false,
     "productUrl":"combo-pack",
+    "type":"blended",
 
     "variant":[{
         "weight":"50",
@@ -882,7 +963,8 @@ const productCreate =(product)=>{
             category:product.category,
             Amazon:product.Amazon,
             Flipkart:product.Flipkart,
-            productUrl:product.productUrl
+            productUrl:product.productUrl,
+            type:product.type
           
 
         }

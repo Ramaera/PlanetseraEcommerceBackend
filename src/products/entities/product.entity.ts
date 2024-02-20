@@ -35,5 +35,8 @@ productImageUrl:string
 @Field({nullable:true})
 productUrl:string
 
+@Field()
+type:string
+
 
 }

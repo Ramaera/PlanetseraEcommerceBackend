@@ -36,6 +36,7 @@ Table Products {
   Flipkart Boolean [not null, default: false]
   Amazon Boolean [not null, default: false]
   productUrl String [not null]
+  type String [not null]
 }
 
 Table ProductVariant {

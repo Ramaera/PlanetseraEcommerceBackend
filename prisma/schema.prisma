@@ -46,6 +46,7 @@ model Products {
   Flipkart        Boolean          @default(false)
   Amazon          Boolean          @default(false)
   productUrl      String
+  type            String
 }
 
 model ProductVariant {
