@@ -11,6 +11,19 @@ export class UsersService {
     private passwordService: PasswordService,
   ) {}
 
+  async getUser(userId) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      include: {
+        buyer: true,
+      },
+    });
+
+    console.log('--->', user);
+    return user;
+  }
   updateUser(userId: string, newUserData: UpdateUserInput) {
     return this.prisma.user.update({
       data: newUserData,
