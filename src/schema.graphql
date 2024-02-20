@@ -33,9 +33,8 @@ input ChangePasswordInput {
 input CreateCartInput {
   buyerId: String!
   cartItem: [JSONObject!]!
-  checkedOut: Boolean!
-  itemCount: Int!
   productVariantId: Int!
+  qty: Int!
 }
 
 input CreateOrderInput {
@@ -85,10 +84,10 @@ type Mutation {
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
-  deleteCart(cartId: String!): Cart!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
   signup(data: SignupInput!): Auth!
+  updateCart(data: UpdateProductInput!): Cart!
   updateUser(data: UpdateUserInput!): User!
 }
 
@@ -165,6 +164,14 @@ type Token {
 
   """JWT refresh token"""
   refreshToken: JWT!
+}
+
+input UpdateProductInput {
+  cartItemId: String!
+  description: String
+  productUrl: String
+  quantity: Int!
+  title: String
 }
 
 input UpdateUserInput {

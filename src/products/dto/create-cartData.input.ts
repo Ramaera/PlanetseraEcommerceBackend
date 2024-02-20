@@ -4,25 +4,14 @@ import { json } from 'stream/consumers';
 
 @InputType()
 export class CreateCartInput {
-
-
-@Field()
-
-  @Field(()=>(Int))
-  itemCount : number;
-
-
-
- @Field(() => [GraphQLJSONObject],)
- cartItem?: any[];
-  @Field()
-  buyerId   : string
-
-  @Field(()=>(Int))
-  productVariantId : number
+  @Field(() => [GraphQLJSONObject])
+  cartItem?: any[];
 
   @Field()
-  checkedOut: Boolean
- 
- 
+  productVariantId: number;
+  @Field()
+  qty: number;
+
+  @Field()
+  buyerId: string;
 }
