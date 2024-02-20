@@ -8,15 +8,16 @@ import { CreateProductInput } from './dto/create-product.input';
 import { CreateProductVariantInput } from './dto/create-productVariant.input';
 import { CreateCartInput } from './dto/create-cartData.input';
 import { CreateOrderInput } from './dto/create-Order.input';
-
-
+import { UpdateProductInput } from './dto/update-product.input';
 
 @Resolver(() => Product)
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
   @Mutation(() => Product)
-  createProduct(@Args('createProductInput') createProductInput: CreateProductInput) {
+  createProduct(
+    @Args('createProductInput') createProductInput: CreateProductInput,
+  ) {
     return this.productsService.create(createProductInput);
   }
 
@@ -25,34 +26,36 @@ export class ProductsResolver {
     return await this.productsService.findAll();
   }
 
-
-
   @Query(() => [Cart], { name: 'viewCart' })
-  async allCartItems(
-    @Args ('buyerId') buyerId:string
-  ) {
+  async allCartItems(@Args('buyerId') buyerId: string) {
     return await this.productsService.allCartItems(buyerId);
   }
 
-
-
   @Mutation(() => ProductVariant)
-  createProductVariant(@Args('CreateProductVariantInput') createProductVariantInput: CreateProductVariantInput) {
+  createProductVariant(
+    @Args('CreateProductVariantInput')
+    createProductVariantInput: CreateProductVariantInput,
+  ) {
     return this.productsService.createProductVariant(createProductVariantInput);
   }
   @Mutation(() => Order)
   createOrder(@Args('CreateOrder') createOrderInput: CreateOrderInput) {
-    return this.productsService.createOrder(createOrderInput)
-  }
-
-
-  @Mutation(()=>Cart)
-  createCart(@Args("CreateCartInput")createCartInput:CreateCartInput){
-    return this.productsService.createCart(createCartInput)
+    return this.productsService.createOrder(createOrderInput);
   }
 
   @Mutation(() => Cart)
-  deleteCart(@Args('cartId') cartId: string): Promise<Cart> {
-    return this.productsService.deleteCart(cartId);
+  createCart(@Args('CreateCartInput') createCartInput: CreateCartInput) {
+    return this.productsService.addItemToCart(createCartInput);
   }
+
+  @Mutation(() => Cart)
+  updateCart(@Args('data') data: UpdateProductInput) {
+    const cartData = this.productsService.updateCartItem(data);
+    return cartData;
+  }
+
+  // @Mutation(() => Cart)
+  // deleteCart(@Args('cartId') cartId: string): Promise<Cart> {
+  //   return this.productsService.deleteCart(cartId);
+  // }
 }
