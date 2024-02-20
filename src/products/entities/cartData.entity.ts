@@ -5,25 +5,32 @@ import { ProductVariant } from './productVariant.entity';
 @ObjectType()
 export class Cart {
 
-    @Field(()=>[Int])
-    itemCount : number[];
-  
+ 
     @Field()
-    subTotal:number
+    id:string
+
+    @Field(()=>String)
+    buyerId : string;
 
     
-    @Field(() => [[GraphQLJSONObject]], { nullable: true })
-    cartItem?: any[];
 
-    @Field()
-    buyerId   : string
+    @Field(()=>[CartItems])
+    cartItem : CartItems[]
   
-    @Field(()=>[Int])
-    productVariantIds : number[]
-  
+
+}
+
+@ObjectType()
+class CartItems {
     @Field()
-    checkedOut: Boolean
-   
+    id:string
 
+    @Field(()=>Int)
+    qty : number;
 
+    @Field(()=>String,{nullable:true})
+    name:string
+
+    @Field(()=>Int)
+    productVariantId : number
 }

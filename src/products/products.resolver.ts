@@ -9,6 +9,9 @@ import { CreateProductVariantInput } from './dto/create-productVariant.input';
 import { CreateCartInput } from './dto/create-cartData.input';
 import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
+import { CartOperationInput } from './dto/operation-cartItem.input';
+import { MessageOutput } from './entities/message.entity';
+
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -26,7 +29,7 @@ export class ProductsResolver {
     return await this.productsService.findAll();
   }
 
-  @Query(() => [Cart], { name: 'viewCart' })
+  @Query(() => Cart, { name: 'viewCart' })
   async allCartItems(@Args('buyerId') buyerId: string) {
     return await this.productsService.allCartItems(buyerId);
   }
@@ -43,9 +46,13 @@ export class ProductsResolver {
     return this.productsService.createOrder(createOrderInput);
   }
 
-  @Mutation(() => Cart)
+  @Mutation(() => MessageOutput)
   createCart(@Args('CreateCartInput') createCartInput: CreateCartInput) {
     return this.productsService.addItemToCart(createCartInput);
+  }
+  @Mutation(() => Cart)
+  cartOpeartion(@Args('CartOperationInput') cartOperationInput: CartOperationInput) {
+    return this.productsService.operationsInCart(cartOperationInput);
   }
 
   @Mutation(() => Cart)
@@ -54,8 +61,13 @@ export class ProductsResolver {
     return cartData;
   }
 
-  // @Mutation(() => Cart)
-  // deleteCart(@Args('cartId') cartId: string): Promise<Cart> {
-  //   return this.productsService.deleteCart(cartId);
-  // }
+  @Mutation(() => MessageOutput)
+  async removeItemFromCart(@Args('cartItem') cartItemId: string) {
+    return await this.productsService.removeItemFromCart(cartItemId);
+  }
+
+  @Mutation(() => MessageOutput)
+  async  deleteCart(@Args('cartId') cartId: string) {
+    return await this.productsService.deleteCart(cartId);
+  }
 }

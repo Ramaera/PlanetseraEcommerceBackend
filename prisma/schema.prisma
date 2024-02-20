@@ -46,7 +46,7 @@ model Products {
   Flipkart        Boolean          @default(false)
   Amazon          Boolean          @default(false)
   productUrl      String
-  type            String
+  type            String?
 }
 
 model ProductVariant {
@@ -60,17 +60,28 @@ model ProductVariant {
 }
 
 model Order {
-  id          Int         @id @default(autoincrement())
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
   orderDate   DateTime?
   orderAmount Float
   Payment     Payment[]
-  status      OrderStatus @default(PROCESSING)
-  Buyer       Buyer?      @relation(fields: [buyerId], references: [id])
+  paymentType PaymentType?
+  status      OrderStatus  @default(PROCESSING)
+  Buyer       Buyer?       @relation(fields: [buyerId], references: [id])
   buyerId     String?
-  OrderItem   Cart?       @relation(fields: [cartItemid], references: [id])
-  cartItemid  String?
+  cart        Cart?        @relation(fields: [cartid], references: [id])
+  cartid      String?
+  orderItems  orderItems[]
+}
+
+model orderItems {
+  id               String  @id @default(cuid())
+  productVariantId Int
+  qty              Int
+  Order            Order?  @relation(fields: [orderId], references: [id])
+  orderId          Int?
+  name             String?
 }
 
 model Cart {
@@ -90,6 +101,7 @@ model cartItems {
   qty              Int
   Cart             Cart?   @relation(fields: [cartId], references: [id])
   cartId           String?
+  name             String?
 }
 
 model Payment {
@@ -115,7 +127,6 @@ enum Role {
 }
 
 enum OrderStatus {
-  OUTOFSTOCK
   USERCANCELLED
   SELLERCANCELLED
   PROCESSING
@@ -123,4 +134,11 @@ enum OrderStatus {
   SHIPPED
   OUTFORDELIVERY
   DELIVERED
+}
+
+enum PaymentType {
+  CASHONDELIVERY
+  UPI
+  CREDITCARD
+  DEBITCARD
 }

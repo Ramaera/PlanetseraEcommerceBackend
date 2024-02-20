@@ -18,11 +18,21 @@ type BuyerData {
 
 type Cart {
   buyerId: String!
-  cartItem: [[JSONObject!]!]
-  checkedOut: Boolean!
-  itemCount: [Int!]!
-  productVariantIds: [Int!]!
-  subTotal: Int!
+  cartItem: [CartItems!]!
+  id: String!
+}
+
+type CartItems {
+  id: String!
+  name: String
+  productVariantId: Int!
+  qty: Int!
+}
+
+input CartOperationInput {
+  cartItemId: String!
+  operation: String!
+  qty: Int!
 }
 
 input ChangePasswordInput {
@@ -32,14 +42,14 @@ input ChangePasswordInput {
 
 input CreateCartInput {
   buyerId: String!
-  cartItem: [JSONObject!]!
+  name: String!
   productVariantId: Int!
   qty: Int!
 }
 
 input CreateOrderInput {
   buyerId: String!
-  cartItemid: String!
+  cartId: String!
   orderAmount: Float!
   orderDate: DateTime
 }
@@ -78,14 +88,21 @@ input LoginInput {
   password: String!
 }
 
+type MessageOutput {
+  success: Boolean!
+}
+
 type Mutation {
+  cartOpeartion(CartOperationInput: CartOperationInput!): Cart!
   changePassword(data: ChangePasswordInput!): User!
-  createCart(CreateCartInput: CreateCartInput!): Cart!
+  createCart(CreateCartInput: CreateCartInput!): MessageOutput!
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
+  deleteCart(cartId: String!): MessageOutput!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
+  removeItemFromCart(cartItem: String!): MessageOutput!
   signup(data: SignupInput!): Auth!
   updateCart(data: UpdateProductInput!): Cart!
   updateUser(data: UpdateUserInput!): User!
@@ -123,6 +140,7 @@ type Product {
   productImageUrl: String
   productUrl: String
   title: String!
+  type: String!
 }
 
 type ProductVariant {
@@ -139,7 +157,7 @@ type Query {
   hello(name: String!): String!
   helloWorld: String!
   me: User!
-  viewCart(buyerId: String!): [Cart!]!
+  viewCart(buyerId: String!): Cart!
 }
 
 """User role"""

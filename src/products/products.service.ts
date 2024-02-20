@@ -6,6 +6,7 @@ import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
 import { BuyerData } from 'src/users/models/buyer.model';
+import { CartOperationInput,  } from './dto/operation-cartItem.input';
 
 @Injectable()
 export class ProductsService {
@@ -64,6 +65,7 @@ export class ProductsService {
 
         await this.prisma.cartItems.create({
           data: {
+            name:createCartInput.name,
             productVariantId: createCartInput.productVariantId,
             cartId: cartCreated.id,
             qty: createCartInput.qty,
@@ -74,11 +76,13 @@ export class ProductsService {
 
       const existingCartItem = await this.prisma.cartItems.findFirst({
         where: {
-          cartId: existingCart.id,
+          productVariantId: createCartInput.productVariantId
         },
       });
 
       if (existingCartItem) {
+        
+        
         await this.prisma.cartItems.update({
           where: {
             id: existingCartItem.id,
@@ -90,6 +94,7 @@ export class ProductsService {
       } else {
         await this.prisma.cartItems.create({
           data: {
+            name:createCartInput.name,
             productVariantId: createCartInput.productVariantId,
             qty: createCartInput.qty,
             cartId: existingCart.id,
@@ -102,6 +107,39 @@ export class ProductsService {
       console.error('Error adding item to cart:', error);
       return { success: false, error: error.message };
     }
+  }
+
+
+  async operationsInCart (operations:CartOperationInput){
+ const item =await this.prisma.cartItems.findUnique({
+  where:{
+    id:operations.cartItemId
+
+  }
+ })
+{
+  operations.operation === "INCREMENT" && await this.prisma.cartItems.update({
+    where:{
+      id: operations.cartItemId
+    },
+    data:{
+      qty:item.qty+operations.qty
+    }
+  })
+}
+{
+  operations.operation === "DECREMENT" && item.qty>1 && await this.prisma.cartItems.update({
+    where:{
+      id: operations.cartItemId
+    },
+    data:{
+      qty:item.qty-operations.qty
+    }
+  })
+}
+console.log("item",item);
+
+return {success:true}
   }
 
   async updateCartItem(update: UpdateProductInput) {
@@ -129,20 +167,39 @@ export class ProductsService {
     return foundItem ? true : false;
   }
 
-  // async deleteCart(cartId: string) {
-  //   try {
-  //     const deletedCart = await this.prisma.cart.delete({
-  //       where: {
-  //         id: cartId,
-  //       },
-  //     });
+  async deleteCart(cartId: string) {
+    try {
+      const deleteCartItem = await this.prisma.cartItems.deleteMany({
+        where:{ cartId:cartId}
+      })
+      const deletedCart = await this.prisma.cart.delete({
+        where: {
+          id: cartId,
+        },
+      });
 
-  //     return deletedCart;
-  //   } catch (error) {
-  //     console.error('Error deleting cart:', error);
-  //     throw new Error('Could not delete cart');
-  //   }
-  // }
+      return deletedCart;
+    } catch (error) {
+      console.error('Error deleting cart:', error);
+      throw new Error('Could not delete cart');
+    }
+  }
+
+
+  
+  async removeItemFromCart(cartItemId: string) {
+    try {
+      const deleteCartItem = await this.prisma.cartItems.delete({
+        where:{ id:cartItemId}
+      })
+      
+
+      return {sucess:true};
+    } catch (error) {
+      console.error('Error deleting cart:', error);
+      throw new Error('Could not delete cart');
+    }
+  }
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
@@ -150,7 +207,7 @@ export class ProductsService {
         data: {
           orderAmount: createOrderVariantInput.orderAmount,
           orderDate: createOrderVariantInput.orderDate,
-          cartItemid: createOrderVariantInput.cartItemid,
+          cartid:createOrderVariantInput.cartId,
           buyerId: createOrderVariantInput.buyerId,
         },
       });
@@ -170,11 +227,15 @@ export class ProductsService {
     });
   }
 
-  allCartItems(buyerId) {
-    return this.prisma.cart.findMany({
-      where: {
-        buyerId,
+ async allCartItems(buyerId) {
+    const getCart = await this.prisma.cart.findUnique({
+      where:{
+        buyerId
       },
-    });
+      include:{cartItem:true}
+    })
+    console.log("getCart",getCart);
+    
+    return getCart
   }
 }

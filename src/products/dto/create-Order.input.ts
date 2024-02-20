@@ -6,12 +6,15 @@ export class CreateOrderInput {
 
   @Field({nullable:true})
   orderDate: Date;
+
   @Field(() => Float,{}) 
   orderAmount: number;
+
   @Field()
   buyerId:string
+  
   @Field()
-  cartItemid:string
+  cartId:string
  
 
 
