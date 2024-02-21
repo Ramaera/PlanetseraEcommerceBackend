@@ -117,6 +117,7 @@ model Address {
   addresId     Int     @id @default(autoincrement())
   name         String
   mobileNumber String
+  address      Json?
   Buyer        Buyer?  @relation(fields: [buyerId], references: [id])
   buyerId      String?
 }

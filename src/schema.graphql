@@ -2,6 +2,13 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type AddressData {
+  address: [JSONObject!]!
+  buyerId: String
+  mobileNumber: String
+  name: String
+}
+
 type Auth {
   """JWT access token"""
   accessToken: JWT!
@@ -93,7 +100,8 @@ type MessageOutput {
 }
 
 type Mutation {
-  cartOpeartion(CartOperationInput: CartOperationInput!): Cart!
+  addAddress(data: UpdateBuyerAddressInput!): AddressData!
+  cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
   changePassword(data: ChangePasswordInput!): User!
   createCart(CreateCartInput: CreateCartInput!): MessageOutput!
   createOrder(CreateOrder: CreateOrderInput!): Order!
@@ -104,6 +112,7 @@ type Mutation {
   refreshToken(token: JWT!): Token!
   removeItemFromCart(cartItem: String!): MessageOutput!
   signup(data: SignupInput!): Auth!
+  updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
   updateUser(data: UpdateUserInput!): User!
 }
@@ -154,6 +163,7 @@ type ProductVariant {
 type Query {
   allProducts: [Product!]!
   getBuyer: BuyerData!
+  getBuyerAddress(buyerId: String!): [AddressData!]!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
@@ -184,6 +194,13 @@ type Token {
   refreshToken: JWT!
 }
 
+input UpdateBuyerAddressInput {
+  address: [JSONObject!]!
+  buyerId: String
+  mobileNumber: String
+  name: String
+}
+
 input UpdateProductInput {
   cartItemId: String!
   description: String
@@ -193,8 +210,7 @@ input UpdateProductInput {
 }
 
 input UpdateUserInput {
-  firstname: String
-  lastname: String
+  address: [JSONObject!]
 }
 
 type User {

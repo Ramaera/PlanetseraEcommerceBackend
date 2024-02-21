@@ -12,7 +12,6 @@ import { UpdateProductInput } from './dto/update-product.input';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { MessageOutput } from './entities/message.entity';
 
-
 @Resolver(() => Product)
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
@@ -50,8 +49,10 @@ export class ProductsResolver {
   createCart(@Args('CreateCartInput') createCartInput: CreateCartInput) {
     return this.productsService.addItemToCart(createCartInput);
   }
-  @Mutation(() => Cart)
-  cartOpeartion(@Args('CartOperationInput') cartOperationInput: CartOperationInput) {
+  @Mutation(() => MessageOutput)
+  cartOpeartion(
+    @Args('CartOperationInput') cartOperationInput: CartOperationInput,
+  ) {
     return this.productsService.operationsInCart(cartOperationInput);
   }
 
@@ -67,7 +68,7 @@ export class ProductsResolver {
   }
 
   @Mutation(() => MessageOutput)
-  async  deleteCart(@Args('cartId') cartId: string) {
+  async deleteCart(@Args('cartId') cartId: string) {
     return await this.productsService.deleteCart(cartId);
   }
 }

@@ -107,6 +107,7 @@ Table Address {
   addresId Int [pk, increment]
   name String [not null]
   mobileNumber String [not null]
+  address Json
   Buyer Buyer
   buyerId String
 }
