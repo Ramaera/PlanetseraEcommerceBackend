@@ -17,6 +17,10 @@ import { UpdateUserInput } from './dto/update-user.input';
 import { BuyerData } from './models/buyer.model';
 import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 import { AddressData } from './models/address.model';
+import { UpdateShippingInput } from './dto/update-shippingType.input';
+import { ShippingData } from './models/shipping.model';
+import { MessageOutput } from 'src/products/entities/message.entity';
+
 
 @Resolver(() => User)
 // @UseGuards(GqlAuthGuard)
@@ -78,6 +82,8 @@ export class UsersResolver {
   async addAddress(@Args('data') data: UpdateBuyerAddressInput) {
     return this.usersService.addAddress(data);
   }
+
+  
 
   @Query(() => [AddressData])
   async getBuyerAddress(@Args('buyerId') buyerId: string) {

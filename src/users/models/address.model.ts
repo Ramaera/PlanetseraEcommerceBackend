@@ -3,6 +3,11 @@ import { GraphQLJSONObject } from 'graphql-scalars';
 
 @ObjectType()
 export class AddressData {
+
+
+  @Field(() => String)
+  addresId?: string;
+
   @Field(() => String, { nullable: true })
   name?: string;
   @Field(() => String, { nullable: true })

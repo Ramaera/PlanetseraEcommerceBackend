@@ -49,31 +49,6 @@ Table ProductVariant {
   productId String [not null]
 }
 
-Table Order {
-  id Int [pk, increment]
-  createdAt DateTime [default: `now()`, not null]
-  updatedAt DateTime [not null]
-  orderDate DateTime
-  orderAmount Float [not null]
-  Payment Payment [not null]
-  paymentType PaymentType
-  status OrderStatus [not null, default: 'PROCESSING']
-  Buyer Buyer
-  buyerId String
-  cart Cart
-  cartid String
-  orderItems orderItems [not null]
-}
-
-Table orderItems {
-  id String [pk]
-  productVariantId Int [not null]
-  qty Int [not null]
-  Order Order
-  orderId Int
-  name String
-}
-
 Table Cart {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
@@ -94,6 +69,16 @@ Table cartItems {
   name String
 }
 
+Table Address {
+  addresId Int [pk, increment]
+  name String [not null]
+  mobileNumber String [not null]
+  address Json
+  Buyer Buyer
+  buyerId String
+  Order Order [not null]
+}
+
 Table Payment {
   paymentId Int [pk, increment]
   order Order [not null]
@@ -103,13 +88,32 @@ Table Payment {
   userId String [not null]
 }
 
-Table Address {
-  addresId Int [pk, increment]
-  name String [not null]
-  mobileNumber String [not null]
-  address Json
+Table Order {
+  id Int [pk, increment]
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  orderDate DateTime
+  orderAmount Float [not null]
+  paymentStatus String
+  status OrderStatus [not null, default: 'PROCESSING']
   Buyer Buyer
   buyerId String
+  cart Cart
+  cartid String
+  orderItems orderItems [not null]
+  ShippingCost Int
+  address Address
+  AddresId Int
+  Payment Payment [not null]
+}
+
+Table orderItems {
+  id String [pk]
+  productVariantId Int [not null]
+  qty Int [not null]
+  Order Order
+  orderId Int
+  name String
 }
 
 Enum Role {
@@ -138,18 +142,20 @@ Ref: Buyer.userId - User.id [delete: Cascade]
 
 Ref: ProductVariant.productId > Products.id
 
-Ref: Order.buyerId > Buyer.id
-
-Ref: Order.cartid > Cart.id
-
-Ref: orderItems.orderId > Order.id
-
 Ref: Cart.buyerId > Buyer.id [delete: Cascade]
 
 Ref: cartItems.cartId > Cart.id
+
+Ref: Address.buyerId > Buyer.id
 
 Ref: Payment.orderOrderId > Order.id
 
 Ref: Payment.userId > User.id
 
-Ref: Address.buyerId > Buyer.id
+Ref: Order.buyerId > Buyer.id
+
+Ref: Order.cartid > Cart.id
+
+Ref: Order.AddresId > Address.addresId
+
+Ref: orderItems.orderId > Order.id

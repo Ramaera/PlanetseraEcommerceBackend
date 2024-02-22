@@ -4,6 +4,7 @@ import { PasswordService } from '../auth/password.service';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
+import { UpdateShippingInput } from './dto/update-shippingType.input';
 
 @Injectable()
 export class UsersService {
@@ -57,6 +58,8 @@ export class UsersService {
     });
     return data;
   }
+  
+
 
   async changePassword(
     userId: string,

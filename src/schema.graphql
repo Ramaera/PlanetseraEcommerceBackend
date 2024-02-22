@@ -3,6 +3,7 @@
 # ------------------------------------------------------
 
 type AddressData {
+  addresId: String!
   address: [JSONObject!]!
   buyerId: String
   mobileNumber: String
@@ -55,10 +56,14 @@ input CreateCartInput {
 }
 
 input CreateOrderInput {
+  AddressId: String!
+  ShippingCost: String!
   buyerId: String!
   cartId: String!
   orderAmount: Float!
   orderDate: DateTime
+  paymentDetails: String!
+  paymentType: String!
 }
 
 input CreateProductInput {
