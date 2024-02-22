@@ -19,7 +19,7 @@ export class PaymentGatewayService {
         merchantUserId: 'MUID' + '1234',
         name: 'RAJU',
         amount: 1 * 100,
-        redirectUrl: `http://localhost:6770/api/v1/status/${merchantTransactionId}`,
+        redirectUrl: `https://planetseraapi.planetsera.com/api/v1/status/${merchantTransactionId}`,
         email: 'mohan@gmail.com',
         redirectMode: 'POST',
 
