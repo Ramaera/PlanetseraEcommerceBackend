@@ -202,17 +202,31 @@ return {success:true}
   }
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
+
     try {
+      const cartData = await this.prisma.cartItems.findMany({
+        where:{
+          cartId:createOrderVariantInput.cartId
+        }
+      })
       const newOrder = await this.prisma.order.create({
         data: {
           orderAmount: createOrderVariantInput.orderAmount,
-          orderDate: createOrderVariantInput.orderDate,
+          AddresId:createOrderVariantInput.AddressId,
+          ShippingCost:createOrderVariantInput.ShippingCost,
           cartid:createOrderVariantInput.cartId,
           buyerId: createOrderVariantInput.buyerId,
         },
       });
 
       return newOrder;
+
+      const orderItems = await this.prisma.orderItems.create({
+        data:{
+          
+        }
+      })
+
     } catch (error) {
       console.error('Error creating new order:', error);
       throw new Error('Could not create order ');
