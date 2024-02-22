@@ -10,8 +10,17 @@ Table User {
   password String [not null]
   name String
   role Role [not null]
-  Order Order [not null]
   Payment Payment [not null]
+  buyer Buyer
+}
+
+Table Buyer {
+  id String [pk]
+  user User [not null]
+  userId String [unique, not null]
+  orders Order [not null]
+  addresses Address [not null]
+  Cart Cart [not null]
 }
 
 Table Products {
@@ -20,36 +29,76 @@ Table Products {
   updatedAt DateTime [not null]
   title String [not null]
   description String [not null]
-  variant ProductVariant [not null]
-  productVariantId Int [not null]
+  productImageUrl String
+  metaData Json
+  category String[] [not null]
+  ProductsVariant ProductVariant [not null]
+  Flipkart Boolean [not null, default: false]
+  Amazon Boolean [not null, default: false]
+  productUrl String [not null]
+  type String
 }
 
 Table ProductVariant {
   id Int [pk, increment]
+<<<<<<< HEAD
   weight Float [not null]
   imageUrl String[] [not null]
   price Float [not null]
   Products Products [not null]
+=======
+  weight String [not null]
+  imageUrl String[] [not null]
+  price Int
+  stock Int
+  products Products
+  productId String [not null]
+>>>>>>> productsTable
 }
 
 Table Order {
-  orderId Int [pk, increment]
+  id Int [pk, increment]
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
-  orderDate DateTime [not null]
-  orderItem OrderItem [not null]
+  orderDate DateTime
   orderAmount Float [not null]
-  user User [not null]
-  userId String [not null]
   Payment Payment [not null]
-  orderItemOrderItemId Int [not null]
+  paymentType PaymentType
+  status OrderStatus [not null, default: 'PROCESSING']
+  Buyer Buyer
+  buyerId String
+  cart Cart
+  cartid String
+  orderItems orderItems [not null]
 }
 
-Table OrderItem {
-  OrderItemId Int [pk, increment]
-  MRP Float [not null]
-  Quantity Int [not null]
+Table orderItems {
+  id String [pk]
+  productVariantId Int [not null]
+  qty Int [not null]
+  Order Order
+  orderId Int
+  name String
+}
+
+Table Cart {
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  id String [pk]
+  checkedOut Boolean [not null, default: false]
+  buyer Buyer [not null]
+  buyerId String [unique, not null]
   Order Order [not null]
+  cartItem cartItems [not null]
+}
+
+Table cartItems {
+  id String [pk]
+  productVariantId Int [not null]
+  qty Int [not null]
+  Cart Cart
+  cartId String
+  name String
 }
 
 Table Payment {
@@ -61,10 +110,13 @@ Table Payment {
   userId String [not null]
 }
 
-Table Addres {
-  addressId Int [pk, increment]
+Table Address {
+  addresId Int [pk, increment]
   name String [not null]
   mobileNumber String [not null]
+  address Json
+  Buyer Buyer
+  buyerId String
 }
 
 Enum Role {
@@ -72,12 +124,39 @@ Enum Role {
   CUSTOMER
 }
 
-Ref: Products.productVariantId > ProductVariant.id
+Enum OrderStatus {
+  USERCANCELLED
+  SELLERCANCELLED
+  PROCESSING
+  PACKED
+  SHIPPED
+  OUTFORDELIVERY
+  DELIVERED
+}
 
-Ref: Order.orderItemOrderItemId > OrderItem.OrderItemId
+Enum PaymentType {
+  CASHONDELIVERY
+  UPI
+  CREDITCARD
+  DEBITCARD
+}
 
-Ref: Order.userId > User.id
+Ref: Buyer.userId - User.id [delete: Cascade]
 
-Ref: Payment.orderOrderId > Order.orderId
+Ref: ProductVariant.productId > Products.id
+
+Ref: Order.buyerId > Buyer.id
+
+Ref: Order.cartid > Cart.id
+
+Ref: orderItems.orderId > Order.id
+
+Ref: Cart.buyerId > Buyer.id [delete: Cascade]
+
+Ref: cartItems.cartId > Cart.id
+
+Ref: Payment.orderOrderId > Order.id
 
 Ref: Payment.userId > User.id
+
+Ref: Address.buyerId > Buyer.id

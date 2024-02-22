@@ -3,6 +3,7 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { PasswordService } from '../auth/password.service';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 
 @Injectable()
 export class UsersService {
@@ -11,6 +12,19 @@ export class UsersService {
     private passwordService: PasswordService,
   ) {}
 
+  async getUser(userId) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        id: userId,
+      },
+      include: {
+        buyer: true,
+      },
+    });
+
+    console.log('--->', user);
+    return user;
+  }
   updateUser(userId: string, newUserData: UpdateUserInput) {
     return this.prisma.user.update({
       data: newUserData,
@@ -18,6 +32,30 @@ export class UsersService {
         id: userId,
       },
     });
+  }
+
+  async updateBuyer(userId, updatedData: UpdateUserInput) {
+    const data = await this.prisma.buyer.update({
+      where: {
+        userId,
+      },
+      data: {
+        addresses: updatedData.address,
+      },
+    });
+    return data;
+  }
+
+  async addAddress(addInput: UpdateBuyerAddressInput) {
+    const data = await this.prisma.address.create({
+      data: {
+        buyerId: addInput.buyerId,
+        name: addInput.name,
+        mobileNumber: addInput.mobileNumber,
+        address: addInput.address,
+      },
+    });
+    return data;
   }
 
   async changePassword(

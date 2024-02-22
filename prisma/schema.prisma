@@ -20,64 +20,126 @@ model User {
   password  String
   name      String?
   role      Role
-  Order     Order[]
   Payment   Payment[]
+  buyer     Buyer?
+}
+
+model Buyer {
+  id        String    @id @default(cuid())
+  user      User      @relation(fields: [userId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  userId    String    @unique
+  orders    Order[]
+  addresses Address[]
+  Cart      Cart[]
 }
 
 model Products {
-  id               String         @id @default(cuid())
-  createdAt        DateTime       @default(now())
-  updatedAt        DateTime       @updatedAt
-  title            String
-  description      String
-  variant          ProductVariant @relation(fields: [productVariantId], references: [id])
-  productVariantId Int
+  id              String           @id @default(cuid())
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+  title           String
+  description     String
+  productImageUrl String?
+  metaData        Json?            @db.Json
+  category        String[]
+  ProductsVariant ProductVariant[]
+  Flipkart        Boolean          @default(false)
+  Amazon          Boolean          @default(false)
+  productUrl      String
+  type            String?
 }
 
 model ProductVariant {
-  id       Int        @id @default(autoincrement())
-  weight   Float
-  imageUrl String[]
-  price    Float
-  Products Products[]
+  id        Int       @id @default(autoincrement())
+  weight    String
+  imageUrl  String[]
+  price     Int?
+  stock     Int?
+  products  Products? @relation(fields: [productId], references: [id])
+  productId String
 }
 
 model Order {
-  orderId              Int       @id @default(autoincrement())
-  createdAt            DateTime  @default(now())
-  updatedAt            DateTime  @updatedAt
-  orderDate            DateTime
-  orderItem            OrderItem @relation(fields: [orderItemOrderItemId], references: [OrderItemId])
-  orderAmount          Float
-  user                 User      @relation(fields: [userId], references: [id])
-  userId               String
-  Payment              Payment[]
-  orderItemOrderItemId Int
+  id          Int          @id @default(autoincrement())
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  orderDate   DateTime?
+  orderAmount Float
+  Payment     Payment[]
+  paymentType PaymentType?
+  status      OrderStatus  @default(PROCESSING)
+  Buyer       Buyer?       @relation(fields: [buyerId], references: [id])
+  buyerId     String?
+  cart        Cart?        @relation(fields: [cartid], references: [id])
+  cartid      String?
+  orderItems  orderItems[]
 }
 
-model OrderItem {
-  OrderItemId Int     @id @default(autoincrement())
-  MRP         Float
-  Quantity    Int
-  Order       Order[]
+model orderItems {
+  id               String  @id @default(cuid())
+  productVariantId Int
+  qty              Int
+  Order            Order?  @relation(fields: [orderId], references: [id])
+  orderId          Int?
+  name             String?
+}
+
+model Cart {
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+  id         String      @id @default(cuid())
+  checkedOut Boolean     @default(false)
+  buyer      Buyer       @relation(fields: [buyerId], references: [id], onUpdate: Cascade, onDelete: Cascade)
+  buyerId    String      @unique
+  Order      Order[]
+  cartItem   cartItems[]
+}
+
+model cartItems {
+  id               String  @id @default(cuid())
+  productVariantId Int
+  qty              Int
+  Cart             Cart?   @relation(fields: [cartId], references: [id])
+  cartId           String?
+  name             String?
 }
 
 model Payment {
   paymentId     Int      @id @default(autoincrement())
-  order         Order    @relation(fields: [orderOrderId], references: [orderId])
+  order         Order    @relation(fields: [orderOrderId], references: [id])
   orderOrderId  Int
   user          User     @relation(fields: [userId], references: [id])
   dateOfPayment DateTime
   userId        String
 }
 
-model Addres {
-  addressId    Int    @id @default(autoincrement())
+model Address {
+  addresId     Int     @id @default(autoincrement())
   name         String
   mobileNumber String
+  address      Json?
+  Buyer        Buyer?  @relation(fields: [buyerId], references: [id])
+  buyerId      String?
 }
 
 enum Role {
   ADMIN
   CUSTOMER
+}
+
+enum OrderStatus {
+  USERCANCELLED
+  SELLERCANCELLED
+  PROCESSING
+  PACKED
+  SHIPPED
+  OUTFORDELIVERY
+  DELIVERED
+}
+
+enum PaymentType {
+  CASHONDELIVERY
+  UPI
+  CREDITCARD
+  DEBITCARD
 }

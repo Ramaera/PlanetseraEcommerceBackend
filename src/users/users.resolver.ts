@@ -14,18 +14,33 @@ import { UsersService } from './users.service';
 import { User } from './models/user.model';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
+import { BuyerData } from './models/buyer.model';
+import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
+import { AddressData } from './models/address.model';
 
 @Resolver(() => User)
-@UseGuards(GqlAuthGuard)
+// @UseGuards(GqlAuthGuard)
 export class UsersResolver {
   constructor(
     private usersService: UsersService,
     private prisma: PrismaService,
   ) {}
 
+  @UseGuards(GqlAuthGuard)
   @Query(() => User)
   async me(@UserEntity() user: User): Promise<User> {
-    return user;
+    const _user = await this.usersService.getUser(user.id);
+    return _user;
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Query(() => BuyerData)
+  async getBuyer(@UserEntity() user: User) {
+    return await this.prisma.buyer.findUnique({
+      where: {
+        userId: user.id,
+      },
+    });
   }
 
   @UseGuards(GqlAuthGuard)
@@ -48,6 +63,29 @@ export class UsersResolver {
       user.password,
       changePassword,
     );
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User)
+  async updateBuyer(
+    @UserEntity() user: User,
+    @Args('data') data: UpdateUserInput,
+  ) {
+    return this.usersService.updateBuyer(user.id, data);
+  }
+
+  @Mutation(() => AddressData)
+  async addAddress(@Args('data') data: UpdateBuyerAddressInput) {
+    return this.usersService.addAddress(data);
+  }
+
+  @Query(() => [AddressData])
+  async getBuyerAddress(@Args('buyerId') buyerId: string) {
+    return await this.prisma.address.findMany({
+      where: {
+        buyerId: buyerId,
+      },
+    });
   }
 
   // @ResolveField('posts')
