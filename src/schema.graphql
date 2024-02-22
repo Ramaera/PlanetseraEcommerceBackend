@@ -56,14 +56,11 @@ input CreateCartInput {
 }
 
 input CreateOrderInput {
-  AddressId: String!
-  ShippingCost: String!
+  AddressId: Int!
+  ShippingCost: Int!
   buyerId: String!
   cartId: String!
   orderAmount: Float!
-  orderDate: DateTime
-  paymentDetails: String!
-  paymentType: String!
 }
 
 input CreateProductInput {
