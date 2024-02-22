@@ -12,6 +12,8 @@ import config from './common/configs/config';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { GqlConfigService } from './gql-config.service';
 import { ProductsModule } from './products/products.module';
+import { PaymentGatewayModule } from './payment-gateway/payment-gateway.module';
+import { GetImagesController } from './get-images/get-images.controller';
 
 @Module({
   imports: [
@@ -38,8 +40,9 @@ import { ProductsModule } from './products/products.module';
     UsersModule,
     PostsModule,
     ProductsModule,
+    PaymentGatewayModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, GetImagesController],
   providers: [AppService, AppResolver],
 })
 export class AppModule {}
