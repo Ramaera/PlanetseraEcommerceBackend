@@ -67,7 +67,7 @@ export class ProductsService {
           },
         });
 
-        await this.prisma.cartItems.create({
+        const cartItem = await this.prisma.cartItems.create({
           data: {
             name: createCartInput.name,
             productVariantId: createCartInput.productVariantId,
@@ -75,7 +75,10 @@ export class ProductsService {
             qty: createCartInput.qty,
           },
         });
-        return { success: true };
+        return {
+          ...cartCreated,
+          cartItem: [cartItem],
+        };
       }
 
       const existingCartItem = await this.prisma.cartItems.findFirst({
@@ -104,7 +107,14 @@ export class ProductsService {
         });
       }
 
-      return { success: true };
+      return await this.prisma.cart.findUnique({
+        where: {
+          id: existingCart.id,
+        },
+        include: {
+          cartItem: true,
+        },
+      });
     } catch (error) {
       console.error('Error adding item to cart:', error);
       return { success: false, error: error.message };
@@ -241,6 +251,7 @@ export class ProductsService {
         cartData.map(async (cartItem) => {
           return await this.prisma.orderItems.create({
             data: {
+              name:cartItem.name,
               orderId: newOrder.id,
               productVariantId: cartItem.productVariantId,
               qty: cartItem.qty,

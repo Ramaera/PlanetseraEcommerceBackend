@@ -13,6 +13,7 @@ type AddressData {
 type AllOrdersData {
   ShippingCost: Int!
   address: AddressData
+  id: String!
   orderAmount: Float!
   orderItems: [OrderItems!]
   status: Status!
@@ -113,7 +114,7 @@ type Mutation {
   addAddress(data: UpdateBuyerAddressInput!): AddressData!
   cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
   changePassword(data: ChangePasswordInput!): User!
-  createCart(CreateCartInput: CreateCartInput!): MessageOutput!
+  createCart(createCartInput: CreateCartInput!): Cart!
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
@@ -129,7 +130,7 @@ type Mutation {
 }
 
 type Order {
-  newOrder: [OrderData!]
+  newOrder: OrderData
   orderItems: [OrderItems!]
 }
 
@@ -140,6 +141,8 @@ type OrderData {
 }
 
 type OrderItems {
+  id: String!
+  name: String!
   productVariantId: Int!
   qty: Int!
 }

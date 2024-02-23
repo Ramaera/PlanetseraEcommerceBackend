@@ -22,25 +22,16 @@ import { OrderItems } from './orderItem.entity';
   @Field()
   buyerId:string
 
-
- 
-
-
-
 } 
 
 @ObjectType()
 export class Order {
 
    
-  @Field(()=>[OrderData],{nullable:true})
-  newOrder: OrderData[] | null;
+  @Field(()=>OrderData,{nullable:true})
+  newOrder: OrderData
 
   @Field(()=>[OrderItems],{nullable:true}) 
   orderItems: OrderItems[] | null;
-
-  
-
-
 
 }

@@ -69,8 +69,9 @@ export class ProductsResolver {
     }
   }
 
-  @Mutation(() => MessageOutput)
-  createCart(@Args('CreateCartInput') createCartInput: CreateCartInput) {
+  
+  @Mutation(() => Cart)
+  async createCart(@Args('createCartInput') createCartInput: CreateCartInput){
     return this.productsService.addItemToCart(createCartInput);
   }
 

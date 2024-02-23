@@ -27,6 +27,9 @@ export class AllOrdersData {
   orderAmount:number
 
   @Field()
+  id:string
+
+  @Field()
   ShippingCost:number
 
   @Field()

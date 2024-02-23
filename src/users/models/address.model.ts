@@ -10,6 +10,7 @@ export class AddressData {
 
   @Field(() => String, { nullable: true })
   name?: string;
+  
   @Field(() => String, { nullable: true })
   mobileNumber?: string;
 

@@ -6,10 +6,14 @@ import { AddressData } from 'src/users/models/address.model';
 @ObjectType()
 export class OrderItems {
 
-   
   @Field()
-  productVariantId: number;
+  productVariantId: number; 
 
+  @Field()
+  id: string;
+
+  @Field()
+  name: string;
   
   @Field()
   qty: number;
