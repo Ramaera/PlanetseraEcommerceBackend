@@ -7,7 +7,7 @@ export class MessageOutput {
 
 
 
-    @Field(()=>Boolean)
+    @Field(()=>Boolean,{nullable:true})
     success : boolean;
 
  

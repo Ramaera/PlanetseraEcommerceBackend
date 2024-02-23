@@ -11,6 +11,8 @@ import { CartOperationInput } from './dto/operation-cartItem.input';
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
+
+  
   async create(createProductInput: CreateProductInput) {
     try {
       const newProduct = await this.prisma.products.create({
@@ -27,6 +29,8 @@ export class ProductsService {
       throw new Error('Could not create product');
     }
   }
+
+
   async createProductVariant(
     createProductVariantInput: CreateProductVariantInput,
   ) {
@@ -177,7 +181,7 @@ export class ProductsService {
         },
       });
 
-      return deletedCart;
+      return {success:true};
     } catch (error) {
       console.error('Error deleting cart:', error);
       throw new Error('Could not delete cart');
@@ -197,12 +201,26 @@ export class ProductsService {
     }
   }
 
+  async removeAddress(addressId: number) {
+    try {
+      const removeAddress = await this.prisma.address.delete({
+        where: { addresId:addressId },
+      });
+
+      return { success: true };
+    } catch (error) {
+      console.error('Error deleting cart:', error);
+      throw new Error('Could not delete cart');
+    }
+  }
+
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
       const cartData = await this.prisma.cartItems.findMany({
         where: {
           cartId: createOrderVariantInput.cartId,
         },
+        
       });
 
       const newOrder = await this.prisma.order.create({
@@ -213,6 +231,10 @@ export class ProductsService {
           cartid: createOrderVariantInput.cartId,
           buyerId: createOrderVariantInput.buyerId,
         },
+        include:{
+          address:true,
+          orderItems:true
+        }
       });
 
       const orderItems = await Promise.all(
@@ -227,7 +249,7 @@ export class ProductsService {
         }),
       );
 
-      return newOrder;
+      return {newOrder,orderItems};
     } catch (error) {
       console.error('Error creating new order:', error);
       throw new Error('Could not create order ');
@@ -240,6 +262,22 @@ export class ProductsService {
         ProductsVariant: true,
       },
     });
+  }
+
+   async findAllOrders(buyerId) {
+    const getAllOrders = await this.prisma.order.findMany({
+      where:{
+        buyerId
+      },
+      include:{
+        orderItems:true,
+        address:true,
+        
+        
+      }
+     
+    });
+    return getAllOrders;
   }
 
   async allCartItems(buyerId) {

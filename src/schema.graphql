@@ -10,6 +10,14 @@ type AddressData {
   name: String
 }
 
+type AllOrdersData {
+  ShippingCost: Int!
+  address: AddressData
+  orderAmount: Float!
+  orderItems: [OrderItems!]
+  status: Status!
+}
+
 type Auth {
   """JWT access token"""
   accessToken: JWT!
@@ -98,7 +106,7 @@ input LoginInput {
 }
 
 type MessageOutput {
-  success: Boolean!
+  success: Boolean
 }
 
 type Mutation {
@@ -112,6 +120,7 @@ type Mutation {
   deleteCart(cartId: String!): MessageOutput!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
+  removeAddress(AddressId: Int!): MessageOutput!
   removeItemFromCart(cartItem: String!): MessageOutput!
   signup(data: SignupInput!): Auth!
   updateBuyer(data: UpdateUserInput!): User!
@@ -120,10 +129,19 @@ type Mutation {
 }
 
 type Order {
+  newOrder: [OrderData!]
+  orderItems: [OrderItems!]
+}
+
+type OrderData {
+  address: AddressData!
   buyerId: String!
-  cartItemid: String!
-  orderAmount: Float!
   orderDate: DateTime!
+}
+
+type OrderItems {
+  productVariantId: Int!
+  qty: Int!
 }
 
 type Post {
@@ -163,6 +181,7 @@ type ProductVariant {
 }
 
 type Query {
+  allOrders(buyerId: String!): [AllOrdersData!]!
   allProducts: [Product!]!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
@@ -182,6 +201,17 @@ input SignupInput {
   email: String!
   name: String
   password: String!
+}
+
+"""Order Status"""
+enum Status {
+  DELIVERED
+  OUTFORDELIVERY
+  PACKED
+  PROCESSING
+  SELLERCANCELLED
+  SHIPPED
+  USERCANCELLED
 }
 
 type Subscription {

@@ -11,16 +11,16 @@ export class PaymentGatewayService {
   async newPayment(createPayment: CreatePaymentGatewayDto) {
     try {
       const merchantTransactionId = 'PL' + Date.now();
-      // const { buyer_id, price, email, name } = createPaymentGatewayDto;
+      const { buyer_id, price, email, name } = createPayment;
 
       const data = {
         merchantId: 'M22VCKEIOPT4Z',
         merchantTransactionId: merchantTransactionId,
-        merchantUserId: 'MUID' + '1234',
-        name: 'RAJU',
-        amount: 1 * 100,
-        redirectUrl: `http://localhost:6770/api/v1/status/${merchantTransactionId}`,
-        email: 'mohan@gmail.com',
+        merchantUserId: 'MUID' + buyer_id,
+        name: name,
+        amount: price * 100,
+        redirectUrl: `https://nvg1b95j-6770.inc1.devtunnels.ms/api/v1/status/${merchantTransactionId}`,
+        email: email,
         redirectMode: 'POST',
 
         paymentInstrument: {
