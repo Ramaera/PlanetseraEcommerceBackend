@@ -27,6 +27,9 @@ export class AllOrdersData {
   orderAmount:number
 
   @Field()
+  orderDate:Date
+
+  @Field()
   id:string
 
   @Field()

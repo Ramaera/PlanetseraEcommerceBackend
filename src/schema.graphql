@@ -15,6 +15,7 @@ type AllOrdersData {
   address: AddressData
   id: String!
   orderAmount: Float!
+  orderDate: DateTime!
   orderItems: [OrderItems!]
   status: Status!
 }
