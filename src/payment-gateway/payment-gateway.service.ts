@@ -11,16 +11,16 @@ export class PaymentGatewayService {
   async newPayment(createPayment: CreatePaymentGatewayDto) {
     try {
       const merchantTransactionId = 'PL' + Date.now();
-      // const { buyer_id, price, email, name } = createPaymentGatewayDto;
+      const { buyer_id, price, email, name } = createPayment;
 
       const data = {
         merchantId: 'M22VCKEIOPT4Z',
         merchantTransactionId: merchantTransactionId,
-        merchantUserId: 'MUID' + '1234',
-        name: 'RAJU',
-        amount: 1 * 100,
+        merchantUserId: 'MUID' + buyer_id,
+        name: name,
+        amount: price * 100,
         redirectUrl: `https://www.planetsera.com/payment-status/${merchantTransactionId}`,
-        email: 'mohan@gmail.com',
+        email: email,
         redirectMode: 'GET',
         paymentInstrument: {
           type: 'PAY_PAGE',
