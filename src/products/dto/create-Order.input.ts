@@ -2,10 +2,8 @@ import { InputType, Int, Field, Float } from '@nestjs/graphql';
 
 @InputType()
 export class CreateOrderInput {
-  
 
-  @Field({nullable:true})
-  orderDate: Date;
+ 
 
   @Field(() => Float,{}) 
   orderAmount: number;
@@ -15,6 +13,13 @@ export class CreateOrderInput {
   
   @Field()
   cartId:string
+
+  @Field()
+  AddressId:number
+  
+
+  @Field()
+  ShippingCost:number
  
 
 

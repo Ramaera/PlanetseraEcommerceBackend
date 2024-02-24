@@ -11,6 +11,8 @@ import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { MessageOutput } from './entities/message.entity';
+import { OrderItems } from './entities/orderItem.entity';
+import { AllOrdersData } from './entities/viewallorders.entity';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -28,6 +30,23 @@ export class ProductsResolver {
     return await this.productsService.findAll();
   }
 
+  // @Query(() => Order, { name: 'allOrders' })
+  // async findAllOrders() {
+  //   return await this.productsService.findAllOrders();
+  // }
+
+
+  @Query(() =>  [AllOrdersData], { name: 'allOrders' })
+  async findAllOrders(@Args('buyerId') buyerId: string){
+    const orders = await this.productsService.findAllOrders(buyerId);
+    return orders.map(order => ({
+      ...order,
+      orderItems: order.orderItems || [], 
+      address:order.address
+    }));
+  }
+
+
   @Query(() => Cart, { name: 'viewCart' })
   async allCartItems(@Args('buyerId') buyerId: string) {
     return await this.productsService.allCartItems(buyerId);
@@ -40,15 +59,23 @@ export class ProductsResolver {
   ) {
     return this.productsService.createProductVariant(createProductVariantInput);
   }
+
+
   @Mutation(() => Order)
-  createOrder(@Args('CreateOrder') createOrderInput: CreateOrderInput) {
-    return this.productsService.createOrder(createOrderInput);
+  async createOrder(@Args('CreateOrder') createOrderInput: CreateOrderInput) {
+    const {newOrder,orderItems}= await this.productsService.createOrder(createOrderInput);
+    return {
+      newOrder,orderItems
+    }
   }
 
-  @Mutation(() => MessageOutput)
-  createCart(@Args('CreateCartInput') createCartInput: CreateCartInput) {
+  
+  @Mutation(() => Cart)
+  async createCart(@Args('createCartInput') createCartInput: CreateCartInput){
     return this.productsService.addItemToCart(createCartInput);
   }
+
+  
   @Mutation(() => MessageOutput)
   cartOpeartion(
     @Args('CartOperationInput') cartOperationInput: CartOperationInput,
@@ -65,6 +92,11 @@ export class ProductsResolver {
   @Mutation(() => MessageOutput)
   async removeItemFromCart(@Args('cartItem') cartItemId: string) {
     return await this.productsService.removeItemFromCart(cartItemId);
+  }
+
+  @Mutation(() => MessageOutput)
+  async removeAddress(@Args('AddressId') addressId: number) {
+    return await this.productsService.removeAddress(addressId);
   }
 
   @Mutation(() => MessageOutput)

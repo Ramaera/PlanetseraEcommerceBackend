@@ -3,10 +3,21 @@
 # ------------------------------------------------------
 
 type AddressData {
+  addresId: String!
   address: [JSONObject!]!
   buyerId: String
   mobileNumber: String
   name: String
+}
+
+type AllOrdersData {
+  ShippingCost: Int!
+  address: AddressData
+  id: String!
+  orderAmount: Float!
+  orderDate: DateTime!
+  orderItems: [OrderItems!]
+  status: Status!
 }
 
 type Auth {
@@ -55,10 +66,11 @@ input CreateCartInput {
 }
 
 input CreateOrderInput {
+  AddressId: Int!
+  ShippingCost: Int!
   buyerId: String!
   cartId: String!
   orderAmount: Float!
-  orderDate: DateTime
 }
 
 input CreateProductInput {
@@ -96,20 +108,21 @@ input LoginInput {
 }
 
 type MessageOutput {
-  success: Boolean!
+  success: Boolean
 }
 
 type Mutation {
   addAddress(data: UpdateBuyerAddressInput!): AddressData!
   cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
   changePassword(data: ChangePasswordInput!): User!
-  createCart(CreateCartInput: CreateCartInput!): MessageOutput!
+  createCart(createCartInput: CreateCartInput!): Cart!
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
   deleteCart(cartId: String!): MessageOutput!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
+  removeAddress(AddressId: Int!): MessageOutput!
   removeItemFromCart(cartItem: String!): MessageOutput!
   signup(data: SignupInput!): Auth!
   updateBuyer(data: UpdateUserInput!): User!
@@ -118,10 +131,21 @@ type Mutation {
 }
 
 type Order {
+  newOrder: OrderData
+  orderItems: [OrderItems!]
+}
+
+type OrderData {
+  address: AddressData!
   buyerId: String!
-  cartItemid: String!
-  orderAmount: Float!
   orderDate: DateTime!
+}
+
+type OrderItems {
+  id: String!
+  name: String!
+  productVariantId: Int!
+  qty: Int!
 }
 
 type Post {
@@ -161,6 +185,7 @@ type ProductVariant {
 }
 
 type Query {
+  allOrders(buyerId: String!): [AllOrdersData!]!
   allProducts: [Product!]!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
@@ -180,6 +205,17 @@ input SignupInput {
   email: String!
   name: String
   password: String!
+}
+
+"""Order Status"""
+enum Status {
+  DELIVERED
+  OUTFORDELIVERY
+  PACKED
+  PROCESSING
+  SELLERCANCELLED
+  SHIPPED
+  USERCANCELLED
 }
 
 type Subscription {

@@ -6,11 +6,13 @@ import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
 import { BuyerData } from 'src/users/models/buyer.model';
-import { CartOperationInput,  } from './dto/operation-cartItem.input';
+import { CartOperationInput } from './dto/operation-cartItem.input';
 
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
+
+  
   async create(createProductInput: CreateProductInput) {
     try {
       const newProduct = await this.prisma.products.create({
@@ -27,6 +29,8 @@ export class ProductsService {
       throw new Error('Could not create product');
     }
   }
+
+
   async createProductVariant(
     createProductVariantInput: CreateProductVariantInput,
   ) {
@@ -63,26 +67,27 @@ export class ProductsService {
           },
         });
 
-        await this.prisma.cartItems.create({
+        const cartItem = await this.prisma.cartItems.create({
           data: {
-            name:createCartInput.name,
+            name: createCartInput.name,
             productVariantId: createCartInput.productVariantId,
             cartId: cartCreated.id,
             qty: createCartInput.qty,
           },
         });
-        return { success: true };
+        return {
+          ...cartCreated,
+          cartItem: [cartItem],
+        };
       }
 
       const existingCartItem = await this.prisma.cartItems.findFirst({
         where: {
-          productVariantId: createCartInput.productVariantId
+          productVariantId: createCartInput.productVariantId,
         },
       });
 
       if (existingCartItem) {
-        
-        
         await this.prisma.cartItems.update({
           where: {
             id: existingCartItem.id,
@@ -94,7 +99,7 @@ export class ProductsService {
       } else {
         await this.prisma.cartItems.create({
           data: {
-            name:createCartInput.name,
+            name: createCartInput.name,
             productVariantId: createCartInput.productVariantId,
             qty: createCartInput.qty,
             cartId: existingCart.id,
@@ -102,44 +107,52 @@ export class ProductsService {
         });
       }
 
-      return { success: true };
+      return await this.prisma.cart.findUnique({
+        where: {
+          id: existingCart.id,
+        },
+        include: {
+          cartItem: true,
+        },
+      });
     } catch (error) {
       console.error('Error adding item to cart:', error);
       return { success: false, error: error.message };
     }
   }
 
-
-  async operationsInCart (operations:CartOperationInput){
- const item =await this.prisma.cartItems.findUnique({
-  where:{
-    id:operations.cartItemId
-
-  }
- })
-{
-  operations.operation === "INCREMENT" && await this.prisma.cartItems.update({
-    where:{
-      id: operations.cartItemId
-    },
-    data:{
-      qty:item.qty+operations.qty
+  async operationsInCart(operations: CartOperationInput) {
+    const item = await this.prisma.cartItems.findUnique({
+      where: {
+        id: operations.cartItemId,
+      },
+    });
+    {
+      operations.operation === 'INCREMENT' &&
+        (await this.prisma.cartItems.update({
+          where: {
+            id: operations.cartItemId,
+          },
+          data: {
+            qty: item.qty + operations.qty,
+          },
+        }));
     }
-  })
-}
-{
-  operations.operation === "DECREMENT" && item.qty>1 && await this.prisma.cartItems.update({
-    where:{
-      id: operations.cartItemId
-    },
-    data:{
-      qty:item.qty-operations.qty
+    {
+      operations.operation === 'DECREMENT' &&
+        item.qty > 1 &&
+        (await this.prisma.cartItems.update({
+          where: {
+            id: operations.cartItemId,
+          },
+          data: {
+            qty: item.qty - operations.qty,
+          },
+        }));
     }
-  })
-}
-console.log("item",item);
+    console.log('item', item);
 
-return {success:true}
+    return { success: true };
   }
 
   async updateCartItem(update: UpdateProductInput) {
@@ -170,31 +183,41 @@ return {success:true}
   async deleteCart(cartId: string) {
     try {
       const deleteCartItem = await this.prisma.cartItems.deleteMany({
-        where:{ cartId:cartId}
-      })
+        where: { cartId: cartId },
+      });
       const deletedCart = await this.prisma.cart.delete({
         where: {
           id: cartId,
         },
       });
 
-      return deletedCart;
+      return {success:true};
     } catch (error) {
       console.error('Error deleting cart:', error);
       throw new Error('Could not delete cart');
     }
   }
 
-
-  
   async removeItemFromCart(cartItemId: string) {
     try {
       const deleteCartItem = await this.prisma.cartItems.delete({
-        where:{ id:cartItemId}
-      })
-      
+        where: { id: cartItemId },
+      });
 
-      return {sucess:true};
+      return { sucess: true };
+    } catch (error) {
+      console.error('Error deleting cart:', error);
+      throw new Error('Could not delete cart');
+    }
+  }
+
+  async removeAddress(addressId: number) {
+    try {
+      const removeAddress = await this.prisma.address.delete({
+        where: { addresId:addressId },
+      });
+
+      return { success: true };
     } catch (error) {
       console.error('Error deleting cart:', error);
       throw new Error('Could not delete cart');
@@ -203,16 +226,41 @@ return {success:true}
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
+      const cartData = await this.prisma.cartItems.findMany({
+        where: {
+          cartId: createOrderVariantInput.cartId,
+        },
+        
+      });
+
       const newOrder = await this.prisma.order.create({
         data: {
           orderAmount: createOrderVariantInput.orderAmount,
-          orderDate: createOrderVariantInput.orderDate,
-          cartid:createOrderVariantInput.cartId,
+          AddresId: createOrderVariantInput.AddressId,
+          ShippingCost: createOrderVariantInput.ShippingCost,
+          cartid: createOrderVariantInput.cartId,
           buyerId: createOrderVariantInput.buyerId,
         },
+        include:{
+          address:true,
+          orderItems:true
+        }
       });
 
-      return newOrder;
+      const orderItems = await Promise.all(
+        cartData.map(async (cartItem) => {
+          return await this.prisma.orderItems.create({
+            data: {
+              name:cartItem.name,
+              orderId: newOrder.id,
+              productVariantId: cartItem.productVariantId,
+              qty: cartItem.qty,
+            },
+          });
+        }),
+      );
+
+      return {newOrder,orderItems};
     } catch (error) {
       console.error('Error creating new order:', error);
       throw new Error('Could not create order ');
@@ -227,15 +275,31 @@ return {success:true}
     });
   }
 
- async allCartItems(buyerId) {
-    const getCart = await this.prisma.cart.findUnique({
+   async findAllOrders(buyerId) {
+    const getAllOrders = await this.prisma.order.findMany({
       where:{
         buyerId
       },
-      include:{cartItem:true}
-    })
-    console.log("getCart",getCart);
-    
-    return getCart
+      include:{
+        orderItems:true,
+        address:true,
+        
+        
+      }
+     
+    });
+    return getAllOrders;
+  }
+
+  async allCartItems(buyerId) {
+    const getCart = await this.prisma.cart.findUnique({
+      where: {
+        buyerId,
+      },
+      include: { cartItem: true },
+    });
+    console.log('getCart', getCart);
+
+    return getCart;
   }
 }
