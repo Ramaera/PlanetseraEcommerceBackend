@@ -21,8 +21,7 @@ export class PaymentGatewayService {
         amount: 1 * 100,
         redirectUrl: `https://www.planetsera.com/payment-status/${merchantTransactionId}`,
         email: 'mohan@gmail.com',
-        redirectMode: 'POST',
-
+        redirectMode: 'GET',
         paymentInstrument: {
           type: 'PAY_PAGE',
         },
