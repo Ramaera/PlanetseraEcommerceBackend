@@ -77,9 +77,9 @@ export class PaymentGatewayService {
       };
       const response = await axios.request(options);
       if (response.data.success === true) {
-        return { success: true, message: 'Payment Success' };
+        return { success: true, message: 'Payment Success', code:response?.data?.code };
       } else {
-        return { success: false, message: 'Payment Failure' };
+        return { success: false, message: 'Payment Failure', code:response?.data?.code  };
       }
     } catch (err) {
       console.log(err);
