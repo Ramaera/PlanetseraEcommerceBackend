@@ -11,7 +11,7 @@ export class Cart {
   buyerId: string;
 
   @Field(() => [CartItems], { nullable: true })
-  cartItem: CartItems[];
+  cartItem?: CartItems[];
 }
 
 @ObjectType()
