@@ -13,15 +13,26 @@ generator dbml {
 }
 
 model User {
-  id           String   @id @default(cuid())
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
-  email        String   @unique
+  id           String       @id @default(cuid())
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  email        String       @unique
   password     String
   mobileNumber String?
   name         String?
   role         Role
+  rewardCode   RewardCode[]
   buyer        Buyer?
+}
+
+model RewardCode {
+  id         String   @id @default(cuid())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  rewardCode String?
+  isClaimed  Boolean  @default(false)
+  User       User?    @relation(fields: [userId], references: [id])
+  userId     String?
 }
 
 model Buyer {

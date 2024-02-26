@@ -15,6 +15,7 @@ import { ProductsModule } from './products/products.module';
 import { PaymentGatewayModule } from './payment-gateway/payment-gateway.module';
 import { GetImagesController } from './get-images/get-images.controller';
 import { OrderModule } from './order/order.module';
+import { RewardCodeModule } from './reward-code/reward-code.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { OrderModule } from './order/order.module';
     PaymentGatewayModule,
     ProductsModule,
     OrderModule,
+    RewardCodeModule,
   ],
   controllers: [AppController, GetImagesController],
   providers: [AppService, AppResolver],
