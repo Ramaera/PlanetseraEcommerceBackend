@@ -15,5 +15,6 @@ export class SignupInput {
   @Field({ nullable: true })
   name?: string;
 
-
+  @Field({ nullable: true })
+  mobileNumber?: string;
 }

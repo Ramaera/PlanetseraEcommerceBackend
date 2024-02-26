@@ -2,10 +2,33 @@ import { Injectable } from '@nestjs/common';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from 'nestjs-prisma';
+import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
+import { MailerService } from 'src/mailer/mailer.service';
+
+const DateInGmt530 = () => {
+  // Create a new Date object for the current date and time
+  const currentDate = new Date();
+
+  // Get the current time in milliseconds since January 1, 1970
+  const currentTimeInMilliseconds = currentDate.getTime();
+
+  // Calculate the offset in milliseconds for GMT+5:30 (5 hours and 30 minutes)
+  const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
+
+  // Apply the offset to the current time
+  const newDateWithOffset = new Date(
+    currentTimeInMilliseconds + offsetInMilliseconds,
+  );
+
+  return newDateWithOffset;
+};
 
 @Injectable()
 export class OrderService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly mailService: MailerService,
+  ) {}
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
@@ -15,8 +38,6 @@ export class OrderService {
           cartId: createOrderVariantInput.cartId,
         },
       });
-
-      console.log('cartData', cartData);
       const newOrder = await this.prisma.order.create({
         data: {
           orderAmount: createOrderVariantInput.orderAmount,
@@ -49,6 +70,32 @@ export class OrderService {
       console.error('Error creating new order:', error);
       throw new Error('Could not create order ');
     }
+  }
+
+  async createPaymentData(data: CreateOrderPayment) {
+    return await this.prisma.payment.create({
+      data: {
+        buyerId: data.buyerId,
+        orderId: data.orderId,
+        paymentId: data.paymentId,
+        dateOfPayment: DateInGmt530(),
+      },
+    });
+  }
+
+  async sendOrderConfirmationMail(OrderItemId) {
+    const orderData = await this.prisma.order.findUnique({
+      where: {
+        id: OrderItemId,
+      },
+      include: {
+        address: true,
+        Payment: true,
+        orderItems: true,
+      },
+    });
+
+    // await this.mailService.sendOrderConfirmation(orderData.a);
   }
 
   findAll() {

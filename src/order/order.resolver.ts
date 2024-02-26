@@ -3,6 +3,8 @@ import { OrderService } from './order.service';
 import { Order } from './entities/order.entity';
 import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
+import { PaymentData } from 'src/products/entities/paymentData.entity';
+import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
 
 @Resolver(() => Order)
 export class OrderResolver {
@@ -18,11 +20,22 @@ export class OrderResolver {
     const { newOrder, orderItems } = await this.orderService.createOrder(
       createOrderInput,
     );
+
     return {
       newOrder,
       orderItems,
     };
   }
+
+  @Mutation(() => PaymentData)
+  async createPaymentData(@Args('data') data: CreateOrderPayment) {
+    const paymentData = await this.orderService.createPaymentData(data);
+    return paymentData;
+  }
+
+  // async sendVerificationMail() {
+  //   const data = await this.orderService.sendOrderConfirmationMail(OrderItemId);
+  // }
 
   @Query(() => [Order], { name: 'order' })
   findAll() {

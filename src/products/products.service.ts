@@ -7,6 +7,7 @@ import { PrismaService } from 'nestjs-prisma';
 import { BuyerData } from 'src/users/models/buyer.model';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
+import { MailerService } from 'src/mailer/mailer.service';
 
 const DateInGmt530 = () => {
   // Create a new Date object for the current date and time
@@ -258,7 +259,6 @@ export class ProductsService {
       },
     });
   }
-
   // async updateOrderPaymentStatus(id, paymentStatus) {
   //   const updatepaymentStatus = await this.prisma.order.update({
   //     where: {
