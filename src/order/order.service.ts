@@ -3,7 +3,6 @@ import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from 'nestjs-prisma';
 import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
-import { MailerService } from 'src/mailer/mailer.service';
 
 const DateInGmt530 = () => {
   // Create a new Date object for the current date and time
@@ -25,10 +24,7 @@ const DateInGmt530 = () => {
 
 @Injectable()
 export class OrderService {
-  constructor(
-    private readonly prisma: PrismaService,
-    private readonly mailService: MailerService,
-  ) {}
+  constructor(private readonly prisma: PrismaService) {}
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {

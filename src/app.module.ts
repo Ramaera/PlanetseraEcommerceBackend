@@ -15,8 +15,6 @@ import { ProductsModule } from './products/products.module';
 import { PaymentGatewayModule } from './payment-gateway/payment-gateway.module';
 import { GetImagesController } from './get-images/get-images.controller';
 import { OrderModule } from './order/order.module';
-import { MailerService } from './mailer/mailer.service';
-import { MailerModule } from './mailer/mailer.module';
 
 @Module({
   imports: [
@@ -45,9 +43,8 @@ import { MailerModule } from './mailer/mailer.module';
     PaymentGatewayModule,
     ProductsModule,
     OrderModule,
-    MailerModule,
   ],
   controllers: [AppController, GetImagesController],
-  providers: [AppService, AppResolver, MailerService],
+  providers: [AppService, AppResolver],
 })
 export class AppModule {}

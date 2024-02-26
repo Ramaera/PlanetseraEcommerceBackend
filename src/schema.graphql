@@ -223,6 +223,7 @@ enum Role {
 
 input SignupInput {
   email: String!
+  mobileNumber: String
   name: String
   password: String!
 }
