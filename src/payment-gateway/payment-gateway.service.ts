@@ -18,7 +18,7 @@ export class PaymentGatewayService {
         merchantTransactionId: merchantTransactionId,
         merchantUserId: 'MUID' + buyer_id,
         name: name,
-        amount: 1 * 100,
+        amount: price * 100,
         redirectUrl: `https://www.planetsera.com/payment-status/${merchantTransactionId}`,
         email: email,
         redirectMode: 'GET',
