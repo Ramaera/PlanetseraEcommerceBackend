@@ -47,6 +47,8 @@ export class AuthResolver {
 
   @ResolveField('user', () => User)
   async user(@Parent() auth: Auth) {
-    return await this.auth.getUserFromToken(auth.accessToken)
+    const data = await this.auth.getUserFromToken(auth.accessToken);
+    console.log('[[', data);
+    return data;
   }
 }

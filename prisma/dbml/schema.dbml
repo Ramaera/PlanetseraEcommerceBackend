@@ -10,7 +10,6 @@ Table User {
   password String [not null]
   name String
   role Role [not null]
-  Payment Payment [not null]
   buyer Buyer
 }
 
@@ -20,6 +19,7 @@ Table Buyer {
   userId String [unique, not null]
   orders Order [not null]
   addresses Address [not null]
+  Payment Payment [not null]
   Cart Cart [not null]
 }
 
@@ -80,12 +80,13 @@ Table Address {
 }
 
 Table Payment {
-  paymentId Int [pk, increment]
+  id Int [pk, increment]
+  paymentId String [unique, not null]
   order Order [not null]
-  orderOrderId Int [not null]
-  user User [not null]
+  orderId Int [not null]
   dateOfPayment DateTime [not null]
-  userId String [not null]
+  Buyer Buyer [not null]
+  buyerId String [not null]
 }
 
 Table Order {
@@ -94,7 +95,6 @@ Table Order {
   updatedAt DateTime [not null]
   orderDate DateTime [default: `now()`]
   orderAmount Float [not null]
-  paymentStatus String
   status OrderStatus [not null, default: 'PROCESSING']
   Buyer Buyer
   buyerId String
@@ -148,9 +148,9 @@ Ref: cartItems.cartId > Cart.id
 
 Ref: Address.buyerId > Buyer.id
 
-Ref: Payment.orderOrderId > Order.id
+Ref: Payment.orderId > Order.id
 
-Ref: Payment.userId > User.id
+Ref: Payment.buyerId > Buyer.id
 
 Ref: Order.buyerId > Buyer.id
 

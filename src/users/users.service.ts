@@ -19,11 +19,13 @@ export class UsersService {
         id: userId,
       },
       include: {
-        buyer: true,
+        buyer: {
+          include: {
+            Cart: true,
+          },
+        },
       },
     });
-
-    console.log('--->', user);
     return user;
   }
   updateUser(userId: string, newUserData: UpdateUserInput) {
@@ -58,8 +60,6 @@ export class UsersService {
     });
     return data;
   }
-  
-
 
   async changePassword(
     userId: string,

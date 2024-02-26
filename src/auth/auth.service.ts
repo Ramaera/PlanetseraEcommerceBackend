@@ -37,16 +37,15 @@ export class AuthService {
         },
       });
       await this.prisma.buyer.create({
-        data:{
-          userId:user.id,
-        }
-      })
+        data: {
+          userId: user.id,
+        },
+      });
 
       return this.generateTokens({
         userId: user.id,
       });
-    }
-   catch (e) {
+    } catch (e) {
       if (
         e instanceof Prisma.PrismaClientKnownRequestError &&
         e.code === 'P2002'
@@ -85,11 +84,16 @@ export class AuthService {
   getUserFromToken(token: string): Promise<User> {
     const id = this.jwtService.decode(token)['userId'];
 
-    return this.prisma.user.findUnique({ 
+    return this.prisma.user.findUnique({
       where: { id },
-      include:{
-           buyer:true
-    } });
+      include: {
+        buyer: {
+          include: {
+            Cart: true,
+          },
+        },
+      },
+    });
   }
 
   generateTokens(payload: { userId: string }): Token {

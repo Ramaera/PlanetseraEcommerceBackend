@@ -2,17 +2,34 @@ import { Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { CreateProductVariantInput } from './dto/create-productVariant.input';
 import { CreateCartInput } from './dto/create-cartData.input';
-import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
 import { BuyerData } from 'src/users/models/buyer.model';
 import { CartOperationInput } from './dto/operation-cartItem.input';
+import { CreateOrderPayment } from './dto/create-OrderPayment.input';
+
+const DateInGmt530 = () => {
+  // Create a new Date object for the current date and time
+  const currentDate = new Date();
+
+  // Get the current time in milliseconds since January 1, 1970
+  const currentTimeInMilliseconds = currentDate.getTime();
+
+  // Calculate the offset in milliseconds for GMT+5:30 (5 hours and 30 minutes)
+  const offsetInMilliseconds = 5.5 * 60 * 60 * 1000;
+
+  // Apply the offset to the current time
+  const newDateWithOffset = new Date(
+    currentTimeInMilliseconds + offsetInMilliseconds,
+  );
+
+  return newDateWithOffset;
+};
 
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  
   async create(createProductInput: CreateProductInput) {
     try {
       const newProduct = await this.prisma.products.create({
@@ -29,7 +46,6 @@ export class ProductsService {
       throw new Error('Could not create product');
     }
   }
-
 
   async createProductVariant(
     createProductVariantInput: CreateProductVariantInput,
@@ -191,7 +207,7 @@ export class ProductsService {
         },
       });
 
-      return {success:true};
+      return { success: true };
     } catch (error) {
       console.error('Error deleting cart:', error);
       throw new Error('Could not delete cart');
@@ -214,7 +230,7 @@ export class ProductsService {
   async removeAddress(addressId: number) {
     try {
       const removeAddress = await this.prisma.address.delete({
-        where: { addresId:addressId },
+        where: { addresId: addressId },
       });
 
       return { success: true };
@@ -224,48 +240,37 @@ export class ProductsService {
     }
   }
 
-  async createOrder(createOrderVariantInput: CreateOrderInput) {
-    try {
-      const cartData = await this.prisma.cartItems.findMany({
-        where: {
-          cartId: createOrderVariantInput.cartId,
-        },
-        
-      });
-
-      const newOrder = await this.prisma.order.create({
-        data: {
-          orderAmount: createOrderVariantInput.orderAmount,
-          AddresId: createOrderVariantInput.AddressId,
-          ShippingCost: createOrderVariantInput.ShippingCost,
-          cartid: createOrderVariantInput.cartId,
-          buyerId: createOrderVariantInput.buyerId,
-        },
-        include:{
-          address:true,
-          orderItems:true
-        }
-      });
-
-      const orderItems = await Promise.all(
-        cartData.map(async (cartItem) => {
-          return await this.prisma.orderItems.create({
-            data: {
-              name:cartItem.name,
-              orderId: newOrder.id,
-              productVariantId: cartItem.productVariantId,
-              qty: cartItem.qty,
-            },
-          });
-        }),
-      );
-
-      return {newOrder,orderItems};
-    } catch (error) {
-      console.error('Error creating new order:', error);
-      throw new Error('Could not create order ');
-    }
+  async createPaymentData(data: CreateOrderPayment) {
+    return await this.prisma.payment.create({
+      data: {
+        buyerId: data.buyerId,
+        orderId: data.orderId,
+        paymentId: data.paymentId,
+        dateOfPayment: DateInGmt530(),
+      },
+    });
   }
+
+  async findPaymentData(paymentId: string) {
+    return this.prisma.payment.findUnique({
+      where: {
+        paymentId: paymentId,
+      },
+    });
+  }
+
+  // async updateOrderPaymentStatus(id, paymentStatus) {
+  //   const updatepaymentStatus = await this.prisma.order.update({
+  //     where: {
+  //       id: id,
+  //     },
+  //     data: {
+  //       paymentStatus: paymentStatus,
+  //     },
+  //   });
+
+  //   return updatepaymentStatus;
+  // }
 
   findAll() {
     return this.prisma.products.findMany({
@@ -275,18 +280,15 @@ export class ProductsService {
     });
   }
 
-   async findAllOrders(buyerId) {
+  async findAllOrders(buyerId) {
     const getAllOrders = await this.prisma.order.findMany({
-      where:{
-        buyerId
+      where: {
+        buyerId,
       },
-      include:{
-        orderItems:true,
-        address:true,
-        
-        
-      }
-     
+      include: {
+        orderItems: true,
+        address: true,
+      },
     });
     return getAllOrders;
   }

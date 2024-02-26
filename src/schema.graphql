@@ -30,14 +30,15 @@ type Auth {
 }
 
 type BuyerData {
+  Cart: [Cart!]
   id: String!
   userId: String!
 }
 
 type Cart {
-  buyerId: String!
-  cartItem: [CartItems!]!
-  id: String!
+  buyerId: String
+  cartItem: [CartItems!]
+  id: String
 }
 
 type CartItems {
@@ -71,6 +72,12 @@ input CreateOrderInput {
   buyerId: String!
   cartId: String!
   orderAmount: Float!
+}
+
+input CreateOrderPayment {
+  buyerId: String
+  orderId: Int!
+  paymentId: String!
 }
 
 input CreateProductInput {
@@ -117,6 +124,7 @@ type Mutation {
   changePassword(data: ChangePasswordInput!): User!
   createCart(createCartInput: CreateCartInput!): Cart!
   createOrder(CreateOrder: CreateOrderInput!): Order!
+  createPaymentData(data: CreateOrderPayment!): PaymentData!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
   deleteCart(cartId: String!): MessageOutput!
@@ -124,9 +132,11 @@ type Mutation {
   refreshToken(token: JWT!): Token!
   removeAddress(AddressId: Int!): MessageOutput!
   removeItemFromCart(cartItem: String!): MessageOutput!
+  removeOrder(id: Int!): Order!
   signup(data: SignupInput!): Auth!
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
+  updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   updateUser(data: UpdateUserInput!): User!
 }
 
@@ -138,6 +148,7 @@ type Order {
 type OrderData {
   address: AddressData!
   buyerId: String!
+  id: Int!
   orderDate: DateTime!
 }
 
@@ -146,6 +157,13 @@ type OrderItems {
   name: String!
   productVariantId: Int!
   qty: Int!
+}
+
+type PaymentData {
+  buyerId: String
+  dateOfPayment: DateTime!
+  orderId: Int!
+  paymentId: String!
 }
 
 type Post {
@@ -187,11 +205,13 @@ type ProductVariant {
 type Query {
   allOrders(buyerId: String!): [AllOrdersData!]!
   allProducts: [Product!]!
+  findPaymentData(merchantTransactionId: String!): PaymentData!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
+  order(id: Int!): Order!
   viewCart(buyerId: String!): Cart!
 }
 
@@ -235,6 +255,15 @@ input UpdateBuyerAddressInput {
   buyerId: String
   mobileNumber: String
   name: String
+}
+
+input UpdateOrderInput {
+  AddressId: Int
+  ShippingCost: Int
+  buyerId: String
+  cartId: String
+  id: Int!
+  orderAmount: Float
 }
 
 input UpdateProductInput {

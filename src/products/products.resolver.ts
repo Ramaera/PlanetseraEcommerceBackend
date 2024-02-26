@@ -2,17 +2,16 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ProductsService } from './products.service';
 import { Product } from './entities/product.entity';
 import { ProductVariant } from './entities/productVariant.entity';
-import { Order } from './entities/order.entity';
 import { Cart } from './entities/cartData.entity';
 import { CreateProductInput } from './dto/create-product.input';
 import { CreateProductVariantInput } from './dto/create-productVariant.input';
 import { CreateCartInput } from './dto/create-cartData.input';
-import { CreateOrderInput } from './dto/create-Order.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { MessageOutput } from './entities/message.entity';
-import { OrderItems } from './entities/orderItem.entity';
 import { AllOrdersData } from './entities/viewallorders.entity';
+import { CreateOrderPayment } from './dto/create-OrderPayment.input';
+import { PaymentData } from './entities/paymentData.entity';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -35,17 +34,15 @@ export class ProductsResolver {
   //   return await this.productsService.findAllOrders();
   // }
 
-
-  @Query(() =>  [AllOrdersData], { name: 'allOrders' })
-  async findAllOrders(@Args('buyerId') buyerId: string){
+  @Query(() => [AllOrdersData], { name: 'allOrders' })
+  async findAllOrders(@Args('buyerId') buyerId: string) {
     const orders = await this.productsService.findAllOrders(buyerId);
-    return orders.map(order => ({
+    return orders.map((order) => ({
       ...order,
-      orderItems: order.orderItems || [], 
-      address:order.address
+      orderItems: order.orderItems || [],
+      address: order.address,
     }));
   }
-
 
   @Query(() => Cart, { name: 'viewCart' })
   async allCartItems(@Args('buyerId') buyerId: string) {
@@ -60,22 +57,33 @@ export class ProductsResolver {
     return this.productsService.createProductVariant(createProductVariantInput);
   }
 
+  // @Mutation(() => Order)
+  // async updateOrder(
+  //   @Args('id') orderId: string,
+  //   @Args('paymentStatus') paymentStatus: string,
+  // ) {
+  //   return this.productsService.updateOrderPaymentStatus(
+  //     orderId,
+  //     paymentStatus,
+  //   );
+  // }
 
-  @Mutation(() => Order)
-  async createOrder(@Args('CreateOrder') createOrderInput: CreateOrderInput) {
-    const {newOrder,orderItems}= await this.productsService.createOrder(createOrderInput);
-    return {
-      newOrder,orderItems
-    }
+  @Mutation(() => PaymentData)
+  async createPaymentData(@Args('data') data: CreateOrderPayment) {
+    const paymentData = await this.productsService.createPaymentData(data);
+    return paymentData;
   }
 
-  
+  @Query(() => PaymentData, { name: 'findPaymentData' })
+  async findPaymentData(@Args('merchantTransactionId') id: string) {
+    return await this.productsService.findPaymentData(id);
+  }
+
   @Mutation(() => Cart)
-  async createCart(@Args('createCartInput') createCartInput: CreateCartInput){
+  async createCart(@Args('createCartInput') createCartInput: CreateCartInput) {
     return this.productsService.addItemToCart(createCartInput);
   }
 
-  
   @Mutation(() => MessageOutput)
   cartOpeartion(
     @Args('CartOperationInput') cartOperationInput: CartOperationInput,

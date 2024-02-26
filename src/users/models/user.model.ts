@@ -8,7 +8,7 @@ import {
 import { IsEmail } from 'class-validator';
 import { Post } from '../../posts/models/post.model';
 import { BaseModel } from '../../common/models/base.model';
-import {  Role } from '@prisma/client';
+import { Role } from '@prisma/client';
 import { BuyerData } from './buyer.model';
 
 registerEnumType(Role, {
@@ -18,11 +18,8 @@ registerEnumType(Role, {
 
 @ObjectType()
 export class User extends BaseModel {
-
-
   @Field({ nullable: true })
   name: string;
-
 
   @Field({ nullable: true })
   email: string;
@@ -30,11 +27,9 @@ export class User extends BaseModel {
   @Field()
   role: Role;
 
+  @Field(() => BuyerData)
+  buyer: BuyerData;
 
-  @Field({})
-  buyer:BuyerData
-  
-   @HideField()
+  @HideField()
   password: string;
 }
-

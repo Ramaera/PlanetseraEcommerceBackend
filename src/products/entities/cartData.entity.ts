@@ -4,33 +4,27 @@ import { ProductVariant } from './productVariant.entity';
 
 @ObjectType()
 export class Cart {
+  @Field(() => String, { nullable: true })
+  id: string;
 
- 
-    @Field()
-    id:string
+  @Field(() => String, { nullable: true })
+  buyerId: string;
 
-    @Field(()=>String)
-    buyerId : string;
-
-    
-
-    @Field(()=>[CartItems])
-    cartItem : CartItems[]
-  
-
+  @Field(() => [CartItems], { nullable: true })
+  cartItem: CartItems[];
 }
 
 @ObjectType()
 class CartItems {
-    @Field()
-    id:string
+  @Field()
+  id: string;
 
-    @Field(()=>Int)
-    qty : number;
+  @Field(() => Int)
+  qty: number;
 
-    @Field(()=>String,{nullable:true})
-    name:string
+  @Field(() => String, { nullable: true })
+  name: string;
 
-    @Field(()=>Int)
-    productVariantId : number
+  @Field(() => Int)
+  productVariantId: number;
 }

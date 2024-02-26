@@ -13,15 +13,15 @@ generator dbml {
 }
 
 model User {
-  id        String    @id @default(cuid())
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  email     String    @unique
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  email     String   @unique
   password  String
   name      String?
   role      Role
-  Payment   Payment[]
-  buyer     Buyer?
+
+  buyer Buyer?
 }
 
 model Buyer {
@@ -30,6 +30,7 @@ model Buyer {
   userId    String    @unique
   orders    Order[]
   addresses Address[]
+  Payment   Payment[]
   Cart      Cart[]
 }
 
@@ -90,31 +91,31 @@ model Address {
 }
 
 model Payment {
-  paymentId     Int      @id @default(autoincrement())
-  order         Order    @relation(fields: [orderOrderId], references: [id])
-  orderOrderId  Int
-  user          User     @relation(fields: [userId], references: [id])
+  id            Int      @id @default(autoincrement())
+  paymentId     String   @unique
+  order         Order    @relation(fields: [orderId], references: [id])
+  orderId       Int
   dateOfPayment DateTime
-  userId        String
+  Buyer         Buyer    @relation(fields: [buyerId], references: [id])
+  buyerId       String
 }
 
 model Order {
-  id            Int          @id @default(autoincrement())
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
-  orderDate     DateTime?    @default(now())
-  orderAmount   Float
-  paymentStatus String?
-  status        OrderStatus  @default(PROCESSING)
-  Buyer         Buyer?       @relation(fields: [buyerId], references: [id])
-  buyerId       String?
-  cart          Cart?        @relation(fields: [cartid], references: [id])
-  cartid        String?
-  orderItems    orderItems[]
-  ShippingCost  Int?
-  address       Address?     @relation(fields: [AddresId], references: [addresId])
-  AddresId      Int?
-  Payment       Payment[]
+  id           Int          @id @default(autoincrement())
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  orderDate    DateTime?    @default(now())
+  orderAmount  Float
+  status       OrderStatus  @default(PROCESSING)
+  Buyer        Buyer?       @relation(fields: [buyerId], references: [id])
+  buyerId      String?
+  cart         Cart?        @relation(fields: [cartid], references: [id])
+  cartid       String?
+  orderItems   orderItems[]
+  ShippingCost Int?
+  address      Address?     @relation(fields: [AddresId], references: [addresId])
+  AddresId     Int?
+  Payment      Payment[]
 }
 
 model orderItems {

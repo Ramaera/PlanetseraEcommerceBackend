@@ -14,6 +14,7 @@ import { GqlConfigService } from './gql-config.service';
 import { ProductsModule } from './products/products.module';
 import { PaymentGatewayModule } from './payment-gateway/payment-gateway.module';
 import { GetImagesController } from './get-images/get-images.controller';
+import { OrderModule } from './order/order.module';
 
 @Module({
   imports: [
@@ -41,6 +42,7 @@ import { GetImagesController } from './get-images/get-images.controller';
     PostsModule,
     PaymentGatewayModule,
     ProductsModule,
+    OrderModule,
   ],
   controllers: [AppController, GetImagesController],
   providers: [AppService, AppResolver],
