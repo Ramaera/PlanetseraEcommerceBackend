@@ -1012,7 +1012,7 @@ const prisma = new PrismaClient();
     }));
 
 
- console.log("We are done")
+//  console.log("We are done")
 
 
    

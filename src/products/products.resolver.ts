@@ -44,6 +44,20 @@ export class ProductsResolver {
     }));
   }
 
+
+  @Query(() => [AllOrdersData], { name: 'getallOrders' })
+  async getAllOrders() {
+    const orders = await this.productsService.getAllOrders();
+    // return orders.map((order) => ({
+    //   ...order,
+    //   orderItems: order.orderItems,
+    //   address: order.address,
+    //   Payment:order.Payment
+      
+    // }));
+    return orders
+  }
+
   @Query(() => Cart, { name: 'viewCart' })
   async allCartItems(@Args('buyerId') buyerId: string) {
     return await this.productsService.allCartItems(buyerId);

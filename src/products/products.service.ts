@@ -292,6 +292,23 @@ export class ProductsService {
     });
     return getAllOrders;
   }
+  async getAllOrders() {
+    const getAllOrders = await this.prisma.order.findMany({
+     
+      include: {
+        orderItems: true,
+        address: true,
+        Payment:true,
+        Buyer:{
+          select:{user:true}
+         
+        }
+      },
+    });
+    console.log("getAllOrders",getAllOrders)
+    return getAllOrders;
+  }
+  
 
   async allCartItems(buyerId) {
     const getCart = await this.prisma.cart.findUnique({

@@ -11,6 +11,8 @@ type AddressData {
 }
 
 type AllOrdersData {
+  Buyer: BuyerData
+  Payment: [PaymentData!]
   ShippingCost: Int!
   address: AddressData
   id: String!
@@ -32,6 +34,7 @@ type Auth {
 type BuyerData {
   Cart: [Cart!]
   id: String!
+  user: UserData
   userId: String!
 }
 
@@ -208,6 +211,7 @@ type Query {
   findPaymentData(merchantTransactionId: String!): PaymentData!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
+  getallOrders: [AllOrdersData!]!
   hello(name: String!): String!
   helloWorld: String!
   me: User!
@@ -290,4 +294,8 @@ type User {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+}
+
+type UserData {
+  name: String!
 }
