@@ -46,6 +46,12 @@ const productData=[{
        "inactiveBtn": "rgb(127 159 94 / 38%)",
        "inactiveBtn2": "rgb(173 212 176 /38%)",
        "bgColor": "rgb(177 211 176)",
+       "flipkart50":
+      "https://www.flipkart.com/planetsera-sabji-masala/p/itma9772eaa0b140?pid=SCMGQ9JXXW8ZHXPG",
+    "flipkart100":
+      "https://www.flipkart.com/planetsera-sabji-masala/p/itma9772eaa0b140?pid=SCMGQCXBCQZWJG5M",
+    "flipkart500":
+      "https://www.flipkart.com/planetsera-sabji-masala/p/itma9772eaa0b140?pid=SCMGQEXY83ZPYPZN",
        
        faqs: [
         {
@@ -122,6 +128,12 @@ const productData=[{
        "inactiveBtn": "rgb(209 209 69 / 38%)",
        "inactiveBtn2": "rgb(205 225 162 / 38%)",
        "bgColor": "rgb(238 238 216)",
+       "amazon100": "https://www.amazon.in/dp/B0C3W3SH12?ref=myi_title_dp",
+
+       "flipkart50":
+         "https://www.flipkart.com/planetsera-chat-masala/p/itmfe8b6cf21eb08?pid=SCMGQMY9HA4NG7P2",
+       "flipkart100":
+         "https://www.flipkart.com/planetsera-chat-masala/p/itmfe8b6cf21eb08?pid=SCMGQMY9QN6TVHPF",
        faqs: [
         {
           question: "1. What is Chat Masala Powder?",
@@ -189,6 +201,8 @@ const productData=[{
        "inactiveBtn": "rgb(212 158 74 / 38%)",
        "inactiveBtn2": "rgb(253 235 208)",
        "bgColor": "rgb(236 220 197)",
+       "flipkart50":
+       "https://www.flipkart.com/planetsera-dry-mango-powder/p/itm0ad77cccb292f?pid=SCMGQDYQEMFGUFEQ",
        faqs: [
         {
           question: "1. How is Amchur Powder made?",
@@ -256,6 +270,14 @@ const productData=[{
        "inactiveBtn": "rgb(209 194 172 / 38%)",
        "inactiveBtn2": "rgb(229 198 187 / 38%)",
        "bgColor": "rgb(188 163 155)",
+       "amazon50": "https://www.amazon.in/dp/B0C3W3PC2G?ref=myi_title_dp",
+
+       "flipkart50":
+         "https://www.flipkart.com/planetsera-garam-masala/p/itm9af1cb20a0cd3?pid=SCMGQ9W67E5MYTH8",
+       "flipkart100":
+         "https://www.flipkart.com/planetsera-premium-quality-garam-masala/p/itm678c2e5f0d1a2?pid=SCMGQ387HKH64BVD",
+       "flipkart500":
+         "https://www.flipkart.com/planetsera-garam-masala/p/itm9af1cb20a0cd3?pid=SCMGQJHCP3X6ZWAF",
        faqs: [
         {
           question: "1. What is Garam Masala?",
@@ -323,6 +345,12 @@ const productData=[{
        "inactiveBtn": "rgb(214 184 65 / 38%)",
        "inactiveBtn2": "rgb(226 193 153 / 38%)",
        "bgColor": "rgb(228 223 203)",
+       "flipkart50":
+       "https://www.flipkart.com/planetsera-turmeric-powder/p/itm0c52e9d424d91?pid=SCMGQCZ8F3X6E6EY",
+     "flipkart100":
+       "https://www.flipkart.com/planetsera-turmeric-powder/p/itm0c52e9d424d91?pid=SCMGQCZ8XZPM9HDJ",
+     "flipkart500":
+       "https://www.flipkart.com/planetsera-turmeric-powder/p/itm0c52e9d424d91?pid=SCMGQ39T5DFSWMHF",
        
        faqs: [
         {
@@ -390,6 +418,14 @@ const productData=[{
        "inactiveBtn": "rgb(171 197 159 / 38%)",
        "inactiveBtn2": "rgb(171 197 159 / 38%)",
        "bgColor": "rgb(210 224 203)",
+       "amazon50": "https://www.amazon.in/dp/B0C3W2FW1M?ref=myi_title_dp",
+
+    "flipkart50":
+      "https://www.flipkart.com/planetsera-coriander-powder/p/itme906e235fc3d4?pid=SCMGQDY2FQBHVTFS",
+    "flipkart100":
+      "https://www.flipkart.com/planetsera-coriander-powder/p/itme906e235fc3d4?pid=SCMGQDY2UGPNQZVZ",
+    "flipkart500":
+      "https://www.flipkart.com/planetsera-coriander-powder/p/itme906e235fc3d4?pid=SCMGQDY2NXGDAV5F",
        faqs: [
         {
           question: "1. What is Coriander Powder (Dhaniya Powder)?",
@@ -459,6 +495,11 @@ const productData=[{
        "inactiveBtn": "rgb(142 91 36 / 38%)",
        "inactiveBtn2": "rgb(142 91 36 / 38%)",
        "bgColor": "rgb(206 182 154)",
+       "flipkart50":
+       "https://www.flipkart.com/planetsera-cumin-powder/p/itmac8a4eb79d181?pid=SCMGQEF6WFRVNGCB",
+ 
+     "flipkart500":
+       "https://www.flipkart.com/planetsera-cumin-powder/p/itmac8a4eb79d181?pid=SCMGQEF68DGSE4DW",
        faqs: [
         {
           question: "1. What is Cumin Powder, and how is it made?",
@@ -527,6 +568,14 @@ const productData=[{
        "inactiveBtn": "rgb(197 197 197)",
        "inactiveBtn2": "rgb(197 197 197)",
        "bgColor": "rgb(161 161 161)",
+       "amazon50": "https://www.amazon.in/dp/B0C3W6MPSW?ref=myi_title_dp",
+
+       "amazon500": "https://www.amazon.in/dp/B0C3W2ZNDR?ref=myi_title_dp",
+       "flipkart50":
+         "https://www.flipkart.com/planetsera-black-pepper-powder/p/itm55970223613f4?pid=SCMGQDZA7DF4SGXS",
+   
+       "flipkart500":
+         "https://www.flipkart.com/planetsera-black-pepper-powder/p/itm55970223613f4?pid=SCMGQDZAPJXCPMN4",
        faqs: [
         {
           question: "1. What is black pepper powder, and how is it made?",
@@ -597,6 +646,13 @@ const productData=[{
        "inactiveBtn": "rgb(212 130 89 / 38%)",
        "inactiveBtn2": "rgb(212 130 89 / 38%)",
        "bgColor": "rgb(231 194 177)",
+
+    "flipkart50":
+    "https://www.flipkart.com/planetsera-meat-masala/p/itmaddb650cbfb76?pid=SCMGQCUTZFEDNUZJ",
+  "flipkart100":
+    "https://www.flipkart.com/planetsera-meat-masala/p/itmaddb650cbfb76?pid=SCMGQ9H23UGGZSPS",
+  "flipkart500":
+    "https://www.flipkart.com/planetsera-meat-masala/p/itmaddb650cbfb76?pid=SCMGQKPS3YAQGKZH",
        faqs: [
         {
           question: "1. What is Meat Masala Powder",
@@ -664,6 +720,13 @@ const productData=[{
        "inactiveBtn": "#F1E4E4",
        "inactiveBtn2": "#F1E4E4",
        "bgColor": "rgb(227 211 211)",
+       "amazon50": "https://www.amazon.in/dp/B0C8HH725H?ref=myi_title_dp",
+    "flipkart50":
+      "https://www.flipkart.com/planetsera-red-chilli-powder/p/itm301769743d0e6?pid=SCMGQ9KNZZZFGDHV",
+    "flipkart100":
+      "https://www.flipkart.com/planetsera-red-chilli-powder/p/itm301769743d0e6?pid=SCMGQ9KNZZZFGDHV",
+    "flipkart500":
+      "https://www.flipkart.com/planetsera-red-chilli-powder/p/itm301769743d0e6?pid=SCMGQNF5PEHPS94Z",
        faqs: [
         {
           question:
@@ -1012,7 +1075,7 @@ const prisma = new PrismaClient();
     }));
 
 
- console.log("We are done")
+//  console.log("We are done")
 
 
    
