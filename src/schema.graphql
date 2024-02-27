@@ -97,6 +97,14 @@ input CreateProductVariantInput {
   weight: String!
 }
 
+input CreateRewardCodeInput {
+  """Example field (placeholder)"""
+  rewardCode: String!
+
+  """Example field (placeholder)"""
+  userId: String!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -130,6 +138,7 @@ type Mutation {
   createPaymentData(data: CreateOrderPayment!): PaymentData!
   createProduct(createProductInput: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
+  createRewardCode(data: CreateRewardCodeInput!): RewardCode!
   deleteCart(cartId: String!): MessageOutput!
   login(data: LoginInput!): Auth!
   refreshToken(token: JWT!): Token!
@@ -217,6 +226,11 @@ type Query {
   me: User!
   order(id: Int!): Order!
   viewCart(buyerId: String!): Cart!
+}
+
+type RewardCode {
+  """rewardCode"""
+  rewardCode: String!
 }
 
 """User role"""
