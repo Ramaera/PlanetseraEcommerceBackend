@@ -81,13 +81,9 @@ export class PaymentGatewayService {
           success: true,
           message: 'Payment Success',
           code: response?.data?.code,
-        };
+       , code:response?.data?.code };
       } else {
-        return {
-          success: false,
-          message: 'Payment Failure',
-          code: response?.data?.code,
-        };
+        return { success: false, message: 'Payment Failure', code:response?.data?.code  };
       }
     } catch (err) {
       console.log(err);
