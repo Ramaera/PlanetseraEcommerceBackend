@@ -792,7 +792,9 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(227 205 192)",
+
    }
    
 ]
@@ -827,7 +829,9 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(169 188 170)",
+
    }
    
 ]
@@ -862,7 +866,9 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(228 223 180)",
+
    }
    
 ]
@@ -897,7 +903,9 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(220 202 166)",
+
    }
    
 ]
@@ -932,7 +940,9 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(183 157 171)",
+
    }
    
 ]
@@ -967,46 +977,14 @@ const productData=[{
    {
        "usage":"",
        "ingredients":"",
-       "healthBenefits":""
+       "healthBenefits":"",
+       "bgColor": "rgb(221 201 147)",
+
    }
    
 ]
 },
-{
-    "title":"Combo Pack",
-    "description":"",
-    "productImageUrl":"",
-    "category":["ComingSoon"],
-    "Flipkart":false,
-    "Amazon":false,
-    "productUrl":"combo-pack",
-    "type":"blended",
 
-    "variant":[{
-        "weight":"50",
-        "price":0,
-        "imgurl":["ab","cd","de"]
-        },
-        {
-            "weight":"100",
-            "price":0,
-            "imgurl":["ab","cd","de"]
-        },
-        {
-                "weight":"500",
-                "price":0,
-                "imgurl":["ab","cd","de"]
-        }
-    ],
-    "metaData":[
-   {
-       "usage":"",
-       "ingredients":"",
-       "healthBenefits":""
-   }
-   
-]
-}
 
 ]
 
