@@ -106,13 +106,13 @@ const productData=[{
     {
         "weight":"100",
         "price":70,
-        "imgurl":["allProductsImg/ChatMasala.webp","allProductsImg/ChatMasala-Back-100.webp","allProductsImg/ChatMasala-BacKContent-100.webp"]
+        "imgurl":["allProductsImg/ChatMasala.webp","allProductsImg/ChatMasala-Back-100.webp","allProductsImg/ChatMasala-BackContent-100.webp"]
 
     },
     {
         "weight":"500",
         "price":330,
-        "imgurl":["allProductsImg/ChatMasala-500.webp","allProductsImg/ChatMasala-Back-500.webp","allProductsImg/ChatMasala-BacKContent-500.webp"]
+        "imgurl":["allProductsImg/ChatMasala-500.webp","allProductsImg/ChatMasala-Back-500.webp","allProductsImg/ChatMasala-BackContent-500.webp"]
 
     }
 
@@ -179,16 +179,7 @@ const productData=[{
         "price":35,
         "imgurl":["allProductsImg/DryMangoPowder.webp","allProductsImg/DryMangoPowder-Back-50.webp","allProductsImg/DryMangoPowder-BackContent-50.webp"]
         },
-        {
-            "weight":"100",
-            "price":0,
-            "imgurl":["ab","cd","de"]
-        },
-        {
-            "weight":"500",
-            "price":0,
-            "imgurl":["ab","cd","de"]
-        }
+        
     ],
     "metaData":[
    {
@@ -473,11 +464,7 @@ const productData=[{
         "price":40,
         "imgurl":["allProductsImg/CuminPowder.webp","allProductsImg/CuminPowder-Back-50.webp","allProductsImg/CuminPowder-BackContent-50.webp"]
         },
-        {
-            "weight":"100",
-            "price":0,
-            "imgurl":["ab","cd","de"]
-        },
+        
         {
             "weight":"500",
             "price":330,
@@ -546,11 +533,7 @@ const productData=[{
         "price":75,
         "imgurl":["allProductsImg/BlackPepperPowder.webp","allProductsImg/BlackPepperPowder-Back-50.webp","allProductsImg/BlackPepperPowder-BackContent-50.webp"]
         },
-        {
-            "weight":"100",
-            "price":0,
-            "imgurl":["ab","cd","de"]
-        },
+        
         {
             "weight":"500",
             "price":495,
