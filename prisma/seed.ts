@@ -122,7 +122,7 @@ const productData = [
         imgurl: [
           'allProductsImg/ChatMasala.webp',
           'allProductsImg/ChatMasala-Back-100.webp',
-          'allProductsImg/ChatMasala-BacKContent-100.webp',
+          'allProductsImg/ChatMasala-BackContent-100.webp',
         ],
       },
       {
@@ -131,7 +131,7 @@ const productData = [
         imgurl: [
           'allProductsImg/ChatMasala-500.webp',
           'allProductsImg/ChatMasala-Back-500.webp',
-          'allProductsImg/ChatMasala-BacKContent-500.webp',
+          'allProductsImg/ChatMasala-BackContent-500.webp',
         ],
       },
     ],
@@ -557,11 +557,7 @@ const productData = [
           'allProductsImg/CuminPowder-BackContent-50.webp',
         ],
       },
-      {
-        weight: '100',
-        price: 0,
-        imgurl: ['ab', 'cd', 'de'],
-      },
+
       {
         weight: '500',
         price: 330,
@@ -642,11 +638,7 @@ const productData = [
           'allProductsImg/BlackPepperPowder-BackContent-50.webp',
         ],
       },
-      {
-        weight: '100',
-        price: 0,
-        imgurl: ['ab', 'cd', 'de'],
-      },
+
       {
         weight: '500',
         price: 495,
@@ -931,6 +923,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
+        bgColor: 'rgb(227 205 192)',
       },
     ],
   },
@@ -966,6 +959,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
+        bgColor: 'rgb(169 188 170)',
       },
     ],
   },
@@ -1001,6 +995,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
+        bgColor: 'rgb(228 223 180)',
       },
     ],
   },
@@ -1036,6 +1031,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
+        bgColor: 'rgb(220 202 166)',
       },
     ],
   },
@@ -1071,6 +1067,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
+        bgColor: 'rgb(183 157 171)',
       },
     ],
   },
@@ -1106,41 +1103,7 @@ const productData = [
         usage: '',
         ingredients: '',
         healthBenefits: '',
-      },
-    ],
-  },
-  {
-    title: 'Combo Pack',
-    description: '',
-    productImageUrl: '',
-    category: ['ComingSoon'],
-    Flipkart: false,
-    Amazon: false,
-    productUrl: 'combo-pack',
-    type: 'blended',
-
-    variant: [
-      {
-        weight: '50',
-        price: 0,
-        imgurl: ['ab', 'cd', 'de'],
-      },
-      {
-        weight: '100',
-        price: 0,
-        imgurl: ['ab', 'cd', 'de'],
-      },
-      {
-        weight: '500',
-        price: 0,
-        imgurl: ['ab', 'cd', 'de'],
-      },
-    ],
-    metaData: [
-      {
-        usage: '',
-        ingredients: '',
-        healthBenefits: '',
+        bgColor: 'rgb(221 201 147)',
       },
     ],
   },
