@@ -100,6 +100,7 @@ export class ProductsService {
       const existingCartItem = await this.prisma.cartItems.findFirst({
         where: {
           productVariantId: createCartInput.productVariantId,
+          cartId: existingCart.id,
         },
       });
 
@@ -293,21 +294,18 @@ export class ProductsService {
   }
   async getAllOrders() {
     const getAllOrders = await this.prisma.order.findMany({
-     
       include: {
         orderItems: true,
         address: true,
-        Payment:true,
-        Buyer:{
-          select:{user:true}
-         
-        }
+        Payment: true,
+        Buyer: {
+          select: { user: true },
+        },
       },
     });
-    console.log("getAllOrders",getAllOrders)
+    console.log('getAllOrders', getAllOrders);
     return getAllOrders;
   }
-  
 
   async allCartItems(buyerId) {
     const getCart = await this.prisma.cart.findUnique({

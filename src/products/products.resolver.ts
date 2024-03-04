@@ -44,7 +44,6 @@ export class ProductsResolver {
     }));
   }
 
-
   @Query(() => [AllOrdersData], { name: 'getallOrders' })
   async getAllOrders() {
     const orders = await this.productsService.getAllOrders();
@@ -53,9 +52,9 @@ export class ProductsResolver {
     //   orderItems: order.orderItems,
     //   address: order.address,
     //   Payment:order.Payment
-      
+
     // }));
-    return orders
+    return orders;
   }
 
   @Query(() => Cart, { name: 'viewCart' })
@@ -97,7 +96,6 @@ export class ProductsResolver {
   async createCart(@Args('createCartInput') createCartInput: CreateCartInput) {
     return this.productsService.addItemToCart(createCartInput);
   }
-
   @Mutation(() => MessageOutput)
   cartOpeartion(
     @Args('CartOperationInput') cartOperationInput: CartOperationInput,
