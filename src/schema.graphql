@@ -34,7 +34,6 @@ type Auth {
 type BuyerData {
   Cart: [Cart!]
   id: String!
-  user: UserData
   userId: String!
 }
 
@@ -309,8 +308,4 @@ type User {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
-}
-
-type UserData {
-  name: String!
 }

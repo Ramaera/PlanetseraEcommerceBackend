@@ -15,7 +15,7 @@ export class Cart {
 }
 
 @ObjectType()
-class CartItems {
+export class CartItems {
   @Field()
   id: string;
 
