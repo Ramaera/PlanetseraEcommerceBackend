@@ -53,7 +53,7 @@ Table Products {
 
 Table ProductVariant {
   id Int [pk, increment]
-  weight String [not null]
+  weight Int
   imageUrl String[] [not null]
   price Int
   stock Int
@@ -148,6 +148,25 @@ Enum PaymentType {
   UPI
   CREDITCARD
   DEBITCARD
+}
+
+Enum WeightInGram {
+  Gram500
+  Gram100
+  Gram50
+}
+
+Enum CategoryOfProducts {
+  KitchenSpices
+  ComingSoon
+  MouthWatering
+  NonvegTadka
+  WeekandTadka
+}
+
+Enum ProductType {
+  blended
+  grounded
 }
 
 Ref: RewardCode.userId > User.id

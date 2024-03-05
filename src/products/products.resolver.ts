@@ -17,11 +17,16 @@ import { PaymentData } from './entities/paymentData.entity';
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
+  // @Mutation(() => Product)
+  // createProduct(
+  //   @Args('createProductInput') createProductInput: CreateProductInput,
+  // ) {
+  //   return this.productsService.create(createProductInput);
+  // }
+
   @Mutation(() => Product)
-  createProduct(
-    @Args('createProductInput') createProductInput: CreateProductInput,
-  ) {
-    return this.productsService.create(createProductInput);
+  async createProduct(@Args('input') createProductInput: CreateProductInput) {
+    return await this.productsService.createProduct(createProductInput);
   }
 
   @Query(() => [Product], { name: 'allProducts' })

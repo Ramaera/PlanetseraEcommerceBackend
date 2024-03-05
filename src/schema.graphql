@@ -83,17 +83,23 @@ input CreateOrderPayment {
 }
 
 input CreateProductInput {
+  Amazon: Boolean!
+  Flipkart: Boolean!
+  ProductsVariant: [CreateProductVariantInput!]!
+  category: [String!]!
   description: String!
+  metaData: [MetaDataInput!]!
+  productImageUrl: String!
   productUrl: String!
   title: String!
+  type: String!
 }
 
 input CreateProductVariantInput {
-  ProductId: String!
   imageUrl: [String!]!
   price: Float!
   stock: Int!
-  weight: String!
+  weight: Int!
 }
 
 input CreateRewardCodeInput {
@@ -108,6 +114,11 @@ input CreateRewardCodeInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
+
+type FaqInput {
+  answer: String!
+  question: String!
+}
 
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
@@ -128,6 +139,37 @@ type MessageOutput {
   success: Boolean
 }
 
+input MetaDataInput {
+  bgColor: String!
+  colored: String!
+  colored2: String!
+  flipkart50: String!
+  flipkart100: String!
+  flipkart500: String!
+  healthBenefits: String!
+  inactiveBtn: String!
+  inactiveBtn2: String!
+  ingredients: String!
+  productBg: String!
+  usage: String!
+}
+
+type MetaDataOutput {
+  bgColor: String!
+  colored: String!
+  colored2: String!
+  faqs: [FaqInput!]!
+  flipkart50: String!
+  flipkart100: String!
+  flipkart500: String!
+  healthBenefits: String!
+  inactiveBtn: String!
+  inactiveBtn2: String!
+  ingredients: String!
+  productBg: String!
+  usage: String!
+}
+
 type Mutation {
   addAddress(data: UpdateBuyerAddressInput!): AddressData!
   cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
@@ -135,7 +177,7 @@ type Mutation {
   createCart(createCartInput: CreateCartInput!): Cart!
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createPaymentData(data: CreateOrderPayment!): PaymentData!
-  createProduct(createProductInput: CreateProductInput!): Product!
+  createProduct(input: CreateProductInput!): Product!
   createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
   createRewardCode(data: CreateRewardCodeInput!): RewardCode!
   deleteCart(cartId: String!): MessageOutput!
@@ -198,7 +240,7 @@ type Product {
   category: [String!]
   description: String!
   id: String!
-  metaData: [JSONObject!]
+  metaData: MetaDataOutput!
   productImageUrl: String
   productUrl: String
   title: String!
@@ -285,11 +327,18 @@ input UpdateOrderInput {
 }
 
 input UpdateProductInput {
+  Amazon: Boolean
+  Flipkart: Boolean
+  ProductsVariant: [CreateProductVariantInput!]
   cartItemId: String!
+  category: [String!]
   description: String
+  metaData: [MetaDataInput!]
+  productImageUrl: String
   productUrl: String
   quantity: Int!
   title: String
+  type: String
 }
 
 input UpdateUserInput {

@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { CreateProductVariantInput } from './dto/create-productVariant.input';
+import { MetaDataInput } from './dto/create-productMetadata.input';
 import { CreateCartInput } from './dto/create-cartData.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
@@ -30,15 +31,53 @@ const DateInGmt530 = () => {
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(createProductInput: CreateProductInput) {
+  async createProduct(createProductInput: CreateProductInput) {
     try {
+      const { title, description, productImageUrl, Flipkart, Amazon, productUrl, category, type, ProductsVariant, metaData } = createProductInput;
+
       const newProduct = await this.prisma.products.create({
         data: {
-          title: createProductInput.title,
-          description: createProductInput.description,
-          productUrl: createProductInput.productUrl,
+            title,
+            description,
+            productUrl,
+            productImageUrl,
+            Flipkart,
+            Amazon,
+            category,
+            type,
+          
+            
+            ProductsVariant: {
+                create: ProductsVariant.map((variant: CreateProductVariantInput) => ({
+                    weight: variant.weight,
+                    imageUrl: variant.imageUrl,
+                    price: variant.price,
+                    stock: variant.stock
+                }))
+            },
+            metaData: {
+                create: metaData.map((data: MetaDataInput) => ({
+                    usage:data.usage,
+                    ingredients:data.ingredients,
+                    healthBenefits:data.healthBenefits,
+                    productBg:data.productBg,
+                    colored:data.colored,
+                    colored2:data.colored2,
+                    inactiveBtn:data.inactiveBtn,
+                    inactiveBtn2:data.inactiveBtn2,
+                    bgColor:data.bgColor,
+                    flipkart50:data.flipkart50,
+                    flipkart100:data.flipkart100,
+                    flipkart500:data.flipkart500,
+                    // faqs: data.faqs
+
+
+                }))
+            }
         },
-      });
+        include:{ProductsVariant:true}
+    });
+    
 
       return newProduct;
     } catch (error) {

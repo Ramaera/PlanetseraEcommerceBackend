@@ -1,12 +1,17 @@
-import { InputType, Field, Float, Int } from '@nestjs/graphql';
+import { InputType, Field, Float, Int, registerEnumType } from '@nestjs/graphql';
+// import { WeightInGram } from '@prisma/client';
 
+
+// registerEnumType(WeightInGram, {
+//   name: 'Weight',
+//   description: 'Products Variant Weight',
+// });
 @InputType()
 export class CreateProductVariantInput {
-  @Field(() => String)
-  ProductId: string;
+
     
-  @Field(() => String)
-  weight: string;
+  @Field(() => Int)
+  weight: number;
 
   @Field(() => [String])
   imageUrl: string[];

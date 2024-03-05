@@ -1,6 +1,7 @@
 import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { GraphQLJSONObject } from 'graphql-scalars';
 import { ProductVariant } from './productVariant.entity';
+import { MetaDataOutput } from './productMetaData.entity';
 
 @ObjectType()
 export class Product {
@@ -17,6 +18,9 @@ description:string
 @Field(()=>[ProductVariant])
 ProductsVariant:ProductVariant[]
 
+@Field(()=>MetaDataOutput)
+metaData:MetaDataOutput[]
+
 @Field(()=>[String],{ nullable: true })
 category:string[]
 
@@ -25,9 +29,6 @@ Amazon:boolean
  
 @Field({nullable:true})
 Flipkart:boolean
-
-@Field(() => [GraphQLJSONObject], { nullable: true })
-metaData?: any[];
 
 @Field({nullable:true})
 productImageUrl:string
