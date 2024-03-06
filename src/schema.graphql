@@ -115,7 +115,12 @@ A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date
 """
 scalar DateTime
 
-type FaqInput {
+input FaqInput {
+  answer: String!
+  question: String!
+}
+
+type FaqOutput {
   answer: String!
   question: String!
 }
@@ -140,9 +145,13 @@ type MessageOutput {
 }
 
 input MetaDataInput {
+  amazon50: String!
+  amazon100: String!
+  amazon500: String!
   bgColor: String!
   colored: String!
   colored2: String!
+  faqs: [FaqInput!]!
   flipkart50: String!
   flipkart100: String!
   flipkart500: String!
@@ -155,10 +164,13 @@ input MetaDataInput {
 }
 
 type MetaDataOutput {
+  amazon50: String!
+  amazon100: String!
+  amazon500: String!
   bgColor: String!
   colored: String!
   colored2: String!
-  faqs: [FaqInput!]!
+  faqs: [FaqOutput!]!
   flipkart50: String!
   flipkart100: String!
   flipkart500: String!

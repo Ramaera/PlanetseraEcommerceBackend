@@ -16,6 +16,7 @@ import { PaymentGatewayModule } from './payment-gateway/payment-gateway.module';
 import { GetImagesController } from './get-images/get-images.controller';
 import { OrderModule } from './order/order.module';
 import { RewardCodeModule } from './reward-code/reward-code.module';
+import { MediasModule } from './medias/medias.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { RewardCodeModule } from './reward-code/reward-code.module';
     ProductsModule,
     OrderModule,
     RewardCodeModule,
+    MediasModule
   ],
   controllers: [AppController, GetImagesController],
   providers: [AppService, AppResolver],

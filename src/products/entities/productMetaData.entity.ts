@@ -30,6 +30,15 @@ export class MetaDataOutput {
   bgColor: string;
 
   @Field()
+  amazon50: string;
+
+  @Field()
+  amazon100: string;
+
+  @Field()
+  amazon500: string;
+
+  @Field()
   flipkart50: string;
 
   @Field()
@@ -38,12 +47,12 @@ export class MetaDataOutput {
   @Field()
   flipkart500: string;
 
-  @Field(() => [FaqInput])
-  faqs: FaqInput[];
+  @Field(() => [FaqOutput])
+  faqs: FaqOutput[];
 }
 
 @ObjectType()
-class FaqInput {
+class FaqOutput {
   @Field()
   question: string;
 

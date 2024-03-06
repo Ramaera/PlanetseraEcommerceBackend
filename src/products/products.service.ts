@@ -31,7 +31,8 @@ const DateInGmt530 = () => {
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createProduct(createProductInput: CreateProductInput) {
+
+   async createProduct(createProductInput: CreateProductInput) {
     try {
       const { title, description, productImageUrl, Flipkart, Amazon, productUrl, category, type, ProductsVariant, metaData } = createProductInput;
 
@@ -66,6 +67,9 @@ export class ProductsService {
                     inactiveBtn:data.inactiveBtn,
                     inactiveBtn2:data.inactiveBtn2,
                     bgColor:data.bgColor,
+                    amazon50:data.amazon50,
+                    amazon100:data.amazon100,
+                    amazon500:data.amazon500,
                     flipkart50:data.flipkart50,
                     flipkart100:data.flipkart100,
                     flipkart500:data.flipkart500,
@@ -86,13 +90,16 @@ export class ProductsService {
     }
   }
 
+
+
+
+
   async createProductVariant(
     createProductVariantInput: CreateProductVariantInput,
   ) {
     try {
       const newProductVariant = await this.prisma.productVariant.create({
         data: {
-          productId: createProductVariantInput.ProductId,
           weight: createProductVariantInput.weight,
           imageUrl: createProductVariantInput.imageUrl,
           price: createProductVariantInput.price,
@@ -315,6 +322,7 @@ export class ProductsService {
     return this.prisma.products.findMany({
       include: {
         ProductsVariant: true,
+        // metaData:true
       },
     });
   }

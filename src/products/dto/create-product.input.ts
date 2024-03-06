@@ -44,6 +44,4 @@ export class CreateProductInput {
 
   @Field(() => [MetaDataInput])
   metaData: MetaDataInput[];
-
- 
 }

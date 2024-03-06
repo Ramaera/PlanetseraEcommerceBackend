@@ -1,5 +1,19 @@
 import { InputType, Field } from '@nestjs/graphql';
 
+
+
+
+
+
+@InputType()
+class FaqInput {
+  @Field()
+  question: string;
+
+  @Field()
+  answer: string;
+}
+
 @InputType()
 export class MetaDataInput {
   @Field()
@@ -30,6 +44,15 @@ export class MetaDataInput {
   bgColor: string;
 
   @Field()
+  amazon50: string;
+
+  @Field()
+  amazon100: string;
+
+  @Field()
+  amazon500: string;
+
+  @Field()
   flipkart50: string;
 
   @Field()
@@ -38,15 +61,7 @@ export class MetaDataInput {
   @Field()
   flipkart500: string;
 
-  // @Field(() => [FaqInput])
-  // faqs: FaqInput[];
+  @Field(() => [FaqInput])
+  faqs: FaqInput[];
 }
 
-@InputType()
-class FaqInput {
-  @Field()
-  question: string;
-
-  @Field()
-  answer: string;
-}

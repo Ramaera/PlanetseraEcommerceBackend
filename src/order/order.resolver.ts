@@ -8,7 +8,7 @@ import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
 
 @Resolver(() => Order)
 export class OrderResolver {
-  constructor(private readonly orderService: OrderService) {}
+  constructor(private readonly   orderService: OrderService) {}
 
   // @Mutation(() => Order)
   // createOrder(@Args('createOrderInput') createOrderInput: CreateOrderInput) {

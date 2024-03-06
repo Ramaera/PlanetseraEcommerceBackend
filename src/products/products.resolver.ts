@@ -17,27 +17,19 @@ import { PaymentData } from './entities/paymentData.entity';
 export class ProductsResolver {
   constructor(private readonly productsService: ProductsService) {}
 
-  // @Mutation(() => Product)
-  // createProduct(
-  //   @Args('createProductInput') createProductInput: CreateProductInput,
-  // ) {
-  //   return this.productsService.create(createProductInput);
-  // }
+
 
   @Mutation(() => Product)
   async createProduct(@Args('input') createProductInput: CreateProductInput) {
     return await this.productsService.createProduct(createProductInput);
   }
 
+
   @Query(() => [Product], { name: 'allProducts' })
   async findAll() {
     return await this.productsService.findAll();
   }
 
-  // @Query(() => Order, { name: 'allOrders' })
-  // async findAllOrders() {
-  //   return await this.productsService.findAllOrders();
-  // }
 
   @Query(() => [AllOrdersData], { name: 'allOrders' })
   async findAllOrders(@Args('buyerId') buyerId: string) {
@@ -52,13 +44,6 @@ export class ProductsResolver {
   @Query(() => [AllOrdersData], { name: 'getallOrders' })
   async getAllOrders() {
     const orders = await this.productsService.getAllOrders();
-    // return orders.map((order) => ({
-    //   ...order,
-    //   orderItems: order.orderItems,
-    //   address: order.address,
-    //   Payment:order.Payment
-
-    // }));
     return orders;
   }
 
@@ -75,16 +60,6 @@ export class ProductsResolver {
     return this.productsService.createProductVariant(createProductVariantInput);
   }
 
-  // @Mutation(() => Order)
-  // async updateOrder(
-  //   @Args('id') orderId: string,
-  //   @Args('paymentStatus') paymentStatus: string,
-  // ) {
-  //   return this.productsService.updateOrderPaymentStatus(
-  //     orderId,
-  //     paymentStatus,
-  //   );
-  // }
 
   @Mutation(() => PaymentData)
   async createPaymentData(@Args('data') data: CreateOrderPayment) {
@@ -129,3 +104,7 @@ export class ProductsResolver {
     return await this.productsService.deleteCart(cartId);
   }
 }
+// function ProductEntity(): (target: ProductsResolver, propertyKey: "updateUser", parameterIndex: 0) => void {
+//   throw new Error('Function not implemented.');
+// }
+

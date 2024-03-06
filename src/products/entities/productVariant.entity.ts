@@ -4,6 +4,7 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 export class ProductVariant {
   @Field()
   id:number
+  
   @Field(() => Float)
   weight: number;
 
