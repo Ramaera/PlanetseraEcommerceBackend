@@ -1,6 +1,7 @@
 import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ProductsService } from './products.service';
 import { Product } from './entities/product.entity';
+import { allProducts } from './entities/allProducts.entity';
 import { ProductVariant } from './entities/productVariant.entity';
 import { Cart } from './entities/cartData.entity';
 import { CreateProductInput } from './dto/create-product.input';
@@ -12,6 +13,7 @@ import { MessageOutput } from './entities/message.entity';
 import { AllOrdersData } from './entities/viewallorders.entity';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
 import { PaymentData } from './entities/paymentData.entity';
+import { UpdateProductVariantInput } from './dto/update-productVariant.input';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -19,13 +21,38 @@ export class ProductsResolver {
 
 
 
+ 
+
   @Mutation(() => Product)
-  async createProduct(@Args('input') createProductInput: CreateProductInput) {
-    return await this.productsService.createProduct(createProductInput);
+  async createProduct(
+      @Args('input') createProductInput: CreateProductInput,
+  ) {
+      try {
+          return await this.productsService.createProduct(createProductInput);
+      } catch (error) {
+          console.error('Error creating product with variants:', error);
+          throw new Error('Could not create product with variants');
+      }
   }
 
+    @Mutation(() => ProductVariant)
+  createProductVariant(
+    @Args('CreateProductVariantInput')
+    createProductVariantInput: CreateProductVariantInput,
+  ) {
+    return this.productsService.createProductVariant(createProductVariantInput);
+  }
 
-  @Query(() => [Product], { name: 'allProducts' })
+  @Mutation(() => ProductVariant)
+  updateProductVariant(@Args('data') data: UpdateProductVariantInput) {
+    const updatedProductVariant = this.productsService.updateProductVariant(data);
+    return updatedProductVariant;
+  }
+  
+  
+
+
+  @Query(() => [allProducts], { name: 'allProducts' })
   async findAll() {
     return await this.productsService.findAll();
   }
@@ -52,13 +79,7 @@ export class ProductsResolver {
     return await this.productsService.allCartItems(buyerId);
   }
 
-  @Mutation(() => ProductVariant)
-  createProductVariant(
-    @Args('CreateProductVariantInput')
-    createProductVariantInput: CreateProductVariantInput,
-  ) {
-    return this.productsService.createProductVariant(createProductVariantInput);
-  }
+
 
 
   @Mutation(() => PaymentData)

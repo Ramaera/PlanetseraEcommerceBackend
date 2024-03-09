@@ -5,7 +5,7 @@ export class ProductVariant {
   @Field()
   id:number
   
-  @Field(() => Float)
+  @Field({nullable:true})
   weight: number;
 
   @Field(() => [String])

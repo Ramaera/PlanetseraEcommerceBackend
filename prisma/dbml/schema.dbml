@@ -53,7 +53,7 @@ Table Products {
 
 Table ProductVariant {
   id Int [pk, increment]
-  weight Int
+  weight String [not null]
   imageUrl String[] [not null]
   price Int
   stock Int

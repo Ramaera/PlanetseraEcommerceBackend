@@ -85,10 +85,9 @@ input CreateOrderPayment {
 input CreateProductInput {
   Amazon: Boolean!
   Flipkart: Boolean!
-  ProductsVariant: [CreateProductVariantInput!]!
   category: [String!]!
   description: String!
-  metaData: [MetaDataInput!]!
+  metaData: [JSONObject!]
   productImageUrl: String!
   productUrl: String!
   title: String!
@@ -98,6 +97,7 @@ input CreateProductInput {
 input CreateProductVariantInput {
   imageUrl: [String!]!
   price: Float!
+  productId: String!
   stock: Int!
   weight: Int!
 }
@@ -114,16 +114,6 @@ input CreateRewardCodeInput {
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
 scalar DateTime
-
-input FaqInput {
-  answer: String!
-  question: String!
-}
-
-type FaqOutput {
-  answer: String!
-  question: String!
-}
 
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
@@ -142,44 +132,6 @@ input LoginInput {
 
 type MessageOutput {
   success: Boolean
-}
-
-input MetaDataInput {
-  amazon50: String!
-  amazon100: String!
-  amazon500: String!
-  bgColor: String!
-  colored: String!
-  colored2: String!
-  faqs: [FaqInput!]!
-  flipkart50: String!
-  flipkart100: String!
-  flipkart500: String!
-  healthBenefits: String!
-  inactiveBtn: String!
-  inactiveBtn2: String!
-  ingredients: String!
-  productBg: String!
-  usage: String!
-}
-
-type MetaDataOutput {
-  amazon50: String!
-  amazon100: String!
-  amazon500: String!
-  bgColor: String!
-  colored: String!
-  colored2: String!
-  faqs: [FaqOutput!]!
-  flipkart50: String!
-  flipkart100: String!
-  flipkart500: String!
-  healthBenefits: String!
-  inactiveBtn: String!
-  inactiveBtn2: String!
-  ingredients: String!
-  productBg: String!
-  usage: String!
 }
 
 type Mutation {
@@ -202,6 +154,7 @@ type Mutation {
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  updateProductVariant(data: UpdateProductVariantInput!): ProductVariant!
   updateUser(data: UpdateUserInput!): User!
 }
 
@@ -246,15 +199,18 @@ type Post {
 }
 
 type Product {
-  Amazon: Boolean
-  Flipkart: Boolean
-  ProductsVariant: [ProductVariant!]!
-  category: [String!]
+  newProduct: ProductDetails!
+}
+
+type ProductDetails {
+  Amazon: Boolean!
+  Flipkart: Boolean!
+  category: [String!]!
   description: String!
   id: String!
-  metaData: MetaDataOutput!
-  productImageUrl: String
-  productUrl: String
+  metaData: [JSONObject!]
+  productImageUrl: String!
+  productUrl: String!
   title: String!
   type: String!
 }
@@ -264,12 +220,12 @@ type ProductVariant {
   imageUrl: [String!]!
   price: Float!
   stock: Int
-  weight: Float!
+  weight: Int
 }
 
 type Query {
   allOrders(buyerId: String!): [AllOrdersData!]!
-  allProducts: [Product!]!
+  allProducts: [allProducts!]!
   findPaymentData(merchantTransactionId: String!): PaymentData!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
@@ -341,16 +297,23 @@ input UpdateOrderInput {
 input UpdateProductInput {
   Amazon: Boolean
   Flipkart: Boolean
-  ProductsVariant: [CreateProductVariantInput!]
   cartItemId: String!
   category: [String!]
   description: String
-  metaData: [MetaDataInput!]
+  metaData: [JSONObject!]
   productImageUrl: String
   productUrl: String
   quantity: Int!
   title: String
   type: String
+}
+
+input UpdateProductVariantInput {
+  id: Int!
+  imageUrl: [String!]!
+  price: Float!
+  stock: Int!
+  weight: Int!
 }
 
 input UpdateUserInput {
@@ -369,4 +332,18 @@ type User {
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime!
+}
+
+type allProducts {
+  Amazon: Boolean!
+  Flipkart: Boolean!
+  ProductsVariant: [ProductVariant!]!
+  category: [String!]!
+  description: String!
+  id: String!
+  metaData: [JSONObject!]
+  productImageUrl: String!
+  productUrl: String!
+  title: String!
+  type: String
 }

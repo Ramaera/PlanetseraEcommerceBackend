@@ -1,17 +1,9 @@
 import { InputType, Int, Field, registerEnumType } from '@nestjs/graphql';
 import { CreateProductVariantInput } from './create-productVariant.input';
-import { MetaDataInput } from './create-productMetadata.input';
-// import { CategoryOfProducts, ProductType } from '@prisma/client';
+import { GraphQLJSONObject } from 'graphql-scalars';
 
 
-// registerEnumType(CategoryOfProducts, {
-//   name: 'category',
-//   description: 'category of products',
-// });
-// registerEnumType(ProductType, {
-//   name: 'Type',
-//   description: 'ProductType',
-// });
+
 
 @InputType()
 export class CreateProductInput {
@@ -23,6 +15,9 @@ export class CreateProductInput {
 
   @Field()
   productImageUrl : string;
+
+  @Field(() => [GraphQLJSONObject], { nullable: true })
+  metaData?: any[];
 
   @Field()
   Flipkart:boolean
@@ -39,9 +34,4 @@ export class CreateProductInput {
   @Field()
   type:string
 
-  @Field(() => [CreateProductVariantInput])
-  ProductsVariant: CreateProductVariantInput[];
-
-  @Field(() => [MetaDataInput])
-  metaData: MetaDataInput[];
 }

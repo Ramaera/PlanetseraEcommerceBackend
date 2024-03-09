@@ -45,21 +45,6 @@ model Buyer {
   Cart      Cart[]
 }
 
-// model Products {
-//   id              String              @id @default(cuid())
-//   createdAt       DateTime            @default(now())
-//   updatedAt       DateTime            @updatedAt
-//   title           String
-//   description     String
-//   productImageUrl String?
-//   metaData        Json?               @db.Json
-//   category        CategoryOfProducts?
-//   ProductsVariant ProductVariant[]
-//   Flipkart        Boolean             @default(false)
-//   Amazon          Boolean             @default(false)
-//   productUrl      String
-//   type            ProductType?
-// }
 model Products {
   id              String           @id @default(cuid())
   createdAt       DateTime         @default(now())
@@ -78,7 +63,7 @@ model Products {
 
 model ProductVariant {
   id        Int       @id @default(autoincrement())
-  weight    Int?
+  weight    String
   imageUrl  String[]
   price     Int?
   stock     Int?

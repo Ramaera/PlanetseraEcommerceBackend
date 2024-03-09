@@ -1,13 +1,13 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductInput } from './dto/create-product.input';
 import { CreateProductVariantInput } from './dto/create-productVariant.input';
-import { MetaDataInput } from './dto/create-productMetadata.input';
 import { CreateCartInput } from './dto/create-cartData.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
 import { BuyerData } from 'src/users/models/buyer.model';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
+import { UpdateProductVariantInput } from './dto/update-productVariant.input';
 
 const DateInGmt530 = () => {
   // Create a new Date object for the current date and time
@@ -32,87 +32,84 @@ export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
 
-   async createProduct(createProductInput: CreateProductInput) {
-    try {
-      const { title, description, productImageUrl, Flipkart, Amazon, productUrl, category, type, ProductsVariant, metaData } = createProductInput;
 
-      const newProduct = await this.prisma.products.create({
-        data: {
-            title,
-            description,
-            productUrl,
-            productImageUrl,
-            Flipkart,
-            Amazon,
-            category,
-            type,
-          
-            
-            ProductsVariant: {
-                create: ProductsVariant.map((variant: CreateProductVariantInput) => ({
-                    weight: variant.weight,
-                    imageUrl: variant.imageUrl,
-                    price: variant.price,
-                    stock: variant.stock
-                }))
+  async createProduct(createProductInput: CreateProductInput) {
+    try {
+        const { title, description, productImageUrl, Flipkart, Amazon, productUrl, category, type, metaData } = createProductInput;
+        
+        // Create the product
+        const newProduct = await this.prisma.products.create({
+            data: {
+                title,
+                description,
+                productUrl,
+                productImageUrl,
+                Flipkart,
+                Amazon,
+                category,
+                type,
+                metaData
             },
-            metaData: {
-                create: metaData.map((data: MetaDataInput) => ({
-                    usage:data.usage,
-                    ingredients:data.ingredients,
-                    healthBenefits:data.healthBenefits,
-                    productBg:data.productBg,
-                    colored:data.colored,
-                    colored2:data.colored2,
-                    inactiveBtn:data.inactiveBtn,
-                    inactiveBtn2:data.inactiveBtn2,
-                    bgColor:data.bgColor,
-                    amazon50:data.amazon50,
-                    amazon100:data.amazon100,
-                    amazon500:data.amazon500,
-                    flipkart50:data.flipkart50,
-                    flipkart100:data.flipkart100,
-                    flipkart500:data.flipkart500,
-                    // faqs: data.faqs
+            include: { ProductsVariant: true }
+        });
 
-
-                }))
-            }
-        },
-        include:{ProductsVariant:true}
-    });
-    
-
-      return newProduct;
+        return { newProduct };
     } catch (error) {
-      console.error('Error creating product:', error);
-      throw new Error('Could not create product');
+        console.error('Error creating product with variants:', error);
+        throw new Error('Could not create product with variants');
     }
-  }
+}
 
+async createProductVariant(createProductVariantInput: CreateProductVariantInput) {
+  try {
+      const { productId, weight, imageUrl, price, stock } = createProductVariantInput;
 
-
-
-
-  async createProductVariant(
-    createProductVariantInput: CreateProductVariantInput,
-  ) {
-    try {
       const newProductVariant = await this.prisma.productVariant.create({
-        data: {
-          weight: createProductVariantInput.weight,
-          imageUrl: createProductVariantInput.imageUrl,
-          price: createProductVariantInput.price,
-          stock: createProductVariantInput.stock,
-        },
+          data: {
+              products: {
+                  connect: {
+                      id: productId, // Connect to the specific product using its ID
+                  },
+              },
+              weight,
+              imageUrl,
+              price,
+              stock,
+          },
       });
 
       return newProductVariant;
-    } catch (error) {
+  } catch (error) {
       console.error('Error creating product variant:', error);
       throw new Error('Could not create product variant');
-    }
   }
+}
+
+
+async updateProductVariant(updateProductVariantInput: UpdateProductVariantInput) {
+  try {
+      const updatedProductVariant = await this.prisma.productVariant.update({
+          where: {
+           id:updateProductVariantInput.id
+          },
+          data: {
+              weight:updateProductVariantInput.weight,
+              imageUrl:updateProductVariantInput.imageUrl,
+              price:updateProductVariantInput.price,
+              stock:updateProductVariantInput.stock,
+          },
+      });
+
+      return updatedProductVariant;
+  } catch (error) {
+      console.error('Error updating product variant:', error);
+      throw new Error('Could not update product variant');
+  }
+}
+
+
+
+
 
   async addItemToCart(createCartInput: CreateCartInput) {
     try {
@@ -318,13 +315,14 @@ export class ProductsService {
   //   return updatepaymentStatus;
   // }
 
-  findAll() {
-    return this.prisma.products.findMany({
+  async findAll() {
+    const allProducts = await this.prisma.products.findMany({
       include: {
         ProductsVariant: true,
-        // metaData:true
+        
       },
     });
+    return allProducts
   }
 
   async findAllOrders(buyerId) {
@@ -361,7 +359,7 @@ export class ProductsService {
       },
       include: { cartItem: true },
     });
-    console.log('getCart', getCart);
+    // console.log('getCart', getCart);
 
     return getCart;
   }

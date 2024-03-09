@@ -2,60 +2,62 @@ import { InputType, Field, ObjectType } from '@nestjs/graphql';
 
 @ObjectType()
 export class MetaDataOutput {
-  @Field()
+  @Field({nullable:true})
   usage: string;
 
-  @Field()
+  @Field({nullable:true})
   ingredients: string;
 
-  @Field()
+  @Field({nullable:true})
   healthBenefits: string;
 
-  @Field()
+  @Field({nullable:true})
   productBg: string;
 
-  @Field()
+  @Field({nullable:true})
   colored: string;
 
-  @Field()
+  @Field({nullable:true})
   colored2: string;
 
-  @Field()
+  @Field({nullable:true})
   inactiveBtn: string;
 
-  @Field()
+  @Field({nullable:true})
   inactiveBtn2: string;
 
-  @Field()
+  @Field({nullable:true})
   bgColor: string;
 
-  @Field()
+  @Field({nullable:true})
   amazon50: string;
 
-  @Field()
+  @Field({nullable:true})
   amazon100: string;
 
-  @Field()
+  @Field({nullable:true})
   amazon500: string;
 
-  @Field()
+  @Field({nullable:true})
   flipkart50: string;
 
-  @Field()
+  @Field({nullable:true})
   flipkart100: string;
 
-  @Field()
+  @Field({nullable:true})
   flipkart500: string;
 
-  @Field(() => [FaqOutput])
+  
+  @Field(() => [FaqOutput], { nullable: true })
   faqs: FaqOutput[];
+  
 }
 
 @ObjectType()
 class FaqOutput {
-  @Field()
+  @Field({nullable:true})
   question: string;
 
-  @Field()
+  @Field({nullable:true})
   answer: string;
 }

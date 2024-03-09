@@ -3,7 +3,7 @@ import { GraphQLJSONObject } from 'graphql-scalars';
 import { ProductVariant } from './productVariant.entity';
 
 @ObjectType()
- class ProductDetails{
+export  class allProducts{
 
 @Field()
 id:string
@@ -29,19 +29,17 @@ productImageUrl:string
 @Field()
 productUrl:string
 
-@Field()
+@Field({nullable:true})
 type:string
+
+@Field(()=>[ProductVariant])
+ProductsVariant:ProductVariant[]
 
 @Field(() => [GraphQLJSONObject], { nullable: true })
 metaData?: any;
 
 }
 
-@ObjectType()
-export class Product {
 
 
-@Field(()=>ProductDetails)
-newProduct:ProductDetails
 
-}

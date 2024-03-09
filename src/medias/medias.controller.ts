@@ -13,20 +13,14 @@ import {
 import { createReadStream } from 'fs';
 import { join } from 'path';
 import Express from 'express';
-
 import 'multer';
-
 import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { extname } from 'path';
 import { diskStorage } from 'multer';
 import { ApiBody, ApiTags } from '@nestjs/swagger';
 
 export const editFileName = (req, file, callback) => {
-  const fileExtName = extname(file.originalname);
-
-  const randomName =
-    Date.now().toString(36) + Math.random().toString(36).substring(2);
-  callback(null, `${randomName}${fileExtName}`);
+  callback(null, file.originalname); // Keep the original filename
 };
 
 function processFilename(filename) {
@@ -66,7 +60,7 @@ export class MediasController {
   @UseInterceptors(
     FileInterceptor('document', {
       storage: diskStorage({
-        destination: './uploads',
+        destination: './images/allProductsImg',
         filename: editFileName,
       }),
       fileFilter: imageFileFilter,
