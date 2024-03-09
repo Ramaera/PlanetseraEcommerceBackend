@@ -14,6 +14,8 @@ import { AllOrdersData } from './entities/viewallorders.entity';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
 import { PaymentData } from './entities/paymentData.entity';
 import { UpdateProductVariantInput } from './dto/update-productVariant.input';
+import { UpdateProductDetailsInput } from './dto/update-ProductDetails.input';
+import { UpdatedProduct } from './entities/updatedProducts.entity';
 
 @Resolver(() => Product)
 export class ProductsResolver {
@@ -41,6 +43,12 @@ export class ProductsResolver {
     createProductVariantInput: CreateProductVariantInput,
   ) {
     return this.productsService.createProductVariant(createProductVariantInput);
+  }
+
+  @Mutation(() => UpdatedProduct)
+  updateProductDetails(@Args('data') data: UpdateProductDetailsInput) {
+    const UpdatedProductDetails = this.productsService.updateProductDetails(data);
+    return UpdatedProductDetails;
   }
 
   @Mutation(() => ProductVariant)

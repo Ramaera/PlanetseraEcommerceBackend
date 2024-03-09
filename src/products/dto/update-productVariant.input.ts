@@ -4,8 +4,8 @@ import { InputType, Field, Float, Int, registerEnumType } from '@nestjs/graphql'
 export class UpdateProductVariantInput {
 
     
-  @Field(() => Int)
-  weight: number;
+  @Field()
+  weight: string;
 
   @Field(() => Int)
   id: number;

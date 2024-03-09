@@ -99,7 +99,7 @@ input CreateProductVariantInput {
   price: Float!
   productId: String!
   stock: Int!
-  weight: Int!
+  weight: String!
 }
 
 input CreateRewardCodeInput {
@@ -154,6 +154,7 @@ type Mutation {
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
+  updateProductDetails(data: UpdateProductDetailsInput!): UpdatedProduct!
   updateProductVariant(data: UpdateProductVariantInput!): ProductVariant!
   updateUser(data: UpdateUserInput!): User!
 }
@@ -294,6 +295,19 @@ input UpdateOrderInput {
   orderAmount: Float
 }
 
+input UpdateProductDetailsInput {
+  Amazon: Boolean
+  Flipkart: Boolean
+  category: [String!]
+  description: String
+  id: String
+  metaData: [JSONObject!]
+  productImageUrl: String
+  productUrl: String
+  title: String
+  type: String
+}
+
 input UpdateProductInput {
   Amazon: Boolean
   Flipkart: Boolean
@@ -313,11 +327,24 @@ input UpdateProductVariantInput {
   imageUrl: [String!]!
   price: Float!
   stock: Int!
-  weight: Int!
+  weight: String!
 }
 
 input UpdateUserInput {
   address: [JSONObject!]
+}
+
+type UpdatedProduct {
+  Amazon: Boolean
+  Flipkart: Boolean
+  category: [String!]
+  description: String
+  id: String
+  metaData: [JSONObject!]
+  productImageUrl: String
+  productUrl: String
+  title: String
+  type: String
 }
 
 type User {

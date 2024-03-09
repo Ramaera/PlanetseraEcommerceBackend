@@ -8,6 +8,7 @@ import { BuyerData } from 'src/users/models/buyer.model';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
 import { UpdateProductVariantInput } from './dto/update-productVariant.input';
+import { UpdateProductDetailsInput } from './dto/update-ProductDetails.input';
 
 const DateInGmt530 = () => {
   // Create a new Date object for the current date and time
@@ -101,6 +102,32 @@ async updateProductVariant(updateProductVariantInput: UpdateProductVariantInput)
       });
 
       return updatedProductVariant;
+  } catch (error) {
+      console.error('Error updating product variant:', error);
+      throw new Error('Could not update product variant');
+  }
+}
+async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput) {
+  try {
+      const UpdatedProductDetails = await this.prisma.products.update({
+          where: {
+           id:updateProductDetailsInput.id
+          },
+          data: {
+            title:updateProductDetailsInput.title,
+            description:updateProductDetailsInput.description,
+            productImageUrl:updateProductDetailsInput.productImageUrl,
+            metaData:updateProductDetailsInput.metaData,
+            category:updateProductDetailsInput.category,
+            Flipkart:updateProductDetailsInput.Flipkart,
+            Amazon:updateProductDetailsInput.Amazon,
+            productUrl:updateProductDetailsInput.productUrl,
+            type:updateProductDetailsInput.type
+              
+          },
+      });
+
+      return UpdatedProductDetails;
   } catch (error) {
       console.error('Error updating product variant:', error);
       throw new Error('Could not update product variant');
