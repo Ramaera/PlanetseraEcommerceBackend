@@ -368,6 +368,7 @@ type allProducts {
   category: [String!]!
   description: String!
   id: String!
+  isActive: Boolean!
   metaData: [JSONObject!]
   productImageUrl: String!
   productUrl: String!

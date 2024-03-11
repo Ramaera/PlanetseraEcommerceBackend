@@ -49,6 +49,7 @@ Table Products {
   Amazon Boolean [not null, default: false]
   productUrl String [not null]
   type String
+  isActive Boolean [not null, default: true]
 }
 
 Table ProductVariant {
@@ -59,6 +60,7 @@ Table ProductVariant {
   stock Int
   products Products
   productId String [not null]
+  isVariantActive Boolean [not null, default: true]
 }
 
 Table Cart {

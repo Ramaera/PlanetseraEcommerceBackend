@@ -13,7 +13,7 @@ export class CreateProductVariantInput {
   
 
   @Field(() => [String])
-  imageUrl: string[];
+  imageUrl?: string[];
 
   @Field(() => Float)
   price: number;

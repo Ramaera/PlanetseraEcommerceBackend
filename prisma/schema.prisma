@@ -59,16 +59,18 @@ model Products {
   Amazon          Boolean          @default(false)
   productUrl      String
   type            String?
+  isActive        Boolean          @default(true)
 }
 
 model ProductVariant {
-  id        Int       @id @default(autoincrement())
-  weight    String
-  imageUrl  String[]
-  price     Int?
-  stock     Int?
-  products  Products? @relation(fields: [productId], references: [id])
-  productId String
+  id              Int       @id @default(autoincrement())
+  weight          String
+  imageUrl        String[]
+  price           Int?
+  stock           Int?
+  products        Products? @relation(fields: [productId], references: [id])
+  productId       String
+  isVariantActive Boolean   @default(true)
 }
 
 model Cart {

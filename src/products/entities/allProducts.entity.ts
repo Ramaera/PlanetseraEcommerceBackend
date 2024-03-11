@@ -38,6 +38,9 @@ ProductsVariant:ProductVariant[]
 @Field(() => [GraphQLJSONObject], { nullable: true })
 metaData?: any;
 
+@Field()
+isActive:boolean
+
 }
 
 
