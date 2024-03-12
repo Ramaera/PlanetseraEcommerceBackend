@@ -17,6 +17,9 @@ export class ProductVariant {
   @Field(() => Int,{nullable:true})
   stock: number;
 
+  @Field()
+  isVariantActive:boolean
+
 
 
   

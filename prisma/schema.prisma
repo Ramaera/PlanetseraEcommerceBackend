@@ -59,7 +59,7 @@ model Products {
   Amazon          Boolean          @default(false)
   productUrl      String
   type            String?
-  isActive        Boolean          @default(true)
+  isActive        Boolean          @default(false)
 }
 
 model ProductVariant {
@@ -70,7 +70,7 @@ model ProductVariant {
   stock           Int?
   products        Products? @relation(fields: [productId], references: [id])
   productId       String
-  isVariantActive Boolean   @default(true)
+  isVariantActive Boolean   @default(false)
 }
 
 model Cart {

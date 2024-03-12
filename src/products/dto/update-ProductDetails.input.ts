@@ -26,6 +26,9 @@ export class UpdateProductDetailsInput {
   Amazon?: boolean;
 
   @Field({ nullable: true })
+  isActive?: boolean;
+
+  @Field({ nullable: true })
   productUrl?: string;
 
   @Field(() => [String], { nullable: true })

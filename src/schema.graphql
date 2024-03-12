@@ -219,6 +219,7 @@ type ProductDetails {
 type ProductVariant {
   id: Int!
   imageUrl: [String!]!
+  isVariantActive: Boolean!
   price: Float!
   stock: Int
   weight: Int
@@ -301,6 +302,7 @@ input UpdateProductDetailsInput {
   category: [String!]
   description: String
   id: String
+  isActive: Boolean
   metaData: [JSONObject!]
   productImageUrl: String
   productUrl: String
@@ -325,6 +327,7 @@ input UpdateProductInput {
 input UpdateProductVariantInput {
   id: Int!
   imageUrl: [String!]!
+  isVariantActive: Boolean
   price: Float!
   stock: Int!
   weight: String!

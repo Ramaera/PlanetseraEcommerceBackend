@@ -98,6 +98,7 @@ async updateProductVariant(updateProductVariantInput: UpdateProductVariantInput)
               imageUrl:updateProductVariantInput.imageUrl,
               price:updateProductVariantInput.price,
               stock:updateProductVariantInput.stock,
+              isVariantActive:updateProductVariantInput.isVariantActive
           },
       });
 
@@ -107,6 +108,7 @@ async updateProductVariant(updateProductVariantInput: UpdateProductVariantInput)
       throw new Error('Could not update product variant');
   }
 }
+
 async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput) {
   try {
       const UpdatedProductDetails = await this.prisma.products.update({
@@ -122,20 +124,19 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
             Flipkart:updateProductDetailsInput.Flipkart,
             Amazon:updateProductDetailsInput.Amazon,
             productUrl:updateProductDetailsInput.productUrl,
-            type:updateProductDetailsInput.type
+            type:updateProductDetailsInput.type,
+            isActive:updateProductDetailsInput.isActive
+            
               
           },
       });
 
       return UpdatedProductDetails;
   } catch (error) {
-      console.error('Error updating product variant:', error);
-      throw new Error('Could not update product variant');
+      console.error('Error updating product :', error);
+      throw new Error('Could not update product ');
   }
 }
-
-
-
 
 
   async addItemToCart(createCartInput: CreateCartInput) {

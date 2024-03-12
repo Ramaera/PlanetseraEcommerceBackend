@@ -5,17 +5,20 @@ export class UpdateProductVariantInput {
 
     
   @Field()
-  weight: string;
+  weight?: string;
 
   @Field(() => Int)
   id: number;
   
   @Field(() => [String])
-  imageUrl: string[];
+  imageUrl?: string[];
 
   @Field(() => Float)
-  price: number;
+  price?: number;
 
   @Field(() => Int)
-  stock: number;
+  stock?: number;
+
+  @Field({ nullable: true })
+  isVariantActive?: boolean;
 }
