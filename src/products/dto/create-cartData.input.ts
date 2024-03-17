@@ -16,4 +16,7 @@ export class CreateCartInput {
 
   @Field()
   buyerId: string;
+
+  @Field()
+  weight: string;
 }

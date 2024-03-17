@@ -91,6 +91,7 @@ model cartItems {
   Cart             Cart?   @relation(fields: [cartId], references: [id])
   cartId           String?
   name             String?
+  weight           String?
 }
 
 model Address {
@@ -129,6 +130,12 @@ model Order {
   address      Address?     @relation(fields: [AddresId], references: [addresId])
   AddresId     Int?
   Payment      Payment[]
+}
+
+model DiscountCode {
+  id             Int @id @default(autoincrement())
+  discountCode   Int
+  discountAmount Int
 }
 
 model orderItems {

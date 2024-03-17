@@ -81,6 +81,7 @@ Table cartItems {
   Cart Cart
   cartId String
   name String
+  weight String
 }
 
 Table Address {

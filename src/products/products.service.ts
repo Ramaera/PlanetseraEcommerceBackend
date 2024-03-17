@@ -4,7 +4,6 @@ import { CreateProductVariantInput } from './dto/create-productVariant.input';
 import { CreateCartInput } from './dto/create-cartData.input';
 import { UpdateProductInput } from './dto/update-product.input';
 import { PrismaService } from 'nestjs-prisma';
-import { BuyerData } from 'src/users/models/buyer.model';
 import { CartOperationInput } from './dto/operation-cartItem.input';
 import { CreateOrderPayment } from './dto/create-OrderPayment.input';
 import { UpdateProductVariantInput } from './dto/update-productVariant.input';
@@ -31,8 +30,6 @@ const DateInGmt530 = () => {
 @Injectable()
 export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
-
-
 
   async createProduct(createProductInput: CreateProductInput) {
     try {
@@ -69,7 +66,7 @@ async createProductVariant(createProductVariantInput: CreateProductVariantInput)
           data: {
               products: {
                   connect: {
-                      id: productId, // Connect to the specific product using its ID
+                      id: productId, 
                   },
               },
               weight,
@@ -125,9 +122,7 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
             Amazon:updateProductDetailsInput.Amazon,
             productUrl:updateProductDetailsInput.productUrl,
             type:updateProductDetailsInput.type,
-            isActive:updateProductDetailsInput.isActive
-            
-              
+            isActive:updateProductDetailsInput.isActive  
           },
       });
 
@@ -160,6 +155,7 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
             productVariantId: createCartInput.productVariantId,
             cartId: cartCreated.id,
             qty: createCartInput.qty,
+            weight:createCartInput.weight
           },
         });
         return {
@@ -182,6 +178,9 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
           },
           data: {
             qty: existingCartItem.qty + createCartInput.qty,
+            weight: createCartInput.weight // Update weight if cart item already exists
+
+
           },
         });
       } else {
@@ -191,6 +190,7 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
             productVariantId: createCartInput.productVariantId,
             qty: createCartInput.qty,
             cartId: existingCart.id,
+            weight:createCartInput.weight
           },
         });
       }
