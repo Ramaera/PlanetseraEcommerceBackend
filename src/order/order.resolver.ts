@@ -33,9 +33,7 @@ export class OrderResolver {
     return paymentData;
   }
 
-  // async sendVerificationMail() {
-  //   const data = await this.orderService.sendOrderConfirmationMail(OrderItemId);
-  // }
+ 
 
   @Query(() => [Order], { name: 'order' })
   findAll() {

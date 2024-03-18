@@ -330,18 +330,7 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
       },
     });
   }
-  // async updateOrderPaymentStatus(id, paymentStatus) {
-  //   const updatepaymentStatus = await this.prisma.order.update({
-  //     where: {
-  //       id: id,
-  //     },
-  //     data: {
-  //       paymentStatus: paymentStatus,
-  //     },
-  //   });
-
-  //   return updatepaymentStatus;
-  // }
+  
 
   async findAll() {
     const allProducts = await this.prisma.products.findMany({

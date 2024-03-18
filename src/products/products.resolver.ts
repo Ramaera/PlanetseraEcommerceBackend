@@ -133,7 +133,5 @@ export class ProductsResolver {
     return await this.productsService.deleteCart(cartId);
   }
 }
-// function ProductEntity(): (target: ProductsResolver, propertyKey: "updateUser", parameterIndex: 0) => void {
-//   throw new Error('Function not implemented.');
-// }
+
 
