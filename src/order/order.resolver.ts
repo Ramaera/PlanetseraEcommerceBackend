@@ -6,6 +6,7 @@ import { UpdateOrderInput } from './dto/update-order.input';
 import { PaymentData } from 'src/products/entities/paymentData.entity';
 import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
 
+
 @Resolver(() => Order)
 export class OrderResolver {
   constructor(private readonly   orderService: OrderService) {}
@@ -33,6 +34,7 @@ export class OrderResolver {
     return paymentData;
   }
 
+  
  
 
   @Query(() => [Order], { name: 'order' })

@@ -116,6 +116,8 @@ Table Order {
   cart Cart
   cartid String
   orderItems orderItems [not null]
+  discountedAmount Int
+  discountCode String
   ShippingCost Int
   address Address
   AddresId Int

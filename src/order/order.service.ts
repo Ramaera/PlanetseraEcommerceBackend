@@ -70,7 +70,7 @@ export class OrderService {
 
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
-      console.log('create order');
+
       const cartData = await this.prisma.cartItems.findMany({
         where: {
           cartId: createOrderVariantInput.cartId,
@@ -78,11 +78,8 @@ export class OrderService {
       });
       const newOrder = await this.prisma.order.create({
         data: {
-          orderAmount: createOrderVariantInput.orderAmount,
-          AddresId: createOrderVariantInput.AddressId,
-          ShippingCost: createOrderVariantInput.ShippingCost,
-          cartid: createOrderVariantInput.cartId,
-          buyerId: createOrderVariantInput.buyerId,
+          ...createOrderVariantInput
+          
         },
         include: {
           address: true,
@@ -131,6 +128,9 @@ export class OrderService {
     }
   }
   
+
+
+
 
   async createPaymentData(data: CreateOrderPayment) {
     return await this.prisma.payment.create({

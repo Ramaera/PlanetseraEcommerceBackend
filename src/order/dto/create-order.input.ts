@@ -16,4 +16,13 @@ export class CreateOrderInput {
 
   @Field()
   ShippingCost: number;
+
+  @Field({nullable:true})
+  discountedAmount?: number;
+
+  @Field({nullable:true})
+  discountCode?: string;
+
+
+
 }

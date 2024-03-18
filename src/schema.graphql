@@ -75,6 +75,8 @@ input CreateOrderInput {
   ShippingCost: Int!
   buyerId: String!
   cartId: String!
+  discountCode: String
+  discountedAmount: Int
   orderAmount: Float!
 }
 
@@ -169,6 +171,8 @@ type Order {
 type OrderData {
   address: AddressData!
   buyerId: String!
+  discountCode: String!
+  discountedAmount: Int!
   id: Int!
   orderDate: DateTime!
 }
@@ -294,6 +298,8 @@ input UpdateOrderInput {
   ShippingCost: Int
   buyerId: String
   cartId: String
+  discountCode: String
+  discountedAmount: Int
   id: Int!
   orderAmount: Float
 }
