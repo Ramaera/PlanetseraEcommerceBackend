@@ -164,6 +164,7 @@ type Mutation {
   updateProductDetails(data: UpdateProductDetailsInput!): UpdatedProduct!
   updateProductVariant(data: UpdateProductVariantInput!): ProductVariant!
   updateUser(data: UpdateUserInput!): User!
+  updateUserAgencyCode(data: UpdateUserAgency!): User!
 }
 
 type Order {
@@ -260,6 +261,7 @@ enum Role {
 }
 
 input SignupInput {
+  agencyCode: String
   email: String!
   mobileNumber: String
   name: String
@@ -344,6 +346,10 @@ input UpdateProductVariantInput {
   weight: String!
 }
 
+input UpdateUserAgency {
+  agencyCode: String
+}
+
 input UpdateUserInput {
   address: [JSONObject!]
 }
@@ -362,6 +368,7 @@ type UpdatedProduct {
 }
 
 type User {
+  agencyCode: String
   buyer: BuyerData!
 
   """Identifies the date and time when the object was created."""
