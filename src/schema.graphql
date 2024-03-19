@@ -375,6 +375,7 @@ type User {
   createdAt: DateTime!
   email: String
   id: ID!
+  mobileNumber: String
   name: String
   role: Role!
 

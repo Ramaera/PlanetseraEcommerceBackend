@@ -10,7 +10,7 @@ Table User {
   password String [not null]
   mobileNumber String
   name String
-  AgencyCode String
+  agencyCode String
   role Role [not null]
   rewardCode RewardCode [not null]
   buyer Buyer
