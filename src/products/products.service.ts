@@ -354,12 +354,14 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
     });
     return getAllOrders;
   }
+
   async getAllOrders() {
     const getAllOrders = await this.prisma.order.findMany({
       include: {
         orderItems: true,
         address: true,
         Payment: true,
+        user:true,
         Buyer: {
           select: { user: true },
         },

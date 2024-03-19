@@ -13,6 +13,7 @@ Table User {
   role Role [not null]
   rewardCode RewardCode [not null]
   buyer Buyer
+  Order Order [not null]
 }
 
 Table RewardCode {
@@ -111,10 +112,12 @@ Table Order {
   orderDate DateTime [default: `now()`]
   orderAmount Float [not null]
   status OrderStatus [not null, default: 'PROCESSING']
+  user User
   Buyer Buyer
   buyerId String
   cart Cart
   cartid String
+  metaData Json
   orderItems orderItems [not null]
   discountedAmount Int
   discountCode String
@@ -122,6 +125,7 @@ Table Order {
   address Address
   AddresId Int
   Payment Payment [not null]
+  userId String
 }
 
 Table orderItems {
@@ -189,6 +193,8 @@ Ref: Address.buyerId > Buyer.id
 Ref: Payment.orderId > Order.id
 
 Ref: Payment.buyerId > Buyer.id
+
+Ref: Order.userId > User.id
 
 Ref: Order.buyerId > Buyer.id
 

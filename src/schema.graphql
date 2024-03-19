@@ -15,11 +15,14 @@ type AllOrdersData {
   Payment: [PaymentData!]
   ShippingCost: Int!
   address: AddressData
+  discountCode: String
+  discountedAmount: Int
   id: String!
   orderAmount: Float!
   orderDate: DateTime!
   orderItems: [OrderItems!]
   status: Status!
+  user: User
 }
 
 type Auth {

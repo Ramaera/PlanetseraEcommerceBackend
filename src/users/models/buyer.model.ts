@@ -10,11 +10,13 @@ class UserData {
 
 @ObjectType()
 export class BuyerData {
-  @Field(() => String)
+  @Field()
   id: string;
 
-  @Field(() => String)
+  @Field()
   userId: string;
+
+
 
   @Field(() => [Cart], { nullable: true })
   Cart: Cart[];

@@ -26,51 +26,9 @@ const DateInGmt530 = () => {
 export class OrderService {
   constructor(private readonly prisma: PrismaService) {}
 
-  // async createOrder(createOrderVariantInput: CreateOrderInput) {
-  //   try {
-  //     console.log('cretate order');
-  //     const cartData = await this.prisma.cartItems.findMany({
-  //       where: {
-  //         cartId: createOrderVariantInput.cartId,
-  //       },
-  //     });
-  //     const newOrder = await this.prisma.order.create({
-  //       data: {
-  //         orderAmount: createOrderVariantInput.orderAmount,
-  //         AddresId: createOrderVariantInput.AddressId,
-  //         ShippingCost: createOrderVariantInput.ShippingCost,
-  //         cartid: createOrderVariantInput.cartId,
-  //         buyerId: createOrderVariantInput.buyerId,
-  //       },
-  //       include: {
-  //         address: true,
-  //         orderItems: true,
-  //       },
-  //     });
-
-  //     const orderItems = await Promise.all(
-  //       cartData.map(async (cartItem) => {
-  //         return await this.prisma.orderItems.create({
-  //           data: {
-  //             name: cartItem.name,
-  //             orderId: newOrder.id,
-  //             productVariantId: cartItem.productVariantId,
-  //             qty: cartItem.qty,
-  //           },
-  //         });
-  //       }),
-  //     );
-
-  //     return { newOrder, orderItems };
-  //   } catch (error) {
-  //     console.error('Error creating new order:', error);
-  //     throw new Error('Could not create order ');
-  //   }
-  // }
-
   async createOrder(createOrderVariantInput: CreateOrderInput) {
     try {
-
+      console.log('cretate order');
       const cartData = await this.prisma.cartItems.findMany({
         where: {
           cartId: createOrderVariantInput.cartId,
@@ -78,7 +36,13 @@ export class OrderService {
       });
       const newOrder = await this.prisma.order.create({
         data: {
-          ...createOrderVariantInput
+          orderAmount: createOrderVariantInput.orderAmount,
+          AddresId: createOrderVariantInput.AddressId,
+          ShippingCost: createOrderVariantInput.ShippingCost,
+          cartid: createOrderVariantInput.cartId,
+          buyerId: createOrderVariantInput.buyerId,
+          discountCode:createOrderVariantInput.discountCode,
+          discountedAmount:createOrderVariantInput.discountedAmount
           
         },
         include: {
@@ -86,10 +50,8 @@ export class OrderService {
           orderItems: true,
         },
       });
-  
       const orderItems = await Promise.all(
         cartData.map(async (cartItem) => {
-          // Create order item
           const createdOrderItem = await this.prisma.orderItems.create({
             data: {
               name: cartItem.name,
@@ -98,14 +60,11 @@ export class OrderService {
               qty: cartItem.qty,
             },
           });
-  
-          // Update stock
           const productVariant = await this.prisma.productVariant.findUnique({
             where: {
               id: cartItem.productVariantId,
             },
           });
-  
           if (productVariant) {
             await this.prisma.productVariant.update({
               where: {
@@ -116,21 +75,16 @@ export class OrderService {
               },
             });
           }
-  
           return createdOrderItem;
         }),
       );
-  
       return { newOrder, orderItems };
     } catch (error) {
       console.error('Error creating new order:', error);
-      throw new Error('Could not create order');
+      throw new Error('Could not create order ');
     }
   }
   
-
-
-
 
   async createPaymentData(data: CreateOrderPayment) {
     return await this.prisma.payment.create({

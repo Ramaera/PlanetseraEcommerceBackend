@@ -23,6 +23,4 @@ export class CreateOrderInput {
   @Field({nullable:true})
   discountCode?: string;
 
-
-
 }

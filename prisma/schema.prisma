@@ -23,6 +23,7 @@ model User {
   role         Role
   rewardCode   RewardCode[]
   buyer        Buyer?
+  Order        Order[]
 }
 
 model RewardCode {
@@ -121,10 +122,12 @@ model Order {
   orderDate        DateTime?    @default(now())
   orderAmount      Float
   status           OrderStatus  @default(PROCESSING)
+  user             User?        @relation(fields: [userId], references: [id])
   Buyer            Buyer?       @relation(fields: [buyerId], references: [id])
   buyerId          String?
   cart             Cart?        @relation(fields: [cartid], references: [id])
   cartid           String?
+  metaData         Json?        @db.Json
   orderItems       orderItems[]
   discountedAmount Int?
   discountCode     String?
@@ -132,6 +135,7 @@ model Order {
   address          Address?     @relation(fields: [AddresId], references: [addresId])
   AddresId         Int?
   Payment          Payment[]
+  userId           String?
 }
 
 model orderItems {

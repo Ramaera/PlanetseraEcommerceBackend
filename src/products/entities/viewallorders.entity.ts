@@ -12,6 +12,7 @@ import { OrderItems } from 'src/order/entities/orderItem.entity';
 import { PaymentData } from './paymentData.entity';
 import { OrderStatus } from '@prisma/client';
 import { BuyerData } from 'src/users/models/buyer.model';
+import { User } from 'src/users/models/user.model';
 
 registerEnumType(OrderStatus, {
   name: 'Status',
@@ -24,6 +25,9 @@ export class AllOrdersData {
   @Field(() => AddressData, { nullable: true })
   address: AddressData;
 
+  @Field(() => User, { nullable: true })
+  user: User;
+
   @Field(() => [PaymentData], { nullable: true })
   Payment: PaymentData[];
 
@@ -35,6 +39,12 @@ export class AllOrdersData {
 
   @Field(() => Float, {})
   orderAmount: number;
+
+  @Field({nullable:true})
+  discountedAmount?: number;
+
+  @Field({nullable:true})
+  discountCode?: string;
 
   @Field()
   orderDate: Date;
