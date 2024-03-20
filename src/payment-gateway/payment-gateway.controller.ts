@@ -24,7 +24,6 @@ export class PaymentGatewayController {
   getPaymentStatus(
     @Param('merchantTransactionId') merchantTransactionId: string,
   ) {
-    console.log('transactio Isd', merchantTransactionId);
     return this.paymentGatewayService.checkStatus(merchantTransactionId);
   }
 

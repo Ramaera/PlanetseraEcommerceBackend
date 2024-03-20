@@ -1,4 +1,5 @@
 import { InputType, Int, Field, Float } from '@nestjs/graphql';
+import { GraphQLJSONObject } from 'graphql-scalars';
 
 @InputType()
 export class CreateOrderInput {
@@ -11,16 +12,18 @@ export class CreateOrderInput {
   @Field()
   cartId: string;
 
+  @Field(() => [GraphQLJSONObject], { nullable: true })
+  metaData?: any;
+
   @Field()
   AddressId: number;
 
   @Field()
   ShippingCost: number;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   discountedAmount?: number;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   discountCode?: string;
-
 }
