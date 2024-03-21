@@ -126,6 +126,7 @@ Table Order {
   AddresId Int
   Payment Payment [not null]
   userId String
+  shipRocketDetails shipRocketDetails [not null]
 }
 
 Table orderItems {
@@ -135,6 +136,16 @@ Table orderItems {
   Order Order
   orderId Int
   name String
+}
+
+Table shipRocketDetails {
+  id String [pk]
+  Order Order
+  orderId Int
+  shiprocket_OrderId Int
+  shiprocket_ShipmentId Int
+  shiprocket_status String [not null]
+  shiprocket_status_code Boolean [not null]
 }
 
 Enum Role {
@@ -203,3 +214,5 @@ Ref: Order.cartid > Cart.id
 Ref: Order.AddresId > Address.addresId
 
 Ref: orderItems.orderId > Order.id
+
+Ref: shipRocketDetails.orderId > Order.id

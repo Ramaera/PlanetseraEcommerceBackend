@@ -116,26 +116,27 @@ model Payment {
 }
 
 model Order {
-  id               Int          @id @default(autoincrement())
-  createdAt        DateTime     @default(now())
-  updatedAt        DateTime     @updatedAt
-  orderDate        DateTime?    @default(now())
-  orderAmount      Float
-  status           OrderStatus  @default(PROCESSING)
-  user             User?        @relation(fields: [userId], references: [id])
-  Buyer            Buyer?       @relation(fields: [buyerId], references: [id])
-  buyerId          String?
-  cart             Cart?        @relation(fields: [cartid], references: [id])
-  cartid           String?
-  metaData         Json?        @db.Json
-  orderItems       orderItems[]
-  discountedAmount Int?
-  discountCode     String?
-  ShippingCost     Int?
-  address          Address?     @relation(fields: [AddresId], references: [addresId])
-  AddresId         Int?
-  Payment          Payment[]
-  userId           String?
+  id                Int                 @id @default(autoincrement())
+  createdAt         DateTime            @default(now())
+  updatedAt         DateTime            @updatedAt
+  orderDate         DateTime?           @default(now())
+  orderAmount       Float
+  status            OrderStatus         @default(PROCESSING)
+  user              User?               @relation(fields: [userId], references: [id])
+  Buyer             Buyer?              @relation(fields: [buyerId], references: [id])
+  buyerId           String?
+  cart              Cart?               @relation(fields: [cartid], references: [id])
+  cartid            String?
+  metaData          Json?               @db.Json
+  orderItems        orderItems[]
+  discountedAmount  Int?
+  discountCode      String?
+  ShippingCost      Int?
+  address           Address?            @relation(fields: [AddresId], references: [addresId])
+  AddresId          Int?
+  Payment           Payment[]
+  userId            String?
+  shipRocketDetails shipRocketDetails[]
 }
 
 model orderItems {
@@ -145,6 +146,16 @@ model orderItems {
   Order            Order?  @relation(fields: [orderId], references: [id])
   orderId          Int?
   name             String?
+}
+
+model shipRocketDetails {
+  id                     String  @id @default(cuid())
+  Order                  Order?  @relation(fields: [orderId], references: [id])
+  orderId                Int?
+  shiprocket_OrderId     Int?
+  shiprocket_ShipmentId  Int?
+  shiprocket_status      String
+  shiprocket_status_code Boolean
 }
 
 enum Role {
