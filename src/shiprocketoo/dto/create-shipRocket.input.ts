@@ -17,6 +17,6 @@ export class CreateShipRocketDetailInput {
   shiprocket_status: string;
 
   @Field()
-  shiprocket_status_code: boolean;
+  shiprocket_status_code: number;
 
 }

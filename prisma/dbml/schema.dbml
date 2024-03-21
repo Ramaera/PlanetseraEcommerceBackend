@@ -146,7 +146,7 @@ Table shipRocketDetails {
   shiprocket_OrderId Int
   shiprocket_ShipmentId Int
   shiprocket_status String [not null]
-  shiprocket_status_code Boolean [not null]
+  shiprocket_status_code Int
 }
 
 Enum Role {

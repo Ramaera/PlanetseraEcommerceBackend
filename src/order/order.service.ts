@@ -45,10 +45,12 @@ export class OrderService {
           discountCode: createOrderVariantInput.discountCode,
           metaData: createOrderVariantInput.metaData,
           discountedAmount: createOrderVariantInput.discountedAmount,
+          userId:createOrderVariantInput.userId
         },
         include: {
           address: true,
           orderItems: true,
+          user:true
         },
       });
       const orderItems = await Promise.all(

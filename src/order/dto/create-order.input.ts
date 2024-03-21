@@ -10,6 +10,9 @@ export class CreateOrderInput {
   buyerId: string;
 
   @Field()
+  userId: string;
+
+  @Field()
   cartId: string;
 
   @Field(() => [GraphQLJSONObject], { nullable: true })

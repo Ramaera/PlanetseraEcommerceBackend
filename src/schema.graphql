@@ -22,6 +22,7 @@ type AllOrdersData {
   orderAmount: Float!
   orderDate: DateTime!
   orderItems: [OrderItems!]
+  shipRocketDetails: [ShipRocketOrderDetails!]
   status: Status!
   user: User
 }
@@ -83,6 +84,7 @@ input CreateOrderInput {
   discountedAmount: Int
   metaData: [JSONObject!]
   orderAmount: Float!
+  userId: String!
 }
 
 input CreateOrderPayment {
@@ -124,7 +126,7 @@ input CreateShipRocketDetailInput {
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
   shiprocket_status: String!
-  shiprocket_status_code: Boolean!
+  shiprocket_status_code: Int!
 }
 
 """
@@ -190,6 +192,7 @@ type OrderData {
   discountedAmount: Int!
   id: Int!
   orderDate: DateTime!
+  userId: String!
 }
 
 type OrderItems {
@@ -273,11 +276,11 @@ enum Role {
 }
 
 type ShipRocketOrderDetails {
-  orderId: Int
-  shiprocket_OrderId: Int
-  shiprocket_ShipmentId: Int
-  shiprocket_status: String
-  shiprocket_status_code: Boolean
+  orderId: Int!
+  shiprocket_OrderId: Int!
+  shiprocket_ShipmentId: Int!
+  shiprocket_status: String!
+  shiprocket_status_code: Int!
 }
 
 input SignupInput {
@@ -328,6 +331,7 @@ input UpdateOrderInput {
   id: Int!
   metaData: [JSONObject!]
   orderAmount: Float
+  userId: String
 }
 
 input UpdateProductDetailsInput {

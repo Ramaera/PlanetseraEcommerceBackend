@@ -365,6 +365,9 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
         Buyer: {
           select: { user: true },
         },
+        shipRocketDetails:true
+      
+
       },
     });
     console.log('getAllOrders', getAllOrders);

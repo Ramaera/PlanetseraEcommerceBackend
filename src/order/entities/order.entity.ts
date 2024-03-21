@@ -19,6 +19,10 @@ class OrderData {
   buyerId: string;
 
   @Field()
+  userId: string;
+
+
+  @Field()
   discountedAmount: number;
 
   @Field()

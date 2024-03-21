@@ -13,6 +13,7 @@ import { PaymentData } from './paymentData.entity';
 import { OrderStatus } from '@prisma/client';
 import { BuyerData } from 'src/users/models/buyer.model';
 import { User } from 'src/users/models/user.model';
+import { ShipRocketOrderDetails } from 'src/shiprocketoo/entities/shiprocketDetail.entity';
 
 registerEnumType(OrderStatus, {
   name: 'Status',
@@ -33,6 +34,9 @@ export class AllOrdersData {
 
   @Field(() => [OrderItems], { nullable: true })
   orderItems: OrderItems[] | null;
+
+  @Field(() => [ShipRocketOrderDetails], { nullable: true })
+  shipRocketDetails: ShipRocketOrderDetails
 
   @Field(() => BuyerData, { nullable: true })
   Buyer: BuyerData

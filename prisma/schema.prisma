@@ -150,13 +150,13 @@ model orderItems {
 }
 
 model shipRocketDetails {
-  id                     String  @id @default(cuid())
-  Order                  Order?  @relation(fields: [orderId], references: [id])
+  id                     String @id @default(cuid())
+  Order                  Order? @relation(fields: [orderId], references: [id])
   orderId                Int?
   shiprocket_OrderId     Int?
   shiprocket_ShipmentId  Int?
   shiprocket_status      String
-  shiprocket_status_code Boolean
+  shiprocket_status_code Int?
 }
 
 enum Role {

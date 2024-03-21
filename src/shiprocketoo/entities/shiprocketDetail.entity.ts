@@ -3,19 +3,19 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 @ObjectType()
 export class ShipRocketOrderDetails {
 
-  @Field({nullable:true})
+  @Field()
   orderId: number;
 
-  @Field({nullable:true})
+  @Field()
   shiprocket_OrderId: number;
 
-  @Field({nullable:true})
+  @Field()
   shiprocket_ShipmentId: number;
 
-  @Field({nullable:true})
+  @Field()
   shiprocket_status: string;
 
-  @Field({nullable:true})
-  shiprocket_status_code: boolean;
+  @Field()
+  shiprocket_status_code: number;
 
 }
