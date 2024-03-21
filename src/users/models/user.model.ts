@@ -27,6 +27,9 @@ export class User extends BaseModel {
   @Field({ nullable: true })
   agencyCode?: string;
 
+  @Field({ nullable: true })
+  mobileNumber?: string;
+
   @Field()
   role: Role;
 

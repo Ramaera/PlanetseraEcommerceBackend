@@ -20,7 +20,7 @@ model User {
   password     String
   mobileNumber String?
   name         String?
-  AgencyCode   String?
+  agencyCode   String?
   role         Role
   rewardCode   RewardCode[]
   buyer        Buyer?

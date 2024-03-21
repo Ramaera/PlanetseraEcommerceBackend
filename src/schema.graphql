@@ -80,6 +80,7 @@ input CreateOrderInput {
   cartId: String!
   discountCode: String
   discountedAmount: Int
+  metaData: [JSONObject!]
   orderAmount: Float!
 }
 
@@ -306,6 +307,7 @@ input UpdateOrderInput {
   discountCode: String
   discountedAmount: Int
   id: Int!
+  metaData: [JSONObject!]
   orderAmount: Float
 }
 
@@ -375,6 +377,7 @@ type User {
   createdAt: DateTime!
   email: String
   id: ID!
+  mobileNumber: String
   name: String
   role: Role!
 

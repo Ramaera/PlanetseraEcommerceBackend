@@ -3,6 +3,7 @@ import { CreateOrderInput } from './dto/create-order.input';
 import { UpdateOrderInput } from './dto/update-order.input';
 import { PrismaService } from 'nestjs-prisma';
 import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
+import { Prisma } from '@prisma/client';
 
 const DateInGmt530 = () => {
   // Create a new Date object for the current date and time
@@ -41,9 +42,9 @@ export class OrderService {
           ShippingCost: createOrderVariantInput.ShippingCost,
           cartid: createOrderVariantInput.cartId,
           buyerId: createOrderVariantInput.buyerId,
-          discountCode:createOrderVariantInput.discountCode,
-          discountedAmount:createOrderVariantInput.discountedAmount
-          
+          discountCode: createOrderVariantInput.discountCode,
+          metaData: createOrderVariantInput.metaData,
+          discountedAmount: createOrderVariantInput.discountedAmount,
         },
         include: {
           address: true,
@@ -84,7 +85,6 @@ export class OrderService {
       throw new Error('Could not create order ');
     }
   }
-  
 
   async createPaymentData(data: CreateOrderPayment) {
     return await this.prisma.payment.create({
