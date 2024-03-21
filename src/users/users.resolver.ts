@@ -20,6 +20,7 @@ import { AddressData } from './models/address.model';
 import { UpdateShippingInput } from './dto/update-shippingType.input';
 import { ShippingData } from './models/shipping.model';
 import { MessageOutput } from 'src/products/entities/message.entity';
+import { UpdateUserAgency } from './dto/update-user-agency.input';
 
 @Resolver(() => User)
 // @UseGuards(GqlAuthGuard)
@@ -53,6 +54,15 @@ export class UsersResolver {
     @Args('data') newUserData: UpdateUserInput,
   ) {
     return this.usersService.updateUser(user.id, newUserData);
+  }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => User)
+  async updateUserAgencyCode(
+    @UserEntity() user: User,
+    @Args('data') newUserData: UpdateUserAgency,
+  ) {
+    return this.usersService.updateUserAgency(user.id, newUserData);
   }
 
   @UseGuards(GqlAuthGuard)

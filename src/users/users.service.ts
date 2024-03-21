@@ -5,6 +5,7 @@ import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 import { UpdateShippingInput } from './dto/update-shippingType.input';
+import { UpdateUserAgency } from './dto/update-user-agency.input';
 
 @Injectable()
 export class UsersService {
@@ -30,6 +31,15 @@ export class UsersService {
   }
   updateUser(userId: string, newUserData: UpdateUserInput) {
     return this.prisma.user.update({
+      data: newUserData,
+      where: {
+        id: userId,
+      },
+    });
+  }
+
+  async updateUserAgency(userId: string, newUserData: UpdateUserAgency) {
+    return await this.prisma.user.update({
       data: newUserData,
       where: {
         id: userId,

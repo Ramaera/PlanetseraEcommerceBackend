@@ -24,6 +24,9 @@ export class User extends BaseModel {
   @Field({ nullable: true })
   email: string;
 
+  @Field({ nullable: true })
+  agencyCode?: string;
+
   @Field()
   role: Role;
 
