@@ -17,6 +17,7 @@ import { GetImagesController } from './get-images/get-images.controller';
 import { OrderModule } from './order/order.module';
 import { RewardCodeModule } from './reward-code/reward-code.module';
 import { MediasModule } from './medias/medias.module';
+import { ShipRocketModule } from './shiprocketoo/shiprocket.module';
 
 @Module({
   imports: [
@@ -45,6 +46,7 @@ import { MediasModule } from './medias/medias.module';
     PaymentGatewayModule,
     ProductsModule,
     OrderModule,
+    ShipRocketModule,
     RewardCodeModule,
     MediasModule
   ],

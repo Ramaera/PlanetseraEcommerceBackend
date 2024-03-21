@@ -57,4 +57,7 @@ export class AllOrdersData {
 
   @Field()
   status: OrderStatus;
+
+  @Field(() => [GraphQLJSONObject], { nullable: true })
+  metaData?: any;
 }

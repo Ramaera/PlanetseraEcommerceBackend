@@ -23,6 +23,8 @@ class OrderData {
 
   @Field()
   discountCode: string;
+
+ 
 }
 
 @ObjectType()

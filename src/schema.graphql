@@ -18,6 +18,7 @@ type AllOrdersData {
   discountCode: String
   discountedAmount: Int
   id: String!
+  metaData: [JSONObject!]
   orderAmount: Float!
   orderDate: DateTime!
   orderItems: [OrderItems!]
@@ -118,6 +119,14 @@ input CreateRewardCodeInput {
   userId: String!
 }
 
+input CreateShipRocketDetailInput {
+  orderId: Int!
+  shiprocket_OrderId: Int!
+  shiprocket_ShipmentId: Int!
+  shiprocket_status: String!
+  shiprocket_status_code: Boolean!
+}
+
 """
 A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
 """
@@ -158,6 +167,7 @@ type Mutation {
   removeAddress(AddressId: Int!): MessageOutput!
   removeItemFromCart(cartItem: String!): MessageOutput!
   removeOrder(id: Int!): Order!
+  shipRocketDetails(ShipRocketDetails: CreateShipRocketDetailInput!): ShipRocketOrderDetails!
   signup(data: SignupInput!): Auth!
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
@@ -237,6 +247,7 @@ type ProductVariant {
 }
 
 type Query {
+  AllShipRocketOrderDetails: [ShipRocketOrderDetails!]!
   allOrders(buyerId: String!): [AllOrdersData!]!
   allProducts: [allProducts!]!
   findPaymentData(merchantTransactionId: String!): PaymentData!
@@ -259,6 +270,14 @@ type RewardCode {
 enum Role {
   ADMIN
   CUSTOMER
+}
+
+type ShipRocketOrderDetails {
+  orderId: Int
+  shiprocket_OrderId: Int
+  shiprocket_ShipmentId: Int
+  shiprocket_status: String
+  shiprocket_status_code: Boolean
 }
 
 input SignupInput {
