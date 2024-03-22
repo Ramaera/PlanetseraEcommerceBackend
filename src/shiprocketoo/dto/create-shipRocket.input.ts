@@ -4,6 +4,8 @@ import { GraphQLJSONObject } from 'graphql-scalars';
 @InputType()
 export class CreateShipRocketDetailInput {
 
+  
+
   @Field()
   orderId: number;
 
@@ -18,5 +20,9 @@ export class CreateShipRocketDetailInput {
 
   @Field()
   shiprocket_status_code: number;
+
+  @Field(() => [GraphQLJSONObject], { nullable: true })
+  metaData?: any;
+
 
 }
