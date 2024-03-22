@@ -73,6 +73,7 @@ export class ProductsResolver {
       ...order,
       orderItems: order.orderItems || [],
       address: order.address,
+      shipRocketDetails:order.shipRocketDetails
     }));
   }
 
@@ -106,7 +107,7 @@ export class ProductsResolver {
     return this.productsService.addItemToCart(createCartInput);
   }
 
-  
+
   @Mutation(() => MessageOutput)
   cartOpeartion(
     @Args('CartOperationInput') cartOperationInput: CartOperationInput,

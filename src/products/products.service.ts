@@ -350,6 +350,7 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
       include: {
         orderItems: true,
         address: true,
+        shipRocketDetails:true
       },
     });
     return getAllOrders;
