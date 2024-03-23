@@ -1,11 +1,7 @@
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
-import { GraphQLJSONObject } from 'graphql-scalars';
 
 @ObjectType()
 export class ShipRocketOrderDetails {
-
-  @Field()
-  id: string;
 
   @Field()
   orderId: number;
@@ -21,8 +17,5 @@ export class ShipRocketOrderDetails {
 
   @Field()
   shiprocket_status_code: number;
-
-  @Field(() => [GraphQLJSONObject], { nullable: true })
-  metaData?: any;
 
 }

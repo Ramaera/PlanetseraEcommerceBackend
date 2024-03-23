@@ -157,7 +157,6 @@ model shipRocketDetails {
   shiprocket_ShipmentId  Int?
   shiprocket_status      String
   shiprocket_status_code Int?
-  metaData               Json?  @db.Json
 }
 
 enum Role {

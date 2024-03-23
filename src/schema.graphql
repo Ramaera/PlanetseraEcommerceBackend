@@ -122,7 +122,6 @@ input CreateRewardCodeInput {
 }
 
 input CreateShipRocketDetailInput {
-  metaData: [JSONObject!]
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
@@ -177,7 +176,6 @@ type Mutation {
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   updateProductDetails(data: UpdateProductDetailsInput!): UpdatedProduct!
   updateProductVariant(data: UpdateProductVariantInput!): ProductVariant!
-  updateShipRocketDetails(data: UpdateShiprocketrInput!): ShipRocketOrderDetails!
   updateUser(data: UpdateUserInput!): User!
   updateUserAgencyCode(data: UpdateUserAgency!): User!
 }
@@ -278,8 +276,6 @@ enum Role {
 }
 
 type ShipRocketOrderDetails {
-  id: String!
-  metaData: [JSONObject!]
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
@@ -373,11 +369,6 @@ input UpdateProductVariantInput {
   price: Float!
   stock: Int!
   weight: String!
-}
-
-input UpdateShiprocketrInput {
-  id: String!
-  metaData: [JSONObject!]
 }
 
 input UpdateUserAgency {

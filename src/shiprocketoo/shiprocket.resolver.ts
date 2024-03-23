@@ -2,7 +2,6 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { ShipRocketService } from './shiprocket.service';
 import { ShipRocketOrderDetails } from './entities/shiprocketDetail.entity';
 import { CreateShipRocketDetailInput } from './dto/create-shipRocket.input';
-import { UpdateShiprocketrInput } from './dto/update-shipRocket.input';
  
 
 
@@ -16,11 +15,6 @@ export class ShipRocketResolver {
    return this.shipRocketService.shipRocketDetails(createShipRocketDetailInput)
   }
 
-  @Mutation(() => ShipRocketOrderDetails)
-  updateShipRocketDetails(@Args('data') data: UpdateShiprocketrInput) {
-    const updateShipRocketDetails = this.shipRocketService.updateShipRocketDetails(data);
-    return updateShipRocketDetails;
-  }
 
   @Query(() => [ShipRocketOrderDetails], { name: 'AllShipRocketOrderDetails' })
   async findAllShipRocketDetails(): Promise<ShipRocketOrderDetails[]> {

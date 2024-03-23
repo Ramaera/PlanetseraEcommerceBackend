@@ -147,7 +147,6 @@ Table shipRocketDetails {
   shiprocket_ShipmentId Int
   shiprocket_status String [not null]
   shiprocket_status_code Int
-  metaData Json
 }
 
 Enum Role {
