@@ -13,7 +13,7 @@ type AddressData {
 type AllOrdersData {
   Buyer: BuyerData
   Payment: [PaymentData!]
-  ShippingCost: Int!
+  ShippingCost: Int
   address: AddressData
   discountCode: String
   discountedAmount: Int

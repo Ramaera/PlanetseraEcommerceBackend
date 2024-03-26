@@ -18,6 +18,7 @@ import { OrderModule } from './order/order.module';
 import { RewardCodeModule } from './reward-code/reward-code.module';
 import { MediasModule } from './medias/medias.module';
 import { ShipRocketModule } from './shiprocketoo/shiprocket.module';
+import { UsersInAAgencyModule } from './users-in-a-agency/users-in-a-agency.module';
 
 @Module({
   imports: [
@@ -48,9 +49,10 @@ import { ShipRocketModule } from './shiprocketoo/shiprocket.module';
     OrderModule,
     ShipRocketModule,
     RewardCodeModule,
-    MediasModule
+    MediasModule,
+    UsersInAAgencyModule
   ],
-  controllers: [AppController, GetImagesController],
+  controllers: [AppController, GetImagesController, ],
   providers: [AppService, AppResolver],
 })
 export class AppModule {}
