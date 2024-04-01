@@ -22,12 +22,13 @@ export class ShipRocketService {
       
       return shipRocketOrderDetails;
     } catch (error) {
-      console.error('Error creating ShipRocket Order Details:', error);
+      console.error('Error creating ShipRocket Order Detailss:', error);
       throw new Error('Could not create order ');
     }
   }
 
   async updateShipRocketDetails(updateShiprocketrInput: UpdateShiprocketrInput) {
+    
     try {
       const updatedShipRocketOrderDetails = await this.prisma.shipRocketDetails.update({
         where: {
