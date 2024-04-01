@@ -15,12 +15,13 @@ import { User } from './models/user.model';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { BuyerData } from './models/buyer.model';
-import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 import { AddressData } from './models/address.model';
 import { UpdateShippingInput } from './dto/update-shippingType.input';
 import { ShippingData } from './models/shipping.model';
 import { MessageOutput } from 'src/products/entities/message.entity';
 import { UpdateUserAgency } from './dto/update-user-agency.input';
+import { CreateBuyerAddressInput } from './dto/create-buyer-address.input';
+import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 
 @Resolver(() => User)
 // @UseGuards(GqlAuthGuard)
@@ -88,8 +89,14 @@ export class UsersResolver {
   }
 
   @Mutation(() => AddressData)
-  async addAddress(@Args('data') data: UpdateBuyerAddressInput) {
+  async addAddress(@Args('data') data: CreateBuyerAddressInput) {
     return this.usersService.addAddress(data);
+  }
+
+
+  @Mutation(() => AddressData)
+  async updateAddress(@Args('data') data: UpdateBuyerAddressInput) {
+    return this.usersService.updateAddress(data);
   }
 
   @Query(() => [AddressData])

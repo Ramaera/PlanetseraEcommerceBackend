@@ -3,6 +3,8 @@ import { GraphQLJSONObject } from 'graphql-scalars';
 
 @InputType()
 export class UpdateShiprocketrInput {
+
+  
   @Field(() => [GraphQLJSONObject], { nullable: true })
   metaData?: any;
 

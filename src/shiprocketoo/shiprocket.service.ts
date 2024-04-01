@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { CreateShipRocketDetailInput } from './dto/create-shipRocket.input';
 import { PrismaService } from 'nestjs-prisma';
-import metadata from 'src/metadata';
 import { UpdateShiprocketrInput } from './dto/update-shipRocket.input';
 
 @Injectable()
@@ -17,7 +16,7 @@ export class ShipRocketService {
           shiprocket_ShipmentId: createShipRocketDetailInput.shiprocket_ShipmentId,
           shiprocket_status: createShipRocketDetailInput.shiprocket_status,
           shiprocket_status_code: createShipRocketDetailInput.shiprocket_status_code,
-          metaData:createShipRocketDetailInput.metaData    
+          metaData:createShipRocketDetailInput.metaData        
         }
       });
       
