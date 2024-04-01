@@ -286,6 +286,7 @@ enum Role {
 }
 
 type ShipRocketOrderDetails {
+  id: String!
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!

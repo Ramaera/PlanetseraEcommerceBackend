@@ -3,6 +3,10 @@ import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
 @ObjectType()
 export class ShipRocketOrderDetails {
 
+
+  @Field()
+  id:string
+
   @Field()
   orderId: number;
 
