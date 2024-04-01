@@ -28,10 +28,14 @@ type AllOrdersData {
 }
 
 type Auth {
-  """JWT access token"""
+  """
+  JWT access token
+  """
   accessToken: JWT!
 
-  """JWT refresh token"""
+  """
+  JWT refresh token
+  """
   refreshToken: JWT!
   user: User!
 }
@@ -65,6 +69,13 @@ input CartOperationInput {
 input ChangePasswordInput {
   newPassword: String!
   oldPassword: String!
+}
+
+input CreateBuyerAddressInput {
+  address: [JSONObject!]!
+  buyerId: String
+  mobileNumber: String
+  name: String
 }
 
 input CreateCartInput {
@@ -114,14 +125,19 @@ input CreateProductVariantInput {
 }
 
 input CreateRewardCodeInput {
-  """Example field (placeholder)"""
+  """
+  Example field (placeholder)
+  """
   rewardCode: String!
 
-  """Example field (placeholder)"""
+  """
+  Example field (placeholder)
+  """
   userId: String!
 }
 
 input CreateShipRocketDetailInput {
+  metaData: [JSONObject!]!
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
@@ -137,7 +153,10 @@ scalar DateTime
 """
 The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
 """
-scalar JSONObject @specifiedBy(url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf")
+scalar JSONObject
+  @specifiedBy(
+    url: "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf"
+  )
 
 """
 A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
@@ -154,14 +173,16 @@ type MessageOutput {
 }
 
 type Mutation {
-  addAddress(data: UpdateBuyerAddressInput!): AddressData!
+  addAddress(data: CreateBuyerAddressInput!): AddressData!
   cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
   changePassword(data: ChangePasswordInput!): User!
   createCart(createCartInput: CreateCartInput!): Cart!
   createOrder(CreateOrder: CreateOrderInput!): Order!
   createPaymentData(data: CreateOrderPayment!): PaymentData!
   createProduct(input: CreateProductInput!): Product!
-  createProductVariant(CreateProductVariantInput: CreateProductVariantInput!): ProductVariant!
+  createProductVariant(
+    CreateProductVariantInput: CreateProductVariantInput!
+  ): ProductVariant!
   createRewardCode(data: CreateRewardCodeInput!): RewardCode!
   deleteCart(cartId: String!): MessageOutput!
   login(data: LoginInput!): Auth!
@@ -169,8 +190,11 @@ type Mutation {
   removeAddress(AddressId: Int!): MessageOutput!
   removeItemFromCart(cartItem: String!): MessageOutput!
   removeOrder(id: Int!): Order!
-  shipRocketDetails(ShipRocketDetails: CreateShipRocketDetailInput!): ShipRocketOrderDetails!
+  shipRocketDetails(
+    ShipRocketDetails: CreateShipRocketDetailInput!
+  ): ShipRocketOrderDetails!
   signup(data: SignupInput!): Auth!
+  updateAddress(data: UpdateBuyerAddressInput!): AddressData!
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
@@ -213,13 +237,17 @@ type Post {
   author: User
   content: String
 
-  """Identifies the date and time when the object was created."""
+  """
+  Identifies the date and time when the object was created.
+  """
   createdAt: DateTime!
   id: ID!
   published: Boolean!
   title: String!
 
-  """Identifies the date and time when the object was last updated."""
+  """
+  Identifies the date and time when the object was last updated.
+  """
   updatedAt: DateTime!
 }
 
@@ -265,11 +293,15 @@ type Query {
 }
 
 type RewardCode {
-  """rewardCode"""
+  """
+  rewardCode
+  """
   rewardCode: String!
 }
 
-"""User role"""
+"""
+User role
+"""
 enum Role {
   ADMIN
   CUSTOMER
@@ -291,7 +323,9 @@ input SignupInput {
   password: String!
 }
 
-"""Order Status"""
+"""
+Order Status
+"""
 enum Status {
   DELIVERED
   OUTFORDELIVERY
@@ -307,16 +341,20 @@ type Subscription {
 }
 
 type Token {
-  """JWT access token"""
+  """
+  JWT access token
+  """
   accessToken: JWT!
 
-  """JWT refresh token"""
+  """
+  JWT refresh token
+  """
   refreshToken: JWT!
 }
 
 input UpdateBuyerAddressInput {
+  AddresId: Int
   address: [JSONObject!]!
-  buyerId: String
   mobileNumber: String
   name: String
 }
@@ -396,7 +434,9 @@ type User {
   agencyCode: String
   buyer: BuyerData!
 
-  """Identifies the date and time when the object was created."""
+  """
+  Identifies the date and time when the object was created.
+  """
   createdAt: DateTime!
   email: String
   id: ID!
@@ -404,7 +444,9 @@ type User {
   name: String
   role: Role!
 
-  """Identifies the date and time when the object was last updated."""
+  """
+  Identifies the date and time when the object was last updated.
+  """
   updatedAt: DateTime!
 }
 
