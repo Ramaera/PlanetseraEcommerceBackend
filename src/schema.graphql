@@ -185,6 +185,7 @@ type Mutation {
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
   updateProductDetails(data: UpdateProductDetailsInput!): UpdatedProduct!
   updateProductVariant(data: UpdateProductVariantInput!): ProductVariant!
+  updateShipRocketDetails(data: UpdateShiprocketrInput!): ShipRocketOrderDetails!
   updateUser(data: UpdateUserInput!): User!
   updateUserAgencyCode(data: UpdateUserAgency!): User!
 }
@@ -378,6 +379,11 @@ input UpdateProductVariantInput {
   price: Float!
   stock: Int!
   weight: String!
+}
+
+input UpdateShiprocketrInput {
+  id: String!
+  metaData: [JSONObject!]
 }
 
 input UpdateUserAgency {
