@@ -15,10 +15,13 @@ export class UsersInAAgencyService {
           Order:{
             select: {
               orderAmount: true, 
+              orderDate:true,
+              id:true
           }
           }
         },
       });
+
       console.log("users",users)
       if (!users || users.length === 0) {
         throw new NotFoundException(`No users found for agencyCode: ${agencyId}`);
