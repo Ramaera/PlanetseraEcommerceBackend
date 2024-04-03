@@ -13,4 +13,17 @@ export class UsersInAAgencyController {
   ) {
     return await this.usersInAAgencyService.findAllByAgency(agencyCode);
   }
+
+
+  @Get('total-order-amount/:agencyCode/:OrderMonthYear')
+async getTotalOrderAmountForAgency(
+  @Param('agencyCode') agencyCode: string,
+  @Param('OrderMonthYear') OrderMonthYear: string,
+) {
+  return await this.usersInAAgencyService.getTotalOrderAmountForAgency(agencyCode, OrderMonthYear);
+}
+
+
+
+  
 }
