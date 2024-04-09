@@ -11,10 +11,22 @@ export class RewardCodeService {
       data: {
         rewardCode: data.rewardCode,
         userId: data.userId,
+
       },
     });
     return rewardCodeData;
   }
+
+  async findAllRewardCodesByUserId(userId: string) {
+    const RewardCode = await this.prisma.rewardCode.findMany({
+      where: {
+        userId: userId,
+      },
+      
+    });
+    return RewardCode;
+  }
+ 
 
   findAll() {
     return `This action returns all rewardCode`;

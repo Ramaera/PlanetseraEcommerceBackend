@@ -13,28 +13,11 @@ export class RewardCodeResolver {
     return this.rewardCodeService.create(createRewardCodeInput);
   }
 
-  // @Query(() => [RewardCode], { name: 'rewardCode' })
-  // findAll() {
-  //   return this.rewardCodeService.findAll();
-  // }
+  @Query(() => [RewardCode], { name: 'getRewardCode' })
+  async findAllRewardCodesByUserId(@Args('userId') userId: string) {
+    return this.rewardCodeService.findAllRewardCodesByUserId(userId);
+  }
 
-  // @Query(() => RewardCode, { name: 'rewardCode' })
-  // findOne(@Args('id', { type: () => Int }) id: number) {
-  //   return this.rewardCodeService.findOne(id);
-  // }
 
-  // @Mutation(() => RewardCode)
-  // updateRewardCode(
-  //   @Args('updateRewardCodeInput') updateRewardCodeInput: UpdateRewardCodeInput,
-  // ) {
-  //   return this.rewardCodeService.update(
-  //     updateRewardCodeInput.id,
-  //     updateRewardCodeInput,
-  //   );
-  // }
 
-  // @Mutation(() => RewardCode)
-  // removeRewardCode(@Args('id', { type: () => Int }) id: number) {
-  //   return this.rewardCodeService.remove(id);
-  // }
 }

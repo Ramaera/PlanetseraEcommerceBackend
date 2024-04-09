@@ -266,6 +266,7 @@ type Query {
   findPaymentData(merchantTransactionId: String!): PaymentData!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
+  getRewardCode(userId: String!): [RewardCode!]!
   getallOrders: [AllOrdersData!]!
   hello(name: String!): String!
   helloWorld: String!
@@ -275,6 +276,12 @@ type Query {
 }
 
 type RewardCode {
+  """Date"""
+  createdAt: String!
+
+  """id"""
+  id: String!
+
   """rewardCode"""
   rewardCode: String!
 }
