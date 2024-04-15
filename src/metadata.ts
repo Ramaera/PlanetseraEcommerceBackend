@@ -21,9 +21,6 @@ export default async () => {
       './shiprocketoo/entities/shiprocketDetail.entity'
     ),
     ['./users/models/buyer.model']: await import('./users/models/buyer.model'),
-    ['./rest-auth/models/token.model']: await import(
-      './rest-auth/models/token.model'
-    ),
   };
   return {
     '@nestjs/swagger/plugin': {
@@ -126,7 +123,6 @@ export default async () => {
               shiprocket_ShipmentId: { required: true, type: () => Number },
               shiprocket_status: { required: true, type: () => String },
               shiprocket_status_code: { required: true, type: () => Number },
-              metaData: { required: false, type: () => Object },
             },
           },
         ],
@@ -221,11 +217,7 @@ export default async () => {
         [
           import('./reward-code/entities/reward-code.entity'),
           {
-            RewardCode: {
-              rewardCode: { required: true, type: () => String },
-              id: { required: true, type: () => String },
-              createdAt: { required: true, type: () => String },
-            },
+            RewardCode: { rewardCode: { required: true, type: () => String } },
           },
         ],
         [
@@ -278,21 +270,7 @@ export default async () => {
         [
           import('./users-in-a-agency/users-in-a-agency.controller'),
           {
-            UsersInAAgencyController: {
-              getUsersInAgency: { type: [Object] },
-              getTotalOrderAmountForAgency: {},
-            },
-          },
-        ],
-        [
-          import('./rest-auth/rest-auth.controller'),
-          { RestAuthController: { signup: {}, create: {}, login: {} } },
-        ],
-        [
-          import('./reward-code/rest-reward.controller'),
-          {
-            RestAuthController: { create: {} },
-            RewardCodeController: { create: {} },
+            UsersInAAgencyController: { getUsersInAgency: { type: [Object] } },
           },
         ],
       ],
@@ -627,7 +605,6 @@ export default async () => {
               shiprocket_ShipmentId: {},
               shiprocket_status: {},
               shiprocket_status_code: {},
-              metaData: { nullable: true },
             },
           },
         ],
@@ -703,7 +680,7 @@ export default async () => {
         ],
         [
           import('./reward-code/entities/reward-code.entity'),
-          { RewardCode: { rewardCode: {}, id: {}, createdAt: {} } },
+          { RewardCode: { rewardCode: {} } },
         ],
         [
           import('./shiprocketoo/dto/create-shipRocket.input'),
@@ -734,31 +711,6 @@ export default async () => {
               ShippingCost: {},
             },
           },
-        ],
-        [
-          import('./rest-auth/dto/signup.input'),
-          {
-            RestSignupInput: {
-              email: {},
-              password: {},
-              name: { nullable: true },
-              mobileNumber: { nullable: true },
-            },
-          },
-        ],
-        [
-          import('./rest-auth/models/token.model'),
-          { Token: { accessToken: {}, refreshToken: {} } },
-        ],
-        [
-          import('./rest-auth/models/auth.model'),
-          {
-            Auth: { user: { type: () => t['./users/models/user.model'].User } },
-          },
-        ],
-        [
-          import('./rest-auth/dto/login.input'),
-          { LoginInput: { email: {}, password: {} } },
         ],
       ],
     },
