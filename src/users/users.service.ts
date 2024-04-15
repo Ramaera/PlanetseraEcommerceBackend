@@ -3,9 +3,10 @@ import { Injectable, BadRequestException } from '@nestjs/common';
 import { PasswordService } from '../auth/password.service';
 import { ChangePasswordInput } from './dto/change-password.input';
 import { UpdateUserInput } from './dto/update-user.input';
-import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 import { UpdateShippingInput } from './dto/update-shippingType.input';
 import { UpdateUserAgency } from './dto/update-user-agency.input';
+import { CreateBuyerAddressInput } from './dto/create-buyer-address.input';
+import { UpdateBuyerAddressInput } from './dto/update-buyer-address.input';
 
 @Injectable()
 export class UsersService {
@@ -59,7 +60,7 @@ export class UsersService {
     return data;
   }
 
-  async addAddress(addInput: UpdateBuyerAddressInput) {
+  async addAddress(addInput: CreateBuyerAddressInput) {
     const data = await this.prisma.address.create({
       data: {
         buyerId: addInput.buyerId,
@@ -70,6 +71,22 @@ export class UsersService {
     });
     return data;
   }
+
+
+  async updateAddress(updateInput: UpdateBuyerAddressInput) {
+    const data = await this.prisma.address.update({
+      where: {
+        addresId: updateInput.AddresId, // Assuming you have the address ID in your input
+      },
+      data: {
+        name: updateInput.name,
+        mobileNumber: updateInput.mobileNumber,
+        address: updateInput.address,
+      },
+    });
+    return data;
+  }
+  
 
   async changePassword(
     userId: string,

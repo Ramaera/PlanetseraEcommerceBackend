@@ -13,7 +13,7 @@ type AddressData {
 type AllOrdersData {
   Buyer: BuyerData
   Payment: [PaymentData!]
-  ShippingCost: Int!
+  ShippingCost: Int
   address: AddressData
   discountCode: String
   discountedAmount: Int
@@ -65,6 +65,13 @@ input CartOperationInput {
 input ChangePasswordInput {
   newPassword: String!
   oldPassword: String!
+}
+
+input CreateBuyerAddressInput {
+  address: [JSONObject!]!
+  buyerId: String
+  mobileNumber: String
+  name: String
 }
 
 input CreateCartInput {
@@ -122,6 +129,10 @@ input CreateRewardCodeInput {
 }
 
 input CreateShipRocketDetailInput {
+<<<<<<< HEAD
+=======
+  metaData: [JSONObject!]!
+>>>>>>> origin/dashboard
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
@@ -154,7 +165,7 @@ type MessageOutput {
 }
 
 type Mutation {
-  addAddress(data: UpdateBuyerAddressInput!): AddressData!
+  addAddress(data: CreateBuyerAddressInput!): AddressData!
   cartOpeartion(CartOperationInput: CartOperationInput!): MessageOutput!
   changePassword(data: ChangePasswordInput!): User!
   createCart(createCartInput: CreateCartInput!): Cart!
@@ -171,6 +182,7 @@ type Mutation {
   removeOrder(id: Int!): Order!
   shipRocketDetails(ShipRocketDetails: CreateShipRocketDetailInput!): ShipRocketOrderDetails!
   signup(data: SignupInput!): Auth!
+  updateAddress(data: UpdateBuyerAddressInput!): AddressData!
   updateBuyer(data: UpdateUserInput!): User!
   updateCart(data: UpdateProductInput!): Cart!
   updateOrder(updateOrderInput: UpdateOrderInput!): Order!
@@ -256,6 +268,7 @@ type Query {
   findPaymentData(merchantTransactionId: String!): PaymentData!
   getBuyer: BuyerData!
   getBuyerAddress(buyerId: String!): [AddressData!]!
+  getRewardCode(userId: String!): [RewardCode!]!
   getallOrders: [AllOrdersData!]!
   hello(name: String!): String!
   helloWorld: String!
@@ -265,6 +278,12 @@ type Query {
 }
 
 type RewardCode {
+  """Date"""
+  createdAt: String!
+
+  """id"""
+  id: String!
+
   """rewardCode"""
   rewardCode: String!
 }
@@ -315,8 +334,8 @@ type Token {
 }
 
 input UpdateBuyerAddressInput {
+  AddresId: Int
   address: [JSONObject!]!
-  buyerId: String
   mobileNumber: String
   name: String
 }

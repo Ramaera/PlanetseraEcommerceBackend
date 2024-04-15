@@ -19,4 +19,11 @@ export class CreateShipRocketDetailInput {
   @Field()
   shiprocket_status_code: number;
 
+<<<<<<< HEAD
+=======
+  @Field(() => [GraphQLJSONObject])
+  metaData?: any[];
+
+
+>>>>>>> origin/dashboard
 }

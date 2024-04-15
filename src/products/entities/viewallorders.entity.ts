@@ -56,7 +56,7 @@ export class AllOrdersData {
   @Field()
   id: string;
 
-  @Field()
+  @Field({nullable:true})
   ShippingCost: number;
 
   @Field()
