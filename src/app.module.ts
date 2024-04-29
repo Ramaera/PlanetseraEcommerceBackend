@@ -20,6 +20,7 @@ import { MediasModule } from './medias/medias.module';
 import { ShipRocketModule } from './shiprocketoo/shiprocket.module';
 import { UsersInAAgencyModule } from './users-in-a-agency/users-in-a-agency.module';
 import { RestAuthModule } from './rest-auth/rest-auth.module';
+import { RestGetAllProductsModule } from './rest-get-all-products/rest-get-all-products.module';
 
 @Module({
   imports: [
@@ -52,7 +53,8 @@ import { RestAuthModule } from './rest-auth/rest-auth.module';
     RewardCodeModule,
     MediasModule,
     UsersInAAgencyModule,
-    RestAuthModule
+    RestAuthModule,
+    RestGetAllProductsModule
   ],
   controllers: [AppController, GetImagesController, ],
   providers: [AppService, AppResolver],
