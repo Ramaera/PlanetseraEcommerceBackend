@@ -30,7 +30,7 @@ export class User extends BaseModel {
   @Field({ nullable: true })
   mobileNumber?: string;
 
-  @Field()
+  @Field(() => Role)
   role: Role;
 
   @Field(() => BuyerData)

@@ -1,5 +1,5 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Cart } from 'src/products/entities/cartData.entity';
+import { Cart } from '../../products/entities/cartData.entity';
 import { User } from './user.model';
 
 @ObjectType()
@@ -15,8 +15,6 @@ export class BuyerData {
 
   @Field()
   userId: string;
-
-
 
   @Field(() => [Cart], { nullable: true })
   Cart: Cart[];

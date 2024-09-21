@@ -7,38 +7,35 @@ export class UsersInAAgencyService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAllByAgency(agencyId: string) {
-    
-      const users = await this.prisma.user.findMany({
-        where: {
-          agencyCode: agencyId,
-        },include: {
-          Order:{
-            select: {
-              orderAmount: true, 
-              orderDate:true,
-              id:true
-          }
-          }
+    const users = await this.prisma.user.findMany({
+      where: {
+        agencyCode: agencyId,
+      },
+      include: {
+        Order: {
+          select: {
+            orderAmount: true,
+            orderDate: true,
+            user: true,
+            id: true,
+          },
         },
-      });
+      },
+    });
 
-      console.log("users",users)
-      if (!users || users.length === 0) {
-        throw new NotFoundException(`No users found for agencyCode: ${agencyId}`);
-      }
-      return users;
-    
+    // console.log('users', users);
+    if (!users || users.length === 0) {
+      throw new NotFoundException(`No users found for agencyCode: ${agencyId}`);
+    }
+    return users;
   }
 
-
   async getTotalOrderAmountForAgency(agencyId: string, OrderMonthYear: string) {
-
     const [year, month] = OrderMonthYear.split('-').map(Number);
     const firstDayOfMonth = new Date(year, month - 1, 1);
-    
+
     // Calculate the first day of the next month
     const firstDayOfNextMonth = new Date(year, month, 1);
-
 
     const users = await this.prisma.user.findMany({
       where: {
@@ -48,9 +45,9 @@ export class UsersInAAgencyService {
             orderDate: {
               gte: firstDayOfMonth,
               lt: firstDayOfNextMonth,
-            }
-          }
-        }
+            },
+          },
+        },
       },
       include: {
         Order: {
@@ -62,29 +59,27 @@ export class UsersInAAgencyService {
             orderDate: {
               gte: firstDayOfMonth,
               lt: firstDayOfNextMonth,
-            }
-          }
-        }
+            },
+          },
+        },
       },
     });
-  
+
     if (!users || users.length === 0) {
       throw new NotFoundException(`No users found for agencyCode: ${agencyId}`);
     }
-  
+
     const totalOrderAmountForAgency = users.reduce((acc, user) => {
-      const userTotalOrderAmount = user.Order.reduce((userAcc, order) => userAcc + order.orderAmount, 0);
+      const userTotalOrderAmount = user.Order.reduce(
+        (userAcc, order) => userAcc + order.orderAmount,
+        0,
+      );
       return acc + userTotalOrderAmount;
     }, 0);
-  
+
     const tenPercentOfTotal = totalOrderAmountForAgency * 0.1;
     const roundedTenPercent = Math.round(tenPercentOfTotal);
-  
+
     return { totalOrderAmountForAgency, roundedTenPercent };
   }
-  
-  
-
-
-
 }

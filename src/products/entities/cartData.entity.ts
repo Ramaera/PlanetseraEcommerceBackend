@@ -28,6 +28,6 @@ export class CartItems {
   @Field(() => Int)
   productVariantId: number;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   weight: string;
 }

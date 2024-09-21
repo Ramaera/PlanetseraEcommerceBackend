@@ -45,12 +45,12 @@ export class OrderService {
           discountCode: createOrderVariantInput.discountCode,
           metaData: createOrderVariantInput.metaData,
           discountedAmount: createOrderVariantInput.discountedAmount,
-          userId:createOrderVariantInput.userId
+          userId: createOrderVariantInput.userId,
         },
         include: {
           address: true,
           orderItems: true,
-          user:true
+          user: true,
         },
       });
       const orderItems = await Promise.all(
@@ -88,8 +88,6 @@ export class OrderService {
     }
   }
 
-  
-
   async createPaymentData(data: CreateOrderPayment) {
     return await this.prisma.payment.create({
       data: {
@@ -120,8 +118,14 @@ export class OrderService {
     return `This action returns all order`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} order`;
+  async findOne(orderId: string) {
+    const data = await this.prisma.order.findUnique({
+      where: {
+        id: parseInt(orderId),
+      },
+    });
+
+    return data;
   }
 
   update(id: number, updateOrderInput: UpdateOrderInput) {

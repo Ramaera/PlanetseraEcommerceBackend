@@ -4,6 +4,6 @@ import { UsersInAAgencyController } from './users-in-a-agency.controller';
 
 @Module({
   controllers: [UsersInAAgencyController],
-  providers: [UsersInAAgencyService]
+  providers: [UsersInAAgencyService],
 })
 export class UsersInAAgencyModule {}

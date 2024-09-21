@@ -6,10 +6,9 @@ import { UpdateOrderInput } from './dto/update-order.input';
 import { PaymentData } from 'src/products/entities/paymentData.entity';
 import { CreateOrderPayment } from 'src/products/dto/create-OrderPayment.input';
 
-
 @Resolver(() => Order)
 export class OrderResolver {
-  constructor(private readonly   orderService: OrderService) {}
+  constructor(private readonly orderService: OrderService) {}
 
   // @Mutation(() => Order)
   // createOrder(@Args('createOrderInput') createOrderInput: CreateOrderInput) {
@@ -34,16 +33,13 @@ export class OrderResolver {
     return paymentData;
   }
 
-  
- 
-
   @Query(() => [Order], { name: 'order' })
   findAll() {
     return this.orderService.findAll();
   }
 
   @Query(() => Order, { name: 'order' })
-  findOne(@Args('id', { type: () => Int }) id: number) {
+  findOne(@Args('id', { type: () => Int }) id: string) {
     return this.orderService.findOne(id);
   }
 

@@ -3,8 +3,8 @@
 # ------------------------------------------------------
 
 type AddressData {
-  addresId: String!
-  address: [JSONObject!]!
+  addresId: String
+  address: [JSONObject!]
   buyerId: String
   mobileNumber: String
   name: String
@@ -68,7 +68,7 @@ input ChangePasswordInput {
 }
 
 input CreateBuyerAddressInput {
-  address: [JSONObject!]!
+  address: [JSONObject!]
   buyerId: String
   mobileNumber: String
   name: String
@@ -113,7 +113,7 @@ input CreateProductInput {
 }
 
 input CreateProductVariantInput {
-  imageUrl: [String!]!
+  imageUrl: [String!]
   price: Float!
   productId: String!
   stock: Int!
@@ -129,7 +129,7 @@ input CreateRewardCodeInput {
 }
 
 input CreateShipRocketDetailInput {
-  metaData: [JSONObject!]!
+  metaData: [JSONObject!]
   orderId: Int!
   shiprocket_OrderId: Int!
   shiprocket_ShipmentId: Int!
@@ -334,7 +334,7 @@ type Token {
 
 input UpdateBuyerAddressInput {
   AddresId: Int
-  address: [JSONObject!]!
+  address: [JSONObject!]
   mobileNumber: String
   name: String
 }
@@ -382,11 +382,11 @@ input UpdateProductInput {
 
 input UpdateProductVariantInput {
   id: Int!
-  imageUrl: [String!]!
+  imageUrl: [String!]
   isVariantActive: Boolean
-  price: Float!
-  stock: Int!
-  weight: String!
+  price: Float
+  stock: Int
+  weight: String
 }
 
 input UpdateShiprocketrInput {

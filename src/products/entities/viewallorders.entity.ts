@@ -22,7 +22,6 @@ registerEnumType(OrderStatus, {
 
 @ObjectType()
 export class AllOrdersData {
-
   @Field(() => AddressData, { nullable: true })
   address: AddressData;
 
@@ -36,18 +35,18 @@ export class AllOrdersData {
   orderItems: OrderItems[] | null;
 
   @Field(() => [ShipRocketOrderDetails], { nullable: true })
-  shipRocketDetails: ShipRocketOrderDetails
+  shipRocketDetails: ShipRocketOrderDetails;
 
   @Field(() => BuyerData, { nullable: true })
-  Buyer: BuyerData
+  Buyer: BuyerData;
 
   @Field(() => Float, {})
   orderAmount: number;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   discountedAmount?: number;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   discountCode?: string;
 
   @Field()
@@ -56,10 +55,10 @@ export class AllOrdersData {
   @Field()
   id: string;
 
-  @Field({nullable:true})
+  @Field({ nullable: true })
   ShippingCost: number;
 
-  @Field()
+  @Field(() => OrderStatus)
   status: OrderStatus;
 
   @Field(() => [GraphQLJSONObject], { nullable: true })
