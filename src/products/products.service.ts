@@ -370,6 +370,10 @@ async updateProductDetails(updateProductDetailsInput: UpdateProductDetailsInput)
       
 
       },
+      orderBy: [
+        { createdAt: 'desc' }, // Sorting by createdAt in descending order
+        { status: 'asc' },     // Sorting by status in ascending order
+      ],
     });
     console.log('getAllOrders', getAllOrders);
     return getAllOrders;
